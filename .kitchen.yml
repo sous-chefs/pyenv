@@ -1,0 +1,20 @@
+---
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+
+platforms:
+- name: centos-6.4
+  driver_config:
+    box: opscode-centos-6.4
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
+
+suites:
+- name: system_python
+  run_list:
+  - recipe[pyenv::system]
+  attributes:
+    pyenv:
+      pythons:
+      - name: 2.7.6
+      global: 2.7.6
