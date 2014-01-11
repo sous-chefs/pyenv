@@ -4,7 +4,7 @@ maintainer_email 'shane@causes.com'
 license          'Apache 2.0'
 description      'Manages pyenv and its installed Python versions, also providing several LWRPs.'
 long_description 'Please refer to README.md'
-version          '0.0.1'
+version          '0.0.2'
 
 supports 'ubuntu'
 supports 'debian'
