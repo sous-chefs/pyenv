@@ -18,3 +18,14 @@ suites:
       pythons:
       - name: 2.7.6
       global: 2.7.6
+
+- name: user_python
+  run_list:
+  - recipe[pyenv::user]
+  attributes:
+    pyenv:
+      user_installs:
+        - user: 'vagrant'
+          pythons:
+            - 2.7.6
+          global: 2.7.6
