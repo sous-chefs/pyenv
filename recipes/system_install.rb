@@ -9,13 +9,13 @@ install_pyenv_pkg_prereqs
 
 directory '/etc/profile.d' do
   owner   'root'
-  mode    '0755'
+  mode    0755
 end
 
 template '/etc/profile.d/pyenv.sh' do
   source  'pyenv.sh.erb'
   owner   'root'
-  mode    '0755'
+  mode    0755
 end
 
 install_or_upgrade_pyenv  :pyenv_prefix => pyenv_prefix,

@@ -5,7 +5,7 @@ install_pyenv_pkg_prereqs
 template '/etc/profile.d/pyenv.sh' do
   source  'pyenv.sh.erb'
   owner   'root'
-  mode    '0755'
+  mode    0755
   only_if { node['pyenv']['create_profiled'] }
 end
 
