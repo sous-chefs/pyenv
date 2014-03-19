@@ -4,25 +4,30 @@ Manages installation of multiple Python versions via
 [pyenv](https://github.com/yyuu/pyenv). Also provides a set of lightweight
 resources and providers.
 
+If you've used [rbenv][rbenv] before, this is a port of that concept for
+Python.
+
 ## pyenv Installed System-Wide with Pythons
 
-Most likely, this is the typical case. Include `recipe[rbenv::system]` in your
+Most likely, this is the typical case. Include `recipe[pyenv::system]` in your
 run\_list and override the defaults you want changed. See [below](#attributes)
 for more details.
 
-## pyenv Installed For A Specific User with Rubies
+## pyenv Installed For A Specific User with Pythons
 
 If you want a per-user install (like on a Mac/Linux workstation for
-development, CI, etc.), include `recipe[rbenv::user]` in your run\_list and
+development, CI, etc.), include `recipe[pyenv::user]` in your run\_list and
 add a user hash to the `user_installs` attribute list. For example:
 
-    node.default['pyenv']['user_installs'] = [
-      {
-        'user'     => 'archie',
-        'pythons'  => ['2.7.6', '3.3.2'],
-        'global'   => '2.7.6',
-      }
-    ]
+```ruby
+node.default['pyenv']['user_installs'] = [
+  {
+    'user'     => 'archie',
+    'pythons'  => ['2.7.6', '3.3.2'],
+    'global'   => '2.7.6',
+  }
+]
+```
 
 See [below](#attributes) for more details.
 
@@ -39,9 +44,11 @@ If you want to manage your own pyenv environment for users with the provided
 LWRPs, then include `recipe[pyenv::user_install]` in your run\_list and add a
 user hash to the `user_installs` attribute list. For example:
 
-    node.default['pyenv']['user_installs'] = [
-      { 'user' => 'archie' }
-    ]
+```ruby
+node.default['pyenv']['user_installs'] = [
+  { 'user' => 'archie' }
+]
+```
 
 See the [Resources and Providers](#lwrps) section for more details.
 
@@ -92,19 +99,22 @@ Chef repository structure like the [Opscode repo][chef_repo] is also assumed.
 [Berkshelf][berkshelf] is a cookbook dependency manager and development
 workflow assistant. To install Berkshelf:
 
-    cd chef-repo
-    gem install berkshelf
-    berks init
+```bash
+cd chef-repo
+gem install berkshelf
+berks init
+```
 
 ### Using Librarian-Chef
 
 [Librarian-Chef][librarian] is a bundler for your Chef cookbooks.
 To install Librarian-Chef:
 
-    cd chef-repo
-    gem install librarian
-    librarian-chef init
-
+```bash
+cd chef-repo
+gem install librarian
+librarian-chef init
+```
 
 ## Recipes
 
@@ -117,43 +127,37 @@ Use this recipe explicitly if you only want access to the LWRPs provided.
 
 ### system_install
 
-Installs the pyenv codebase system-wide (that is, into `/usr/local/pyenv`). This
+Installs the `pyenv` codebase system-wide (that is, into `/usr/local/pyenv`). This
 recipe includes *default*.
 
-Use this recipe by itself if you want pyenv installed system-wide but want
+Use this recipe by itself if you want `pyenv` installed system-wide but want
 to handle installing Pythons, invoking LWRPs, etc..
 
 ### system
 
-Installs the pyenv codebase system-wide (that is, into `/usr/local/rbenv`) and
+Installs the `pyenv` codebase system-wide (that is, into `/usr/local/pyenv`) and
 installs Pythons driven off attribute metadata. This recipe includes *default*
 and *system_install*.
 
-Use this recipe by itself if you want rbenv installed system-wide with rubies
-installed.
+Use this recipe by itself if you want `pyenv` installed system-wide with
+Pythons installed.
 
 ### user_install
 
-Installs the pyenv codebase for a list of users (selected from the
+Installs the `pyenv` codebase for a list of users (selected from the
 `node['pyenv']['user_installs']` hash). This recipe includes *default*.
 
-Use this recipe by itself if you want pyenv installed for specific users in
+Use this recipe by itself if you want `pyenv` installed for specific users in
 isolation but want each user to handle installing Pythons, invoking LWRPs, etc.
 
 ### user
 
 Installs the pyenv codebase for a list of users (selected from the
-`node['rbenv']['user_installs']` hash) and installs rubies driven off attribte
-metadata. This recipe includes *default* and *user_install*.
+`node['pyenv']['user_installs']` hash) and installs Pythons driven off
+attribute metadata. This recipe includes *default* and *user_install*.
 
-Use this recipe by itself if you want pyenv installed for specific users in
+Use this recipe by itself if you want `pyenv` installed for specific users in
 isolation with Pythons installed.
-
-### vagrant
-
-An optional recipe if Chef is installed in a non-pyenv Python in a
-[Vagrant][vagrant] virtual machine. This recipe installs a `chef-solo`
-wrapper script so Chef doesn't need to be re-installed in the global pyenv Python.
 
 ## Attributes
 
@@ -165,37 +169,39 @@ The default is `"git://github.com/yyuu/pyenv.git"`.
 
 ### git_ref
 
-A specific Git branch/tag/reference to use when installing pyenv. For
-example, to pin pyenv to a specific release:
+A specific Git branch/tag/reference to use when installing `pyenv`. For
+example, to pin `pyenv` to a specific release:
 
-    node.default['ruby_build']['git_ref'] = "v0.4.0-20130613"
+    node.default['pyenv']['git_ref'] = "v0.4.0-20130613"
 
 The default is `"v0.4.0-20140110.1"`.
 
 ### upgrade
 
-Determines how to handle installing updates to the pyenv. There are currently
+Determines how to handle installing updates to the `pyenv`. There are currently
 2 valid values:
 
-* `"none"`, `false`, or `nil`: will not update pyenv and leave it in its
+* `"none"`, `false`, or `nil`: will not update `pyenv` and leave it in its
   current state.
-* `"sync"` or `true`: updates pyenv to the version specified by the
+* `"sync"` or `true`: updates `pyenv` to the version specified by the
   `git_ref` attribute or the head of the master branch by default.
 
 The default is `"none"`.
 
 ### root_path
 
-The path prefix to pyenv in a system-wide installation.
+The path prefix to `pyenv` in a system-wide installation.
 
-The default is `"/usr/local/pyenv"`.
+The default is `/usr/local/pyenv`.
 
 ### pythons
 
 A list of additional system-wide Python versions to be built and installed.
 For example:
 
-    node.default['pyenv']['pythons'] = [ "2.7.7", "3.3.2" ]
+```ruby
+node.default['pyenv']['pythons'] = [ "2.7.7", "3.3.2" ]
+```
 
 The default is an empty array: `[]`.
 
@@ -204,17 +210,11 @@ The default is an empty array: `[]`.
 A list of additional system-wide Python versions to be built and installed
 per-user when not explicitly set. For example:
 
-    node.default['pyenv']['user_pythons'] = [ "2.7.5" ]
+```ruby
+node.default['pyenv']['user_pythons'] = [ "2.7.5" ]
+```
 
 The default is an empty array: `[]`.
-
-
-### vagrant/system_chef_solo
-
-If using the `vagrant` recipe, this sets the path to the package-installed
-*chef-solo* binary.
-
-The default is `"/opt/ruby/bin/chef-solo"`.
 
 ### create_profiled
 
@@ -229,7 +229,9 @@ user.
 Set this attribute to `false` to skip creation of the
 `/etc/profile.d/pyenv.sh` template. For example:
 
-    node.default['pyenv']['create_profiled'] = false
+```ruby
+node.default['pyenv']['create_profiled'] = false
+```
 
 The default is `true`.
 
@@ -305,22 +307,28 @@ This resource sets the global version of Python to be used in all shells.
 
 ##### Set A Python As Global
 
-    pyenv_global "2.7.6"
+```ruby
+pyenv_global "2.7.6"
+```
 
 ##### Set System Python As Global
 
-    pyenv_global 'system'
+```ruby
+pyenv_global 'system'
+```
 
 ##### Set A Python As Global For A User
 
-    rbenv_global '3.3.2' do
-      user 'archie'
-    end
+```ruby
+pyenv_global '3.3.2' do
+  user 'archie'
+end
+```
 
 ### pyenv_script
 
 This resource is a wrapper for the `script` resource which wraps the code block
-in an pyenv-aware environment. See the Opscode
+in an `pyenv`-aware environment. See the Opscode
 [script resource][script_resource] documentation for more details.
 
 #### Actions
@@ -369,7 +377,7 @@ notifies it.
       <td>name</td>
     </tr>
     <tr>
-      <td>rbenv_version</td>
+      <td>pyenv_version</td>
       <td>
         A version of Python being managed by pyenv.
       </td>
@@ -445,7 +453,7 @@ notifies it.
     <tr>
       <td>user</td>
       <td>
-        A users's isolated rbenv installation on which to apply an action. The
+        A users's isolated pyenv installation on which to apply an action. The
         default value of <code>nil</code> denotes a system-wide pyenv
         installation is being targeted. <b>Note:</b> if specified, the user
         must already exist.
@@ -466,17 +474,19 @@ notifies it.
 
 ##### Run A Rake Task
 
-    pyenv_script 'migrate_rails_database' do
-      pyenv_version '2.7.6'
-      user          'deploy'
-      group         'deploy'
-      cwd           '/srv/webapp/current'
-      code          %{python manage.py syncdb}
-    end
+```ruby
+pyenv_script 'migrate_rails_database' do
+  pyenv_version '2.7.6'
+  user          'deploy'
+  group         'deploy'
+  cwd           '/srv/webapp/current'
+  code          %{python manage.py syncdb}
+end
+```
 
 ### pyenv_rehash
 
-This resource installs shims for all Python binaries known to pyenv.
+This resource installs shims for all Python binaries known to `pyenv`.
 
 #### Actions
 
@@ -536,7 +546,7 @@ notifies it.
     <tr>
       <td>root_path</td>
       <td>
-        The path prefix to rbenv installation, for example:
+        The path prefix to pyenv installation, for example:
         <code>/opt/pyenv</code>.
       </td>
       <td><code>nil</code></td>
@@ -546,15 +556,19 @@ notifies it.
 
 #### Examples
 
-##### Rehash A System-Wide rbenv
+##### Rehash A System-Wide pyenv
 
-    pyenv_rehash 'Doing the rehash dance'
+```ruby
+pyenv_rehash 'Doing the rehash dance'
+```
 
-##### Rehash A User's rbenv
+##### Rehash A User's pyenv
 
-    pyenv_rehash "Rehashing archie's pyenv" do
-      user 'archie'
-    end
+```ruby
+pyenv_rehash "Rehashing archie's pyenv" do
+  user 'archie'
+end
+```
 
 ### pyenv_python
 
@@ -633,20 +647,26 @@ This resource installs a specified version of Python.
 
 ##### Install Python 2.7.6
 
-    pyenv_python '2.7.6' do
-      action :install
-    end
+```ruby
+pyenv_python '2.7.6' do
+  action :install
+end
+```
 
-    pyenv_python '2.7.6'
+```ruby
+pyenv_python '2.7.6'
+```
 
 **Note:** the install action is default, so the second example is a more common
 usage.
 
 ##### Reinstall Python
 
-    pyenv_python '2.7.6' do
-      action :reinstall
-    end
+```ruby
+pyenv_python '2.7.6' do
+  action :reinstall
+end
+```
 
 ## System-Wide Mac Installation Note
 
@@ -675,3 +695,4 @@ limitations under the License.
 [lwrp]:             http://docs.opscode.com/lwrp_custom.html
 [mac_profile_d]:    http://hints.macworld.com/article.php?story=20011221192012445
 [script_resource]:  http://docs.opscode.com/resource_script.html
+[rbenv]:            https://github.com/sstephenson/rbenv

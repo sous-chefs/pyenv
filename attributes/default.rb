@@ -7,7 +7,6 @@ default['pyenv']['upgrade'] = 'none'
 
 # extra system-wide tunables
 default['pyenv']['root_path'] = '/usr/local/pyenv'
-default['pyenv']['vagrant']['system_chef_solo'] = '/opt/ruby/bin/chef-solo'
 
 # a list of user hashes, each an isolated per-user pyenv installation
 default['pyenv']['user_installs'] = []
