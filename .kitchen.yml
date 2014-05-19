@@ -10,6 +10,9 @@ platforms:
 - name: centos-6.5
   run_list:
   - recipe[build-essential]
+- name: centos-6.4
+  run_list:
+  - recipe[build-essential]
 
 suites:
 - name: system_python
