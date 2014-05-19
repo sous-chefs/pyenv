@@ -24,21 +24,26 @@ when 'redhat', 'centos', 'fedora', 'amazon', 'scientific'
     bzip2 bzip2-devel
     git
     grep
+    patch
     readline-devel
     sqlite sqlite-devel
     zlib-devel
-    patch
   ]
   default['pyenv']['user_home_root']  = '/home'
 when 'debian', 'ubuntu', 'suse'
   node.set['pyenv']['install_pkgs'] = %w[
+    make
+    build-essential
+    libssl-dev
+    zlib1g-dev
     git-core
     grep
     libbz2-dev
     libreadline-dev
     libsqlite3-dev
-    libssl-dev
-    zlib1g-dev
+    wget
+    curl
+    llvm
   ]
   default['pyenv']['user_home_root']  = '/home'
 when 'mac_os_x'
