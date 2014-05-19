@@ -21,7 +21,9 @@ suites:
   attributes:
     pyenv:
       pythons:
-      - name: 2.7.6
+        - 2.7.6
+        - 2.6.9
+        - 3.4.0
       global: 2.7.6
 
 - name: user_python
@@ -33,4 +35,6 @@ suites:
         - user: 'vagrant'
           pythons:
             - 2.7.6
+            - 2.6.9
+            - 3.4.0
           global: 2.7.6
