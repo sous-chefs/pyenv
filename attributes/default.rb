@@ -28,6 +28,7 @@ when 'redhat', 'centos', 'fedora', 'amazon', 'scientific'
     readline-devel
     sqlite sqlite-devel
     zlib-devel
+    openssl-devel
   ]
   default['pyenv']['user_home_root']  = '/home'
 when 'debian', 'ubuntu', 'suse'
