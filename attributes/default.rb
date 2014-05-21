@@ -11,7 +11,7 @@ default['pyenv']['root_path'] = '/usr/local/pyenv'
 # a list of user hashes, each an isolated per-user pyenv installation
 default['pyenv']['user_installs'] = []
 
-# list of additional rubies that will be installed
+# list of additional Pythons that will be installed
 default['pyenv']['pythons']      = []
 default['pyenv']['user_pythons'] = []
 
