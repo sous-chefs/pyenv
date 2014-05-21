@@ -1,6 +1,6 @@
 name             'pyenv'
 maintainer       'Shane da Silva'
-maintainer_email 'shane@causes.com'
+maintainer_email 'shane@dasilva.io'
 license          'Apache 2.0'
 description      'Manages pyenv and its installed Python versions, also providing several LWRPs.'
 long_description 'Please refer to README.md'
