@@ -1,6 +1,6 @@
 # chef-pyenv Changelog
 
-## master (unreleased)
+## 0.1.0
 
 * Update default pyenv version to v0.4.0-20140516
 * Add support for CentOS 6.5
