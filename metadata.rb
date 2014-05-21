@@ -6,13 +6,6 @@ description      'Manages pyenv and its installed Python versions, also providin
 long_description 'Please refer to README.md'
 version          '0.0.2'
 
-supports 'ubuntu'
-supports 'debian'
-supports 'freebsd'
-supports 'redhat'
-supports 'centos'
-supports 'fedora'
-supports 'amazon'
-supports 'scientific'
-supports 'suse'
-supports 'mac_os_x'
+%w[amazon centos debian fedora freebsd mac_os_x redhat scientific suse ubuntu].each do |os|
+  supports os
+end
