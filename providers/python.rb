@@ -29,7 +29,13 @@ def perform_install
     pyenv_user    = @user
     pyenv_prefix  = @root_path
     pyenv_env     = @environment
-    command       = %{pyenv install #{@python}}
+
+    if Array(new_resource.action).include?(:reinstall)
+      # Reinstall requires the --force/-f option
+      command       = %{pyenv install -f #{@python}}
+    else
+      command       = %{pyenv install #{@python}}
+    end
 
     pyenv_script "#{command} #{which_pyenv}" do
       code        command
