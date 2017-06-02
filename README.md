@@ -72,14 +72,6 @@ the recipes and LWRPs run on these platforms without error:
 
 * ubuntu (10.04/12.04)
 * debian (6.0)
-* freebsd
-* redhat
-* centos
-* fedora
-* amazon
-* scientific
-* suse
-* mac\_os\_x
 
 Please [report][issues] any additional platforms so they can be added.
 
@@ -688,11 +680,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-[berkshelf]:        http://berkshelf.com/
-[chef_repo]:        https://github.com/opscode/chef-repo
-[librarian]:        https://github.com/applicationsonline/librarian#readme
-[lwrp]:             http://docs.opscode.com/lwrp_custom.html
-[mac_profile_d]:    http://hints.macworld.com/article.php?story=20011221192012445
-[script_resource]:  http://docs.opscode.com/resource_script.html
-[rbenv]:            https://github.com/sstephenson/rbenv
