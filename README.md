@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/darwin67/chef-pyenv.svg?branch=master)](https://travis-ci.org/darwin67/chef-pyenv)
+
 # pyenv Chef Cookbook
 
 Manages installation of multiple Python versions via
