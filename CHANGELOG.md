@@ -1,5 +1,8 @@
 # chef-pyenv Changelog
 
+## 0.1.4
+* Updated deprecated methods used in attributes.rb
+
 ## 0.1.0
 
 * Update default pyenv version to v0.4.0-20140516

@@ -20,7 +20,7 @@ default['pyenv']['create_profiled'] = true
 
 case platform
 when 'redhat', 'centos', 'fedora', 'amazon', 'scientific'
-  node.default['pyenv']['install_pkgs'] = %w[
+  default['pyenv']['install_pkgs'] = %w[
     bzip2 bzip2-devel
     git
     grep
@@ -30,9 +30,9 @@ when 'redhat', 'centos', 'fedora', 'amazon', 'scientific'
     zlib-devel
     openssl-devel
   ]
-  default['pyenv']['user_home_root']  = '/home'
+  default['pyenv']['user_home_root'] = '/home'
 when 'debian', 'ubuntu', 'suse'
-  node.default['pyenv']['install_pkgs'] = %w[
+  default['pyenv']['install_pkgs'] = %w[
     make
     build-essential
     libssl-dev
@@ -46,11 +46,11 @@ when 'debian', 'ubuntu', 'suse'
     curl
     llvm
   ]
-  default['pyenv']['user_home_root']  = '/home'
+  default['pyenv']['user_home_root'] = '/home'
 when 'mac_os_x'
-  node.default['pyenv']['install_pkgs']   = %w{git readline}
-  default['pyenv']['user_home_root']  = '/Users'
+  default['pyenv']['install_pkgs'] = ['git', 'readline']
+  default['pyenv']['user_home_root'] = '/Users'
 when 'freebsd'
-  node.default['pyenv']['install_pkgs']   = %w{git}
-  default['pyenv']['user_home_root']  = '/usr/home'
+  default['pyenv']['install_pkgs'] = ['git']
+  default['pyenv']['user_home_root'] = '/usr/home'
 end

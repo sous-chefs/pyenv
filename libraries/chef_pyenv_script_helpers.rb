@@ -24,7 +24,7 @@ class Chef
       def current_global_version
         version_file = ::File.join(pyenv_root, 'version')
 
-        ::File.exists?(version_file) && ::IO.read(version_file).chomp
+        ::File.exist?(version_file) && ::IO.read(version_file).chomp
       end
 
       def wrap_shim_cmd(cmd)
