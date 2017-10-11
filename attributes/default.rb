@@ -18,8 +18,7 @@ default['pyenv']['user_pythons'] = []
 # whether to create profile.d shell script
 default['pyenv']['create_profiled'] = true
 
-case platform
-when 'redhat', 'centos', 'fedora', 'amazon', 'scientific'
+if platform?('redhat', 'centos', 'fedora', 'amazon', 'scientific')
   default['pyenv']['install_pkgs'] = %w[
     bzip2 bzip2-devel
     git
@@ -31,7 +30,7 @@ when 'redhat', 'centos', 'fedora', 'amazon', 'scientific'
     openssl-devel
   ]
   default['pyenv']['user_home_root'] = '/home'
-when 'debian', 'ubuntu', 'suse'
+elsif platform?('debian', 'ubuntu', 'suse')
   default['pyenv']['install_pkgs'] = %w[
     make
     build-essential
@@ -47,10 +46,10 @@ when 'debian', 'ubuntu', 'suse'
     llvm
   ]
   default['pyenv']['user_home_root'] = '/home'
-when 'mac_os_x'
+elsif platform?('mac_os_x')
   default['pyenv']['install_pkgs'] = ['git', 'readline']
   default['pyenv']['user_home_root'] = '/Users'
-when 'freebsd'
+elsif platform?('freebsd')
   default['pyenv']['install_pkgs'] = ['git']
   default['pyenv']['user_home_root'] = '/usr/home'
 end
