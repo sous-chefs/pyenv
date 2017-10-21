@@ -22,3 +22,4 @@ Policyfile.lock.json
 
 # RubyMine
 .idea/
+vendor/
