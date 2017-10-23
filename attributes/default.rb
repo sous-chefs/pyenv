@@ -1,6 +1,6 @@
 # git repository containing pyenv
-default['pyenv']['git_url'] = 'git://github.com/yyuu/pyenv.git'
-default['pyenv']['git_ref'] = 'v0.4.0-20140516'
+default['pyenv']['git_url'] = 'https://github.com/pyenv/pyenv.git'
+default['pyenv']['git_ref'] = 'master'
 
 # upgrade action strategy
 default['pyenv']['upgrade'] = 'none'
