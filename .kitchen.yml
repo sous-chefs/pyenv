@@ -45,7 +45,7 @@ suites:
     attributes:
       pyenv:
         user_installs:
-          - user: 'vagrant'
+          - user: kitchen
             pythons:
               - 2.7.6
               - 3.6.0

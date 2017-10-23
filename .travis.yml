@@ -1,4 +1,33 @@
+dist: trusty
+cache: bundler
+sudo: required
+
 language: ruby
+
 rvm:
-  - 2.0.0
-bundler_args: --without integration
+  - 2.3.1
+  - 2.4.1
+
+services:
+  - docker
+
+before_install:
+  - gem install bundler
+  - bundle --version
+  - gem update --system
+  - gem --version
+
+bundler_args: --jobs 7 --retry 3
+
+
+script: "bundle exec kitchen converge $SUITE"
+
+env:
+  - SUITE=system-python-ubuntu-1404
+  - SUITE=system-python-ubuntu-1604
+  - SUITE=system-python-centos-69
+  - SUITE=system-python-centos-7
+  - SUITE=user-python-ubuntu-1404
+  - SUITE=user-python-ubuntu-1604
+  - SUITE=user-python-centos-69
+  - SUITE=user-python-centos-7
