@@ -7,6 +7,9 @@ provisioner:
   name: chef_zero
   require_chef_omnibus: 12.21.20
 
+verifier:
+  name: inspec
+
 platforms:
   # ====================== Ubuntu =====================
   - name: ubuntu-14.04
@@ -32,6 +35,9 @@ suites:
   - name: system_python
     run_list:
       - recipe[pyenv::system]
+    verifier:
+      inspec_tests:
+        - test/smoke/system
     attributes:
       pyenv:
         pythons:

@@ -20,7 +20,7 @@ before_install:
 bundler_args: --jobs 7 --retry 3
 
 
-script: "bundle exec kitchen converge $SUITE"
+script: "bundle exec kitchen test $SUITE"
 
 env:
   - SUITE=system-python-ubuntu-1404
