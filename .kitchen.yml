@@ -24,7 +24,7 @@ platforms:
   - name: centos-6.9
     run_list:
       - recipe[build-essential]
-  - name: centos-7
+  - name: centos-7.3
     run_list:
       - recipe[build-essential]
   - name: oracle-7.3
