@@ -48,6 +48,9 @@ suites:
   - name: user_python
     run_list:
       - recipe[pyenv::user]
+    verifier:
+      inspec_tests:
+        - test/smoke/user
     attributes:
       pyenv:
         user_installs:
