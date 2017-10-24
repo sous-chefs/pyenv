@@ -18,7 +18,7 @@ default['pyenv']['user_pythons'] = []
 # whether to create profile.d shell script
 default['pyenv']['create_profiled'] = true
 
-if platform?('redhat', 'centos', 'fedora', 'amazon', 'scientific')
+if platform?('redhat', 'centos', 'fedora', 'amazon', 'scientific', 'oracle')
   default['pyenv']['install_pkgs'] = %w[
     bzip2 bzip2-devel
     git
