@@ -7,8 +7,8 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 issues_url       'https://github.com/darwin67/chef-pyenv/issues'
 source_url       'https://github.com/darwin67/chef-pyenv'
 version          '0.1.4'
-chef_version     '>= 12.1' if respond_to?(:chef_version)
+chef_version     '>= 12.9' if respond_to?(:chef_version)
 
-%w[centos ubuntu].each do |os|
+%w[centos ubuntu oracle].each do |os|
   supports os
 end
