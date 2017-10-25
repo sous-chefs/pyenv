@@ -47,9 +47,9 @@ elsif platform?('debian', 'ubuntu', 'suse')
   ]
   default['pyenv']['user_home_root'] = '/home'
 elsif platform?('mac_os_x')
-  default['pyenv']['install_pkgs'] = ['git', 'readline']
+  default['pyenv']['install_pkgs']   = %w[git readline]
   default['pyenv']['user_home_root'] = '/Users'
 elsif platform?('freebsd')
-  default['pyenv']['install_pkgs'] = ['git']
+  default['pyenv']['install_pkgs']   = %w[git]
   default['pyenv']['user_home_root'] = '/usr/home'
 end
