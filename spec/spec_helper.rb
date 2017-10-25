@@ -3,7 +3,8 @@ require 'chefspec/berkshelf'
 
 DISTRIBUTIONS = {
   'ubuntu' => ['14.04', '16.04'],
-  'centos' => ['6.9', '7.3.1611']
+  'centos' => ['6.9', '7.3.1611'],
+  'oracle' => ['7.3']
 }
 
 at_exit { ChefSpec::Coverage.report! }

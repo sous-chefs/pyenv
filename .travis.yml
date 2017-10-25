@@ -26,8 +26,11 @@ env:
   - SUITE=system-python-ubuntu-1404
   - SUITE=system-python-ubuntu-1604
   - SUITE=system-python-centos-69
-  - SUITE=system-python-centos-7
+  - SUITE=system-python-centos-73
+  - SUITE=system-python-oracle-73
+
   - SUITE=user-python-ubuntu-1404
   - SUITE=user-python-ubuntu-1604
   - SUITE=user-python-centos-69
-  - SUITE=user-python-centos-7
+  - SUITE=user-python-centos-73
+  - SUITE=user-python-oracle-73

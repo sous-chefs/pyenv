@@ -72,43 +72,12 @@ fine. File an [issue][issues] if this isn't the case.
 The following platforms have been tested with this cookbook, meaning that
 the recipes and LWRPs run on these platforms without error:
 
-* ubuntu (10.04/12.04)
-* debian (6.0)
+* ubuntu (14.04 / 16.04)
+* centos (6.9 / 7.3)
+* oracle (7.3)
 
-Please [report][issues] any additional platforms so they can be added.
+Welcome any PRs for additional platforms.
 
-### Cookbooks
-
-There are **no** external cookbook dependencies.
-
-## Installation
-
-Depending on the situation and use case there are several ways to install
-this cookbook. All the methods listed below assume a tagged version release
-is the target, but omit the tags to get the head of development. A valid
-Chef repository structure like the [Opscode repo][chef_repo] is also assumed.
-
-### Using Berkshelf
-
-[Berkshelf][berkshelf] is a cookbook dependency manager and development
-workflow assistant. To install Berkshelf:
-
-```bash
-cd chef-repo
-gem install berkshelf
-berks init
-```
-
-### Using Librarian-Chef
-
-[Librarian-Chef][librarian] is a bundler for your Chef cookbooks.
-To install Librarian-Chef:
-
-```bash
-cd chef-repo
-gem install librarian
-librarian-chef init
-```
 
 ## Recipes
 
@@ -159,16 +128,16 @@ isolation with Pythons installed.
 
 The Git URL which is used to install pyenv.
 
-The default is `"git://github.com/yyuu/pyenv.git"`.
+The default is `"https://github.com/pyenv/pyenv.git"`.
 
 ### git_ref
 
 A specific Git branch/tag/reference to use when installing `pyenv`. For
 example, to pin `pyenv` to a specific release:
 
-    node.default['pyenv']['git_ref'] = "v0.4.0-20130613"
+    node.default['pyenv']['git_ref'] = 'master'
 
-The default is `"v0.4.0-20140110.1"`.
+The default is `'master'`.
 
 ### upgrade
 
@@ -237,65 +206,17 @@ This resource sets the global version of Python to be used in all shells.
 
 #### Actions
 
-<table>
-  <thead>
-    <tr>
-      <th>Action</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>create</td>
-      <td>
-        Sets the global version of Python to be used in all shells.
-      </td>
-      <td>Yes</td>
-    </tr>
-  </tbody>
-</table>
+| Action | Description                                                | Default |
+|--------|------------------------------------------------------------|---------|
+| create | Sets the global version of Python to be used in all shells | Yes     |
 
 #### Attributes
 
-<table>
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Description</th>
-      <th>Default Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>pyenv_version</td>
-      <td>
-        <b>Name attribute:</b> a version of Python being managed by pyenv.
-        <b>Note:</b> the version of Python must already be installed--this LWRP
-        will not install it automatically.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>user</td>
-      <td>
-        A users's isolated pyenv installation on which to apply an action. The
-        default value of <code>nil</code> denotes a system-wide pyenv
-        installation is being targeted. <b>Note:</b> if specified, the user
-        must already exist.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>root_path</td>
-      <td>
-        The path prefix to pyenv installation, for example:
-        <code>/opt/pyenv</code>.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-  </tbody>
-</table>
+| Attribute     | Description                                                                                                                                                                                                   | Default Value |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| pyenv_version | **Name attribute:** a version of Python being managed by pyenv. **Note:** the version of Python must already be installed--this LWRP will not install it automatically                                        | `nil`         |
+| user          | A users's isolated pyenv installation on which to apply an action. The default value of `nil` denotes a system-wide pyenv installation is being targeted. **Note:** if specified, the user must already exist | `nil`         |
+| root_path     | The path prefix to pyenv installation, for example: `/opt/pyenv`                                                                                                                                              | `nil`         |
 
 #### Examples
 
@@ -327,142 +248,32 @@ in an `pyenv`-aware environment. See the Opscode
 
 #### Actions
 
-<table>
-  <thead>
-    <tr>
-      <th>Action</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>run</td>
-      <td>Run the script</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>nothing</td>
-      <td>Do not run this command</td>
-      <td>&nbsp;</td>
-    </tr>
-  </tbody>
-</table>
+| Action  | Description             | Default |
+|---------|-------------------------|---------|
+| run     | Run the script          | Yes     |
+| nothing | Do not run this command |         |
 
 Use `action :nothing` to set a command to only run if another resource
 notifies it.
 
 #### Attributes
 
-<table>
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Description</th>
-      <th>Default Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>name</td>
-      <td>
-        <b>Name attribute:</b> Name of the command to execute.
-      </td>
-      <td>name</td>
-    </tr>
-    <tr>
-      <td>pyenv_version</td>
-      <td>
-        A version of Python being managed by pyenv.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>root_path</td>
-      <td>
-        The path prefix to pyenv installation, for example:
-        <code>/opt/pyenv</code>.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>code</td>
-      <td>
-        Quoted script of code to execute.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>creates</td>
-      <td>
-        A file this command creates - if the file exists, the command will not
-        be run.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>cwd</td>
-      <td>
-        Current working directory to run the command from.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>environment</td>
-      <td>
-        A has of environment variables to set before running this command.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>group</td>
-      <td>
-        A group or group ID that we should change to before running this
-        command.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>path</td>
-      <td>
-        An array of paths to use when searching for the command.
-      </td>
-      <td><code>nil</code>, uses system path</td>
-    </tr>
-    <tr>
-      <td>returns</td>
-      <td>
-        The return value of the command (may be an array of accepted values) -
-        this resource raises an exception if the return value(s) do not match.
-      </td>
-      <td><code>0</code></td>
-    </tr>
-    <tr>
-      <td>timeout</td>
-      <td>
-        How many seconds to let the command run before timing out.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>user</td>
-      <td>
-        A users's isolated pyenv installation on which to apply an action. The
-        default value of <code>nil</code> denotes a system-wide pyenv
-        installation is being targeted. <b>Note:</b> if specified, the user
-        must already exist.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>umask</td>
-      <td>
-        Umask for files created by the command.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-  </tbody>
-</table>
+| Attribute     | Description                                                                                                                                                                                                   | Default Value           |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
+| name          | **Name** attribute: Name of the command to execute                                                                                                                                                            | `name`                  |
+| pyenv_version | A version of Python being managed by pyenv                                                                                                                                                                    | `nil`                   |
+| root_path     | The path prefix to pyenv installation, for example: `/opt/pyenv`                                                                                                                                              | `nil`                   |
+| code          | Quoted script of code to execute                                                                                                                                                                              | `nil`                   |
+| creates       | A file this command creates - if the file exists, the command will not be run                                                                                                                                 | `nil`                   |
+| cwd           | Current working directory to run the command from                                                                                                                                                             | `nil`                   |
+| environment   | A has of environment variables to set before running this command                                                                                                                                             | `nil`                   |
+| group         | A group or group ID that we should change to before running this command                                                                                                                                      | `nil`                   |
+| path          | An array of paths to use when searching for the command                                                                                                                                                       | `nil`, uses system path |
+| returns       | The return value of the command (may be an array of accepted values) - this resource raises an exception if the return value(s) do not match                                                                  | `0`                     |
+| timeout       | How many seconds to let the command run before timing out                                                                                                                                                     | `nil`                   |
+| user          | A users's isolated pyenv installation on which to apply an action. The default value of `nil` denotes a system-wide pyenv installation is being targeted. **Note:** if specified, the user must already exist | `nil`                   |
+| unmask        | Umask for files created by the command                                                                                                                                                                        | `nil`                   |
+
 
 #### Examples
 
@@ -484,69 +295,21 @@ This resource installs shims for all Python binaries known to `pyenv`.
 
 #### Actions
 
-<table>
-  <thead>
-    <tr>
-      <th>Action</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>run</td>
-      <td>Run the script</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>nothing</td>
-      <td>Do not run this command</td>
-      <td>&nbsp;</td>
-    </tr>
-  </tbody>
-</table>
+| Action  | Description             | Default |
+|---------|-------------------------|---------|
+| run     | Run the script          | Yes     |
+| nothing | Do not run this command |         |
 
 Use `action :nothing` to set a command to only run if another resource
 notifies it.
 
 #### Attributes
 
-<table>
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Description</th>
-      <th>Default Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>name</td>
-      <td>
-        <b>Name attribute:</b> Name of the command to execute.
-      </td>
-      <td>name</td>
-    </tr>
-    <tr>
-      <td>user</td>
-      <td>
-        A users's isolated pyenv installation on which to apply an action. The
-        default value of <code>nil</code> denotes a system-wide pyenv
-        installation is being targeted. <b>Note:</b> if specified, the user
-        must already exist.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>root_path</td>
-      <td>
-        The path prefix to pyenv installation, for example:
-        <code>/opt/pyenv</code>.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-  </tbody>
-</table>
+| Attribute | Description                                                                                                                                                                                                   | Default Value |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| name      | **Name attribute:** Name of the command to execute                                                                                                                                                            | `name`        |
+| user      | A users's isolated pyenv installation on which to apply an action. The default value of `nil` denotes a system-wide pyenv installation is being targeted. **Note:** if specified, the user must already exist | `nil`         |
+| root_path | The path prefix to pyenv installation, for example: `/opt/pyenv`                                                                                                                                              | `nil`         |
 
 #### Examples
 
@@ -570,72 +333,18 @@ This resource installs a specified version of Python.
 
 #### Actions
 
-<table>
-  <thead>
-    <tr>
-      <th>Action</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>install</td>
-      <td>
-        Build and install a Python version.
-      </td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>reinstall</td>
-      <td>
-        Force a recompiliation of the Python version from source. The
-        `:install` action will skip a build if the target install directory
-        already exists.
-      </td>
-      <td>&nbsp;</td>
-    </tr>
-  </tbody>
-</table>
+| Action    | Description                                                                                                                                      | Default |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| install   | Build and install a Python version                                                                                                               | Yes     |
+| reinstall | Force a recompiliation of the Python version from source. The `:install` action will skip a build if the target install directory already exists |         |
 
 #### Attributes
 
-<table>
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Description</th>
-      <th>Default Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>version</td>
-      <td>
-        <b>Name attribute:</b> the name of a Python version (e.g. `2.7.6`)
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>user</td>
-      <td>
-        A users's isolated pyenv installation on which to apply an action. The
-        default value of <code>nil</code> denotes a system-wide pyenv
-        installation is being targeted. <b>Note:</b> if specified, the user
-        must already exist.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-    <tr>
-      <td>root_path</td>
-      <td>
-        The path prefix to pyenv installation, for example:
-        <code>/opt/pyenv</code>.
-      </td>
-      <td><code>nil</code></td>
-    </tr>
-  </tbody>
-</table>
+| Attribute | Description                                                                                                                                                                                                   | Default Value |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| version   | **Name attribute:** the name of a Python version (e.g. `2.7.6`)                                                                                                                                               | `nil`         |
+| user      | A users's isolated pyenv installation on which to apply an action. The default value of `nil` denotes a system-wide pyenv installation is being targeted. **Note:** if specified, the user must already exist | `nil`         |
+| root_path | The path prefix to pyenv installation, for example: `/opt/pyenv`                                                                                                                                              | `nil`         |
 
 #### Examples
 
