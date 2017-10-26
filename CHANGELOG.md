@@ -1,5 +1,11 @@
 # chef-pyenv Changelog
 
+## 0.2.0
+* Add oracle linux support
+* Update syntax for chef-client v13
+* Update gems and dependencies
+* Add integration tests on travis
+
 ## 0.1.4
 * Updated deprecated methods used in attributes.rb
 
