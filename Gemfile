@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'chef', '~> 12.19'
 gem 'berkshelf'
 
-group :development, :test do
+group :test do
   gem 'cookstyle'
   gem 'inspec'
   gem 'kitchen-docker'

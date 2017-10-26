@@ -2,6 +2,8 @@
 
 # pyenv Chef Cookbook
 
+This cookbook is aimed to support chef-client v12.9 or beyond. If you have an older version, please use `v0.1.4` tag.
+
 Manages installation of multiple Python versions via
 [pyenv](https://github.com/yyuu/pyenv). Also provides a set of lightweight
 resources and providers.
