@@ -1,43 +1,56 @@
 ---
 driver:
-  name: vagrant
+  name: docker
+  use_sudo: false
+
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: 12.9.38
+
+verifier:
+  name: inspec
 
 platforms:
-- name: ubuntu-14.04
-  run_list:
-  - recipe[apt]
-  - recipe[build-essential]
-- name: centos-6.4
-  run_list:
-  - recipe[build-essential]
-- name: centos-6.5
-  run_list:
-  - recipe[build-essential]
-- name: oracle-7.3
-  run_list:
-  - recipe[build-essential]
+  - name: ubuntu-14.04
+    run_list:
+      - recipe[apt]
+  - name: ubuntu-16.04
+    run_list:
+      - recipe[apt]
+  - name: centos-6.9
+  - name: centos-7.3
+  - name: oracle-7.3
+    driver_config:
+      image: oraclelinux:7.3
+      platform: rhel
 
 suites:
-- name: system_python
-  run_list:
-  - recipe[pyenv::system]
-  attributes:
-    pyenv:
-      pythons:
-        - 2.7.6
-        - 2.6.9
-        - 3.4.0
-      global: 2.7.6
+  - name: system_python
+    run_list:
+      - recipe[build-essential]
+      - recipe[pyenv::system]
+    verifier:
+      inspec_tests:
+        - test/smoke/system
+    attributes:
+      pyenv:
+        pythons:
+          - 2.7.6
+          - 3.6.0
+        global: 2.7.6
 
-- name: user_python
-  run_list:
-  - recipe[pyenv::user]
-  attributes:
-    pyenv:
-      user_installs:
-        - user: 'vagrant'
-          pythons:
-            - 2.7.6
-            - 2.6.9
-            - 3.4.0
-          global: 2.7.6
+  - name: user_python
+    run_list:
+      - recipe[build-essential]
+      - recipe[pyenv::user]
+    verifier:
+      inspec_tests:
+        - test/smoke/user
+    attributes:
+      pyenv:
+        user_installs:
+          - user: kitchen
+            pythons:
+              - 2.7.6
+              - 3.6.0
+            global: 2.7.6

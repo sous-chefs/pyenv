@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rake'
-gem 'foodcritic'
+gem 'chef', '~> 12.19'
+gem 'berkshelf'
 
-group :integration do
-  gem 'berkshelf'
-  gem 'test-kitchen', '~> 1.2.1'
-  gem 'kitchen-vagrant'
+group :development, :test do
+  gem 'cookstyle'
+  gem 'inspec'
+  gem 'kitchen-docker'
+  gem 'kitchen-inspec'
+  gem 'test-kitchen'
 end

@@ -2,7 +2,7 @@ source 'https://supermarket.chef.io'
 
 metadata
 
-group :integration do
+group :test do
   cookbook 'apt'
   cookbook 'yum'
   cookbook 'build-essential'

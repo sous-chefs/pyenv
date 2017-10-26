@@ -18,9 +18,7 @@ class Chef
       def install_pyenv_pkg_prereqs
         return if mac_with_no_homebrew
 
-        node['pyenv']['install_pkgs'].each do |pkg|
-          package pkg
-        end
+        node['pyenv']['install_pkgs'].each { |pkg| package pkg }
       end
 
       def install_or_upgrade_pyenv(opts = {})
@@ -31,11 +29,7 @@ class Chef
       private
 
       def git_deploy_pyenv(opts)
-        if opts[:upgrade_strategy] == 'none'
-          git_exec_action = :checkout
-        else
-          git_exec_action = :sync
-        end
+        git_exec_action = opts[:upgrade_strategy] == 'none' ? :checkout : :sync
 
         git opts[:pyenv_prefix] do
           repository  opts[:git_url]
@@ -48,16 +42,10 @@ class Chef
       end
 
       def initialize_pyenv(opts)
-        prefix  = opts[:pyenv_prefix]
-
-        if opts[:user]
-          init_env = { 'USER' => opts[:user], 'HOME' => opts[:home_dir] }
-        else
-          init_env = {}
-        end
-
+        prefix = opts[:pyenv_prefix]
+        init_env = opts[:user] ? { 'USER' => opts[:user], 'HOME' => opts[:home_dir] } : {}
         bash "Initialize pyenv (#{opts[:user] || 'system'})" do
-          code  %{PATH="#{prefix}/bin:$PATH" pyenv init -}
+          code %{PATH="#{prefix}/bin:$PATH" pyenv init -}
           environment({ 'PYENV_ROOT' => prefix }.merge(init_env))
           user  opts[:user]   if opts[:user]
           group opts[:group]  if opts[:group]
