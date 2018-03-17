@@ -27,9 +27,9 @@ bundler_args: --jobs 7 --retry 3
 
 env:
   matrix:
-    - CHEF_VERSION=12.9.38
-    - CHEF_VERSION=12.22.1
-    - CHEF_VERSION=13.8.5
+    # - CHEF_VERSION=12.9.38
+    # - CHEF_VERSION=12.22.1
+    # - CHEF_VERSION=13.8.5
     # - INSTANCE=gem-centos-7
     # - INSTANCE=global-debian-8
     # - INSTANCE=global-debian-9
@@ -63,7 +63,7 @@ before_script:
   - cookstyle --version
   - foodcritic --version
 
-script: CHEF_VERSION=${CHEF_VERSION} KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen verify ${INSTANCE}
+script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen verify ${INSTANCE}
 
 # matrix:
 #   include:
