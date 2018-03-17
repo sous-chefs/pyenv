@@ -6,9 +6,7 @@ default['pyenv']['git_ref'] = 'master'
 default['pyenv']['upgrade'] = 'none'
 
 # extra system-wide tunables
-default['pyenv']['root_path'] = {
-  'system' => '/usr/local/pyenv'
-}
+default['pyenv']['root_path']['system'] = '/usr/local/pyenv'
 
 # a list of user hashes, each an isolated per-user pyenv installation
 default['pyenv']['user_installs'] = []
