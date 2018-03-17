@@ -21,16 +21,13 @@
 
 provides :pyenv_system_install
 
-property :git_url,       String, default: 'https://github.com/pyenv/pyenv.git'
-property :git_ref,       String, default: 'master'
-property :global_prefix, String, default: '/usr/local/pyenv'
+property :git_url,       String, default: node['pyenv']['git_url']
+property :git_ref,       String, default: node['pyenv']['git_ref']
+property :global_prefix, String, default: node['pyenv']['root_path']['system']
 property :update_pyenv,  [true, false], default: true
 
 action :install do
-  node.run_state['root_path'] ||= {}
-  node.run_state['root_path']['system'] = new_resource.global_prefix
-
-  package package_prerequisites
+  package node['pyenv']['prerequisites']
 
   directory '/etc/profile.d' do
     owner 'root'
@@ -71,20 +68,5 @@ action :install do
     code %(PATH="#{new_resource.global_prefix}/bin:$PATH" pyenv init -)
     environment('PYENV_ROOT' => new_resource.global_prefix)
     action :nothing
-  end
-end
-
-action_class do
-  def package_prerequisites
-    case node['platform_family']
-    when 'rhel', 'fedora', 'amazon', 'arch'
-      %w[bzip2 bzip2-devel git grep patch readline-devel sqlite sqlite-devel zlib-devel openssl-devel]
-    when 'debian', 'suse'
-      %w[make build-essential libssl-dev zlib1g-dev git-core grep libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm]
-    when 'mac_os_x', 'gentoo'
-      %w[git readline]
-    when 'freebsd'
-      %w[git bash]
-    end
   end
 end
