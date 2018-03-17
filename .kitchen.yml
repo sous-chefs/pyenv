@@ -45,10 +45,6 @@ platforms:
   driver:
     image: dokken/fedora-latest
 
-- name: ubuntu-14.04
-  driver:
-    image: dokken/ubuntu-14.04
-
 - name: ubuntu-16.04
   driver:
     image: dokken/ubuntu-16.04
