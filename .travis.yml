@@ -74,6 +74,7 @@ script: kitchen verify ${INSTANCE}
 #       env: UNIT_AND_LINT=1
 
 notifications:
+  email: false
   slack:
     rooms:
-      - ${SLACK_NOTIFY}
+      -  mai-darwin:hxe0q88Tfq9MdGqceoCDrjcC#chef-pyenv
