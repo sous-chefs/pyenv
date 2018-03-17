@@ -2,7 +2,7 @@ name             'pyenv'
 maintainer       'Darwin D. Wu'
 maintainer_email 'darwinwu67@gmail.com'
 license          'Apache 2.0'
-description      'Manages pyenv and its installed Python versions, also providing several LWRPs.'
+description      'Manages pyenv and its installed Python versions.'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 issues_url       'https://github.com/darwin67/chef-pyenv/issues'
 source_url       'https://github.com/darwin67/chef-pyenv'

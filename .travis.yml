@@ -4,33 +4,74 @@ sudo: required
 
 language: ruby
 
+addons:
+  apt:
+    sources:
+      - chef-current-trusty
+    packages:
+      - chefdk
+
 rvm:
-  - 2.3.1
-  - 2.4.1
+  - 2.4.3
 
 services:
   - docker
 
 before_install:
   - gem install bundler
-  - bundle --version
   - gem update --system
-  - gem --version
 
 bundler_args: --jobs 7 --retry 3
 
-
-script: "bundle exec kitchen test $SUITE"
-
 env:
-  - SUITE=system-python-ubuntu-1404
-  - SUITE=system-python-ubuntu-1604
-  - SUITE=system-python-centos-69
-  - SUITE=system-python-centos-73
-  - SUITE=system-python-oracle-73
+  matrix:
+    # - CHEF_VERSION=12.9.38
+    # - CHEF_VERSION=12.22.1
+    # - CHEF_VERSION=13.8.5
+    # - INSTANCE=gem-centos-7
+    # - INSTANCE=global-debian-8
+    # - INSTANCE=global-debian-9
+    # - INSTANCE=global-centos-7
+    # - INSTANCE=global-centos-7 CHEF_VERSION=12.9.41
+    # - INSTANCE=global-fedora-latest
+    # - INSTANCE=global-ubuntu-1604
+    # - INSTANCE=global-ubuntu-1804
+    # - INSTANCE=global-opensuse-leap
+    - INSTANCE=system-install-debian-8
+    - INSTANCE=system-install-debian-9
+    - INSTANCE=system-install-centos-6
+    - INSTANCE=system-install-centos-7
+    - INSTANCE=system-install-fedora-latest
+    - INSTANCE=system-install-ubuntu-1604
+    # - INSTANCE=system-install-ubuntu-1804
+    - INSTANCE=system-install-opensuse-leap
+    - INSTANCE=system-install-oracle-linux-73
+    - INSTANCE=system-install-amazon-linux
+    # - INSTANCE=user-install-debian-8
+    # - INSTANCE=user-install-debian-9
+    # - INSTANCE=user-install-centos-7
+    # - INSTANCE=user-install-fedora-latest
+    # - INSTANCE=user-install-ubuntu-1404
+    # - INSTANCE=user-install-ubuntu-1604
+    # - INSTANCE=user-install-ubuntu-1804
+    # - INSTANCE=user-install-opensuse-leap
 
-  - SUITE=user-python-ubuntu-1404
-  - SUITE=user-python-ubuntu-1604
-  - SUITE=user-python-centos-69
-  - SUITE=user-python-centos-73
-  - SUITE=user-python-oracle-73
+before_script:
+  - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - chef --version
+  - cookstyle --version
+  - foodcritic --version
+
+script: kitchen verify ${INSTANCE}
+
+# matrix:
+#   include:
+#     - script:
+#       - chef exec delivery local all
+#       env: UNIT_AND_LINT=1
+
+notifications:
+  slack:
+    rooms:
+      - ${SLACK_NOTIFY}

@@ -1,5 +1,10 @@
 # chef-pyenv Changelog
 
+## 1.0.0 (BREAKING CHANGES!!)
+Refactor and update the legacy code base
+* update `system_install` to be a resource
+* update integration test style
+
 ## 0.2.0
 * Add oracle linux support
 * Update syntax for chef-client v13
