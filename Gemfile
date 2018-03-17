@@ -6,7 +6,8 @@ gem 'berkshelf'
 group :test do
   gem 'cookstyle'
   gem 'inspec'
-  gem 'kitchen-docker'
+  gem 'kitchen-dokken'
   gem 'kitchen-inspec'
+  gem 'kitchen-vagrant'
   gem 'test-kitchen'
 end

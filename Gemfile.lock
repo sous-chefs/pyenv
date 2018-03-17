@@ -124,14 +124,19 @@ GEM
       train (~> 0.28)
     ipaddress (0.8.3)
     json (2.1.0)
-    kitchen-docker (2.6.0)
-      test-kitchen (>= 1.0.0)
+    kitchen-dokken (2.6.7)
+      docker-api (~> 1.33)
+      lockfile (~> 2.1)
+      test-kitchen (~> 1.15)
     kitchen-inspec (0.19.0)
       hashie (~> 3.4)
       inspec (>= 0.34.0, < 2.0.0)
       test-kitchen (~> 1.6)
+    kitchen-vagrant (1.3.1)
+      test-kitchen (~> 1.4)
     libyajl2 (1.2.0)
     little-plugger (1.1.4)
+    lockfile (2.1.3)
     logging (2.2.2)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
@@ -321,9 +326,10 @@ DEPENDENCIES
   chef (~> 12.19)
   cookstyle
   inspec
-  kitchen-docker
+  kitchen-dokken
   kitchen-inspec
+  kitchen-vagrant
   test-kitchen
 
 BUNDLED WITH
-   1.15.4
+   1.16.1
