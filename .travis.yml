@@ -46,6 +46,8 @@ env:
     - INSTANCE=system-install-ubuntu-1604
     - INSTANCE=system-install-ubuntu-1804
     - INSTANCE=system-install-opensuse-leap
+    - INSTANCE=system-install-oracle-linux-73
+    - INSTANCE=system-install-amazon-linux
     # - INSTANCE=user-install-debian-8
     # - INSTANCE=user-install-debian-9
     # - INSTANCE=user-install-centos-7
@@ -62,7 +64,7 @@ before_script:
   - cookstyle --version
   - foodcritic --version
 
-script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen verify ${INSTANCE}
+script: kitchen verify ${INSTANCE}
 
 # matrix:
 #   include:
