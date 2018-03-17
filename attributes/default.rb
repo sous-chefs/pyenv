@@ -57,7 +57,7 @@ elsif platform?('freebsd')
 end
 
 default['pyenv']['prerequisites'] = case node['platform_family']
-                                    when 'redhat', 'centos', 'fedora', 'amazon', 'scientific', 'oracle'
+                                    when 'rhel', 'fedora', 'amazon', 'scientific', 'oracle'
                                       %w(bzip2 bzip2-devel git grep patch readline-devel sqlite sqlite-devel zlib-devel openssl-devel)
                                     when 'debian', 'ubuntu'
                                       %w(make build-essential libssl-dev zlib1g-dev git-core grep libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm)

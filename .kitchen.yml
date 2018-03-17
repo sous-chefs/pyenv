@@ -18,6 +18,10 @@ platforms:
   - name: debian-9.0
   - name: ubuntu-14.04
   - name: ubuntu-16.04
+  - name: oracle-7.3
+    driver_config:
+      image: oraclelinux:7.3
+      platform: rhel
 
 suites:
   # - name: gem
@@ -30,8 +34,6 @@ suites:
       - recipe[apt]
       - recipe[build-essential]
       - recipe[test::system_install]
-    includes:
-      - ubuntu-16.04
   # - name: user_install
   #   run_list: recipe[test::user_install]
   #   includes: [ubuntu-16.04]
