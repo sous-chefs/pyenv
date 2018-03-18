@@ -1,377 +1,78 @@
-[![Build Status](https://travis-ci.org/darwin67/chef-pyenv.svg?branch=master)](https://travis-ci.org/darwin67/chef-pyenv)
-
 # pyenv Chef Cookbook
 
-This cookbook is aimed to support chef-client v12.9 or beyond. If you have an older version, please use `v0.1.4` tag.
+[![Build Status](https://travis-ci.org/darwin67/chef-pyenv.svg?branch=master)](https://travis-ci.org/darwin67/chef-pyenv)
+[![Chef Version](https://img.shields.io/cookbook/v/pyenv.svg?style=flat-square)](https://supermarket.chef.io/cookbooks/pyenv)
 
-Manages installation of multiple Python versions via
-[pyenv](https://github.com/yyuu/pyenv). Also provides a set of lightweight
-resources and providers.
 
-If you've used [rbenv][rbenv] before, this is a port of that concept for
-Python.
+## Description
+Manages [pyenv][pyenv] and its installed Pythons.
 
-## pyenv Installed System-Wide with Pythons
+Several custom resources are defined to facilitate this.
 
-Most likely, this is the typical case. Include `recipe[pyenv::system]` in your
-run\_list and override the defaults you want changed. See [below](#attributes)
-for more details.
+**WARNING** As of `v1.0.0`, this cookbook no longer provide any recipes. Custom resources are provided instead.
 
-## pyenv Installed For A Specific User with Pythons
-
-If you want a per-user install (like on a Mac/Linux workstation for
-development, CI, etc.), include `recipe[pyenv::user]` in your run\_list and
-add a user hash to the `user_installs` attribute list. For example:
-
-```ruby
-node.default['pyenv']['user_installs'] = [
-  {
-    'user'     => 'archie',
-    'pythons'  => ['2.7.6', '3.3.2'],
-    'global'   => '2.7.6',
-  }
-]
-```
-
-See [below](#attributes) for more details.
-
-## pyenv Installed System-Wide and LWRPs Defined
-
-If you want to manage your own pyenv environment with the provided
-LWRPs, then include `recipe[pyenv::system_install]` in your run\_list
-to prevent a default pyenv Ruby being installed. See the
-[Resources and Providers](#lwrps) section for more details.
-
-## pyenv Installed For A Specific User and LWRPs Defined
-
-If you want to manage your own pyenv environment for users with the provided
-LWRPs, then include `recipe[pyenv::user_install]` in your run\_list and add a
-user hash to the `user_installs` attribute list. For example:
-
-```ruby
-node.default['pyenv']['user_installs'] = [
-  { 'user' => 'archie' }
-]
-```
-
-See the [Resources and Providers](#lwrps) section for more details.
-
-### Ultra-Minimal Access To LWRPs
-
-Simply include `recipe[pyenv]` in your run\_list and the LWRPs will be
-available to use in other cookbooks. See the [Resources and Providers](#lwrps)
-section for more details.
 
 ## Requirements
 
 ### Chef
-
-Tested on 11.8.2 but newer and older version should work just
-fine. File an [issue][issues] if this isn't the case.
+This cookbook requires Chef 12.9+.
 
 ### Platform
+* Debian derivatives
+* Fedora
+* RHEL derivatives (RHEL, CentOS, Amazon Linux, Oracle, Scientific Linux)
+* openSUSE and openSUSE leap
 
-The following platforms have been tested with this cookbook, meaning that
-the recipes and LWRPs run on these platforms without error:
+# Usage
+__Please read__
 
-* ubuntu (14.04 / 16.04)
-* centos (6.9 / 7.3)
-* oracle (7.3)
+Examples installtions are provided in `test/fixtures/cookbooks/test/recipes`
 
-Welcome any PRs for additional platforms.
+A `pyenv_system_install` or `pyenv_user_install` is required to be set so that pyenv knows which version you want to use, and is installed on the system.
 
-
-## Recipes
-
-### default
-
-Initializes Chef to use the Lightweight Resources and Providers
-([LWRPs][lwrp]).
-
-Use this recipe explicitly if you only want access to the LWRPs provided.
-
-### system_install
-
-Installs the `pyenv` codebase system-wide (that is, into `/usr/local/pyenv`). This
-recipe includes *default*.
-
-Use this recipe by itself if you want `pyenv` installed system-wide but want
-to handle installing Pythons, invoking LWRPs, etc..
-
-### system
-
-Installs the `pyenv` codebase system-wide (that is, into `/usr/local/pyenv`) and
-installs Pythons driven off attribute metadata. This recipe includes *default*
-and *system_install*.
-
-Use this recipe by itself if you want `pyenv` installed system-wide with
-Pythons installed.
-
-### user_install
-
-Installs the `pyenv` codebase for a list of users (selected from the
-`node['pyenv']['user_installs']` hash). This recipe includes *default*.
-
-Use this recipe by itself if you want `pyenv` installed for specific users in
-isolation but want each user to handle installing Pythons, invoking LWRPs, etc.
-
-### user
-
-Installs the pyenv codebase for a list of users (selected from the
-`node['pyenv']['user_installs']` hash) and installs Pythons driven off
-attribute metadata. This recipe includes *default* and *user_install*.
-
-Use this recipe by itself if you want `pyenv` installed for specific users in
-isolation with Pythons installed.
-
-## Attributes
-
-### git_url
-
-The Git URL which is used to install pyenv.
-
-The default is `"https://github.com/pyenv/pyenv.git"`.
-
-### git_ref
-
-A specific Git branch/tag/reference to use when installing `pyenv`. For
-example, to pin `pyenv` to a specific release:
-
-    node.default['pyenv']['git_ref'] = 'master'
-
-The default is `'master'`.
-
-### upgrade
-
-Determines how to handle installing updates to the `pyenv`. There are currently
-2 valid values:
-
-* `"none"`, `false`, or `nil`: will not update `pyenv` and leave it in its
-  current state.
-* `"sync"` or `true`: updates `pyenv` to the version specified by the
-  `git_ref` attribute or the head of the master branch by default.
-
-The default is `"none"`.
-
-### root_path
-
-The path prefix to `pyenv` in a system-wide installation.
-
-The default is `/usr/local/pyenv`.
-
-### pythons
-
-A list of additional system-wide Python versions to be built and installed.
-For example:
-
+## Python
 ```ruby
-node.default['pyenv']['pythons'] = [ "2.7.7", "3.3.2" ]
+pyenv_python '3.6.1' do
+  user         # Optional: if passed, the user pyenv to install to
+  pyenv_action # Optional: the action to perform, install, remove etc
+end
 ```
+Shorter example `pyenv_python '3.6.1'.`
 
-The default is an empty array: `[]`.
-
-### user_pythons
-
-A list of additional system-wide Python versions to be built and installed
-per-user when not explicitly set. For example:
-
+## Script
+Runs a pyenv aware script.
 ```ruby
-node.default['pyenv']['user_pythons'] = [ "2.7.5" ]
-```
-
-The default is an empty array: `[]`.
-
-### create_profiled
-
-The user's shell needs to know about pyenv's location and set up the
-`PATH` environment variable. This is handled in the
-[system_install](#recipes-system_install) and
-[user_install](#recipes-user_install) recipes by dropping off
-`/etc/profile.d/pyenv.sh`. However, this requires root privilege,
-which means that a user cannot use a "user install" for only their
-user.
-
-Set this attribute to `false` to skip creation of the
-`/etc/profile.d/pyenv.sh` template. For example:
-
-```ruby
-node.default['pyenv']['create_profiled'] = false
-```
-
-The default is `true`.
-
-## Resources and Providers
-
-### pyenv_global
-
-This resource sets the global version of Python to be used in all shells.
-
-#### Actions
-
-| Action | Description                                                | Default |
-|--------|------------------------------------------------------------|---------|
-| create | Sets the global version of Python to be used in all shells | Yes     |
-
-#### Attributes
-
-| Attribute     | Description                                                                                                                                                                                                   | Default Value |
-|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| pyenv_version | **Name attribute:** a version of Python being managed by pyenv. **Note:** the version of Python must already be installed--this LWRP will not install it automatically                                        | `nil`         |
-| user          | A users's isolated pyenv installation on which to apply an action. The default value of `nil` denotes a system-wide pyenv installation is being targeted. **Note:** if specified, the user must already exist | `nil`         |
-| root_path     | The path prefix to pyenv installation, for example: `/opt/pyenv`                                                                                                                                              | `nil`         |
-
-#### Examples
-
-##### Set A Python As Global
-
-```ruby
-pyenv_global "2.7.6"
-```
-
-##### Set System Python As Global
-
-```ruby
-pyenv_global 'system'
-```
-
-##### Set A Python As Global For A User
-
-```ruby
-pyenv_global '3.3.2' do
-  user 'archie'
+pyenv_script 'foo' do
+  code          # Script code to run
+  pyenv_version # pyenv version to run the script against
+  environment   # Optional: Environment to setup to run the script
+  user          # Optional: User to run as
+  group         # Optional: Group to run as
+  path          # Optional: User to run as
+  returns       # Optional: Expected return code
 end
 ```
 
-### pyenv_script
-
-This resource is a wrapper for the `script` resource which wraps the code block
-in an `pyenv`-aware environment. See the Opscode
-[script resource][script_resource] documentation for more details.
-
-#### Actions
-
-| Action  | Description             | Default |
-|---------|-------------------------|---------|
-| run     | Run the script          | Yes     |
-| nothing | Do not run this command |         |
-
-Use `action :nothing` to set a command to only run if another resource
-notifies it.
-
-#### Attributes
-
-| Attribute     | Description                                                                                                                                                                                                   | Default Value           |
-|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
-| name          | **Name** attribute: Name of the command to execute                                                                                                                                                            | `name`                  |
-| pyenv_version | A version of Python being managed by pyenv                                                                                                                                                                    | `nil`                   |
-| root_path     | The path prefix to pyenv installation, for example: `/opt/pyenv`                                                                                                                                              | `nil`                   |
-| code          | Quoted script of code to execute                                                                                                                                                                              | `nil`                   |
-| creates       | A file this command creates - if the file exists, the command will not be run                                                                                                                                 | `nil`                   |
-| cwd           | Current working directory to run the command from                                                                                                                                                             | `nil`                   |
-| environment   | A has of environment variables to set before running this command                                                                                                                                             | `nil`                   |
-| group         | A group or group ID that we should change to before running this command                                                                                                                                      | `nil`                   |
-| path          | An array of paths to use when searching for the command                                                                                                                                                       | `nil`, uses system path |
-| returns       | The return value of the command (may be an array of accepted values) - this resource raises an exception if the return value(s) do not match                                                                  | `0`                     |
-| timeout       | How many seconds to let the command run before timing out                                                                                                                                                     | `nil`                   |
-| user          | A users's isolated pyenv installation on which to apply an action. The default value of `nil` denotes a system-wide pyenv installation is being targeted. **Note:** if specified, the user must already exist | `nil`                   |
-| unmask        | Umask for files created by the command                                                                                                                                                                        | `nil`                   |
-
-
-#### Examples
-
-##### Run A Rake Task
-
+## System install
+Installs rbenv to the system location, by default `/usr/local/rbenv`
 ```ruby
-pyenv_script 'migrate_rails_database' do
-  pyenv_version '2.7.6'
-  user          'deploy'
-  group         'deploy'
-  cwd           '/srv/webapp/current'
-  code          %{python manage.py syncdb}
+pyenv_system_install 'foo' do
+  git_url      # URL of the plugin repo you want to checkout
+  git_ref      # Optional: Git reference to checkout
+  update_pyenv # Optional: Keeps the git repo up to date
 end
 ```
 
-### pyenv_rehash
-
-This resource installs shims for all Python binaries known to `pyenv`.
-
-#### Actions
-
-| Action  | Description             | Default |
-|---------|-------------------------|---------|
-| run     | Run the script          | Yes     |
-| nothing | Do not run this command |         |
-
-Use `action :nothing` to set a command to only run if another resource
-notifies it.
-
-#### Attributes
-
-| Attribute | Description                                                                                                                                                                                                   | Default Value |
-|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| name      | **Name attribute:** Name of the command to execute                                                                                                                                                            | `name`        |
-| user      | A users's isolated pyenv installation on which to apply an action. The default value of `nil` denotes a system-wide pyenv installation is being targeted. **Note:** if specified, the user must already exist | `nil`         |
-| root_path | The path prefix to pyenv installation, for example: `/opt/pyenv`                                                                                                                                              | `nil`         |
-
-#### Examples
-
-##### Rehash A System-Wide pyenv
-
+## User install
+Installs pyenv to the user path, making rbenv available to that user only.
 ```ruby
-pyenv_rehash 'Doing the rehash dance'
-```
-
-##### Rehash A User's pyenv
-
-```ruby
-pyenv_rehash "Rehashing archie's pyenv" do
-  user 'archie'
+pyenv_user_install 'vagrant' do
+  git_url # Optional: Git URL to checkout pyenv from.
+  git_ref # Optional: Git reference to checkout e.g. 'master'
+  user    # Which user to install pyenv to (also specified in the resources name above)
 end
 ```
 
-### pyenv_python
-
-This resource installs a specified version of Python.
-
-#### Actions
-
-| Action    | Description                                                                                                                                      | Default |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| install   | Build and install a Python version                                                                                                               | Yes     |
-| reinstall | Force a recompiliation of the Python version from source. The `:install` action will skip a build if the target install directory already exists |         |
-
-#### Attributes
-
-| Attribute | Description                                                                                                                                                                                                   | Default Value |
-|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| version   | **Name attribute:** the name of a Python version (e.g. `2.7.6`)                                                                                                                                               | `nil`         |
-| user      | A users's isolated pyenv installation on which to apply an action. The default value of `nil` denotes a system-wide pyenv installation is being targeted. **Note:** if specified, the user must already exist | `nil`         |
-| root_path | The path prefix to pyenv installation, for example: `/opt/pyenv`                                                                                                                                              | `nil`         |
-
-#### Examples
-
-##### Install Python 2.7.6
-
-```ruby
-pyenv_python '2.7.6' do
-  action :install
-end
-```
-
-```ruby
-pyenv_python '2.7.6'
-```
-
-**Note:** the install action is default, so the second example is a more common
-usage.
-
-##### Reinstall Python
-
-```ruby
-pyenv_python '2.7.6' do
-  action :reinstall
-end
-```
 
 ## System-Wide Mac Installation Note
 
@@ -380,16 +81,29 @@ This cookbook takes advantage of managing profile fragments in an
 Unfortunately, Mac OS X does not support this idiom out of the box,
 so you may need to [modify][mac_profile_d] your user profile.
 
+## Development
+
+- Source hosted at [GitHub][repo]
+- Report issues/Questions/Feature requests on [GitHub Issues][issues]
+
+Pull requests are very welcome! Make sure your patches are well tested.
+
 ## License and Author
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+- [Shane da Silva][sds]
+- [Darwin D. Wu][darwin]
 
-    http://www.apache.org/licenses/LICENSE-2.0
+Copyright 2014, Shane da Silva
+Copyright 2017, Darwin D. Wu
+```
+http://www.apache.org/licenses/LICENSE-2.0
+```
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+[pyenv]: https://github.com/yyuu/pyenv
+[mac_profile_d]: http://hints.macworld.com/article.php?story=20011221192012445
+[repo]: https://github.com/darwin67/chef-pyenv
+[issues]: https://github.com/darwin67/chef-pyenv/issues
+[sds]: https://github.com/sds
+[darwin]: https://github.com/darwin67
