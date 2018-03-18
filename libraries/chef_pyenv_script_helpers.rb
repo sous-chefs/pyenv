@@ -1,38 +1,46 @@
 class Chef
   module Pyenv
     module ScriptHelpers
-      def pyenv_root
-        if new_resource.root_path
-          new_resource.root_path
-        elsif new_resource.user
-          ::File.join(user_home, '.pyenv')
+      def root_path
+        node.run_state['root_path'] ||= {}
+
+        if new_resource.user
+          node.run_state['root_path'][new_resource.user]
         else
-          node['pyenv']['root_path']
+          node.run_state['root_path']['system']
         end
-      end
-
-      def user_home
-        return nil unless new_resource.user
-
-        Etc.getpwnam(new_resource.user).dir
       end
 
       def which_pyenv
         "(#{new_resource.user || 'system'})"
       end
 
-      def current_global_version
-        version_file = ::File.join(pyenv_root, 'version')
-
-        ::File.exist?(version_file) && ::IO.read(version_file).chomp
+      def script_code
+        script = []
+        script << %(export PYENV_ROOT="#{root_path}")
+        script << %(export PATH="${PYENV_ROOT}/bin:$PATH")
+        script << %{eval "$(pyenv init -)"}
+        if new_resource.pyenv_version
+          script << %(export PYENV_VERSION="#{new_resource.pyenv_version}")
+        end
+        script << new_resource.code
+        script.join("\n").concat("\n")
       end
 
-      def wrap_shim_cmd(cmd)
-        [ %{export PYENV_ROOT="#{pyenv_root}"},
-          %{export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"},
-          %{export PYENV_VERSION="#{new_resource.pyenv_version}"},
-          %{$PYENV_ROOT/shims/#{cmd}}
-        ].join(' && ')
+      def script_environment
+        script_env = { 'PYENV_ROOT' => root_path }
+        script_env.merge!(new_resource.environment) if new_resource.environment
+
+        if new_resource.path
+          script_env['PATH'] = "#{new_resource.path.join(':')}:#{ENV['PATH']}"
+        end
+
+        if new_resource.user
+          script_env['USER'] = new_resource.user
+          script_env['HOME'] = ::File.expand_path("~#{new_resource.user}")
+        end
+
+        script_env
       end
     end
   end

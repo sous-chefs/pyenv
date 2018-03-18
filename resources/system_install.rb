@@ -23,10 +23,13 @@ provides :pyenv_system_install
 
 property :git_url,       String, default: node['pyenv']['git_url']
 property :git_ref,       String, default: node['pyenv']['git_ref']
-property :global_prefix, String, default: node['pyenv']['root_path']['system']
+property :global_prefix, String, default: '/usr/local/pyenv'
 property :update_pyenv,  [true, false], default: true
 
 action :install do
+  node.run_state['root_path'] ||= {}
+  node.run_state['root_path']['system'] = new_resource.global_prefix
+
   package node['pyenv']['prerequisites']
 
   directory '/etc/profile.d' do

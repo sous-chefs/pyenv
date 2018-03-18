@@ -30,14 +30,19 @@ property :user_prefix,  String, default: lazy { ::File.join(home_dir, '.pyenv') 
 property :update_pyenv, [true, false], default: true
 
 action :install do
+  node.run_state['root_path'] ||= {}
+  node.run_state['root_path'][new_resource.user] ||= new_resource.user_prefix
+
   package node['pyenv']['prerequisites']
+
+  system_prefix = node.run_state['root_path']['system']
 
   template '/etc/profile.d/pyenv.sh' do
     cookbook 'pyenv'
     source   'pyenv.sh'
     owner    'root'
     mode     '0755'
-    variables(global_prefix: node['pyenv']['root_path']['system'])
+    variables(global_prefix: system_prefix) if system_prefix
   end
 
   git new_resource.user_prefix do
