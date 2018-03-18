@@ -64,12 +64,12 @@ platforms:
        - RUN /usr/bin/apt-get update
        - RUN /usr/bin/apt-get install sudo -y
 
-# - name: ubuntu-18.04
-#   driver:
-#     image: dokken/ubuntu-18.04
-#     intermediate_instructions:
-#        - RUN /usr/bin/apt-get update
-#        - RUN /usr/bin/apt-get install sudo -y
+- name: ubuntu-18.04
+  driver:
+    image: dokken/ubuntu-18.04
+    intermediate_instructions:
+       - RUN /usr/bin/apt-get update
+       - RUN /usr/bin/apt-get install sudo -y
 
 - name: opensuse-leap
   driver:
@@ -83,14 +83,12 @@ suites:
   #     - recipe[test::dokken]
   #     - recipe[test::gem]
   #   includes: [centos-7]
-  # - name: global
-  #   run_list: recipe[test::global]
   - name: system_install
     run_list:
       - recipe[build-essential]
-      - recipe[test::system_install]
+      - recipe[test::system]
   - name: user_install
     run_list:
       - recipe[build-essential]
       - recipe[test::dokken]
-      - recipe[test::user_install]
+      - recipe[test::user]
