@@ -54,7 +54,7 @@ end
 ```
 
 ## System install
-Installs rbenv to the system location, by default `/usr/local/rbenv`
+Installs pyenv to the system location, by default `/usr/local/pyenv`
 ```ruby
 pyenv_system_install 'foo' do
   git_url      # URL of the plugin repo you want to checkout
