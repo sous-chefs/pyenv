@@ -59,11 +59,11 @@ before_script:
 
 script: kitchen verify ${INSTANCE}
 
-# matrix:
-#   include:
-#     - script:
-#       - chef exec delivery local all
-#       env: UNIT_AND_LINT=1
+matrix:
+  include:
+    - script:
+      - chef exec delivery local all
+      env: UNIT_AND_LINT=1
 
 notifications:
   email: false

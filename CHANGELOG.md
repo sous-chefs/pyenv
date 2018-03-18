@@ -7,6 +7,7 @@ Refactor and update the legacy code base
 * update `script` resource
 * update `python` resource
 * update `global` resource
+* update `rehash` resource
 * update integration tests
 * delete all recipes
 * delete matchers
