@@ -2,8 +2,10 @@
 # Cookbook:: pyenv
 # Resource:: python
 #
+# Author:: Shane da Silva
 # Author:: Darwin D. Wu <darwinwu67@gmail.com>
 #
+# Copyright:: 2014-2017, Shane da Silva
 # Copyright:: 2017-2018, Darwin D. Wu
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
