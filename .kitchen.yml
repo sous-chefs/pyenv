@@ -91,5 +91,6 @@ suites:
       - recipe[test::system_install]
   - name: user_install
     run_list:
+      - recipe[build-essential]
       - recipe[test::dokken]
       - recipe[test::user_install]
