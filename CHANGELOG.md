@@ -4,6 +4,8 @@
 Refactor and update the legacy code base
 * update `system_install` to be a resource
 * update `user_install` to be a resource
+* update `script` resource
+* update `python` resource
 * update integration test style
 
 ## 0.2.0
