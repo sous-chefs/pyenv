@@ -8,8 +8,8 @@ control 'pyenv should be installed' do
   desc 'pyenv should be installed'
   describe bash('sudo -H -u vagrant bash -c "source /etc/profile.d/pyenv.sh && pyenv global"') do
     its('exit_status') { should eq 0 }
-    # its('stdout') { should include(global_python) }
-    # its('stdout') { should_not match(/system/) }
+    its('stdout') { should include(global_python) }
+    its('stdout') { should_not match(/system/) }
   end
 
   desc "Python #{global_python} should be installed"

@@ -9,6 +9,18 @@ source_url       'https://github.com/darwin67/chef-pyenv'
 version          '0.2.0'
 chef_version     '>= 12.9' if respond_to?(:chef_version)
 
-%w[centos ubuntu oracle].each do |os|
+%w(
+  ubuntu
+  linuxmint
+  debian
+  redhat
+  centos
+  fedora
+  amazon
+  scientific
+  opensuse
+  opensuseleap
+  oracle
+).each do |os|
   supports os
 end
