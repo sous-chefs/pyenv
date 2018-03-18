@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# global_python = '2.7.12'
+global_python = '3.6.1'
 
 control 'pyenv should be installed' do
   title 'pyenv should be installed to the users home directory'
@@ -10,6 +10,12 @@ control 'pyenv should be installed' do
     its('exit_status') { should eq 0 }
     # its('stdout') { should include(global_python) }
     # its('stdout') { should_not match(/system/) }
+  end
+
+  desc "Python #{global_python} should be installed"
+  describe bash('sudo -H -u vagrant bash -c "source /etc/profile.d/pyenv.sh && pyenv versions"') do
+    its('exit_status') { should eq 0 }
+    its('stdout')      { should match(global_python) }
   end
 
   describe file('/home/vagrant/.pyenv/versions') do
