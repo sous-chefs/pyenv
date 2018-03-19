@@ -1,5 +1,5 @@
 #
-# Cookbook:: ruby_rbenv
+# Cookbook:: pyenv
 # Resource:: plugin
 #
 # Author:: Darwin D. Wu <darwinwu67@gmail.com>

@@ -31,27 +31,23 @@ control 'pyenv should be installed to the user path' do
   describe file('/etc/profile.d/pyenv.sh') do
     it { should be_file }
     it { should be_executable }
-    its('owner')   { should eq('root') }
-    its('group')   { should eq('root') }
+    its('owner') { should eq('root') }
   end
 
   describe directory("/home/#{user}/.pyenv") do
     it { should exist }
     its('owner') { should eq(user) }
-    its('group') { should eq(user) }
   end
 
   describe file("/home/#{user}/.pyenv/bin/pyenv") do
     it { should be_file }
     it { should be_executable }
     its('owner') { should eq(user) }
-    its('group') { should eq(user) }
   end
 
   describe file("/home/#{user}/.pyenv/shims/pip") do
     it { should be_file }
     it { should be_executable }
     its('owner') { should eq(user) }
-    its('group') { should eq('root') }
   end
 end

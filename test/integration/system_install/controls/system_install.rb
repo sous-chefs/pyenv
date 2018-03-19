@@ -31,26 +31,22 @@ control 'pyenv should be installed to the system path' do
     it { should be_file }
     it { should be_executable }
     its('owner') { should eq('root') }
-    its('group') { should eq('root') }
   end
 
   describe directory('/usr/local/pyenv') do
     it { should exist }
     its('owner') { should eq('root') }
-    its('group') { should eq('root') }
   end
 
   describe file('/usr/local/pyenv/bin/pyenv') do
     it { should be_file }
     it { should be_executable }
     its('owner') { should eq('root') }
-    its('group') { should eq('root') }
   end
 
   describe file('/usr/local/pyenv/shims/pip') do
     it { should be_file }
     it { should be_executable }
     its('owner') { should eq('root') }
-    its('group') { should eq('root') }
   end
 end
