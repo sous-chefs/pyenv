@@ -29,33 +29,25 @@ env:
     # - CHEF_VERSION=12.22.1
     # - CHEF_VERSION=13.8.5
     # - INSTANCE=gem-centos-7
-    # - INSTANCE=global-debian-8
-    # - INSTANCE=global-debian-9
-    # - INSTANCE=global-centos-7
-    # - INSTANCE=global-centos-7 CHEF_VERSION=12.9.41
-    # - INSTANCE=global-fedora-latest
-    # - INSTANCE=global-ubuntu-1604
-    # - INSTANCE=global-ubuntu-1804
-    # - INSTANCE=global-opensuse-leap
     - INSTANCE=system-install-debian-8
     - INSTANCE=system-install-debian-9
     - INSTANCE=system-install-centos-6
     - INSTANCE=system-install-centos-7
-    - INSTANCE=system-install-fedora-latest
+    - INSTANCE=system-install-fedora
     - INSTANCE=system-install-ubuntu-1604
-    # - INSTANCE=system-install-ubuntu-1804
+    - INSTANCE=system-install-ubuntu-1804
     - INSTANCE=system-install-opensuse-leap
-    - INSTANCE=system-install-oracle-linux-73
+    - INSTANCE=system-install-oracle-linux
     - INSTANCE=system-install-amazon-linux
     - INSTANCE=user-install-debian-8
     - INSTANCE=user-install-debian-9
     - INSTANCE=user-install-centos-6
     - INSTANCE=user-install-centos-7
-    - INSTANCE=user-install-fedora-latest
+    - INSTANCE=user-install-fedora
     - INSTANCE=user-install-ubuntu-1604
-    # - INSTANCE=user-install-ubuntu-1804
+    - INSTANCE=user-install-ubuntu-1804
     - INSTANCE=user-install-opensuse-leap
-    - INSTANCE=user-install-oracle-linux-73
+    - INSTANCE=user-install-oracle-linux
     - INSTANCE=user-install-amazon-linux
 
 before_script:
@@ -67,11 +59,11 @@ before_script:
 
 script: kitchen verify ${INSTANCE}
 
-# matrix:
-#   include:
-#     - script:
-#       - chef exec delivery local all
-#       env: UNIT_AND_LINT=1
+matrix:
+  include:
+    - script:
+      - chef exec delivery local all
+      env: UNIT_AND_LINT=1
 
 notifications:
   email: false

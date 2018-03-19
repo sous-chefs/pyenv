@@ -6,8 +6,9 @@ control 'pyenv should be installed' do
   title 'pyenv should be installed globally'
 
   desc "Can set global Python versions to #{global_python}"
-  describe bash('source /etc/profile.d/pyenv.sh && pyenv versions --bare') do
+  describe bash('source /etc/profile.d/pyenv.sh && pyenv versions') do
     its('exit_status') { should eq(0) }
+    its('stdout')      { should include(global_python) }
   end
 end
 

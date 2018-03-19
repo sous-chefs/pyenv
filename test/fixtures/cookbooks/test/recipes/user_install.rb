@@ -8,6 +8,6 @@ pyenv_python version do
   user 'vagrant'
 end
 
-# pyenv_global version do
-#   user 'vagrant'
-# end
+pyenv_global version do
+  user 'vagrant'
+end

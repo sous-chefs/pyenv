@@ -30,6 +30,14 @@ Examples installtions are provided in `test/fixtures/cookbooks/test/recipes`
 
 A `pyenv_system_install` or `pyenv_user_install` is required to be set so that pyenv knows which version you want to use, and is installed on the system.
 
+## Global
+```ruby
+pyenv_global '3.6.1' do
+  user # Optional: if passed sets the users global version. Do not set, to set the systems global version
+end
+```
+If a user is passed in to this resource it sets the global version for the user, under the users root_path (usually `~/.rbenv/version`), otherwise it sets the system global version.
+
 ## Python
 ```ruby
 pyenv_python '3.6.1' do
@@ -54,7 +62,7 @@ end
 ```
 
 ## System install
-Installs rbenv to the system location, by default `/usr/local/rbenv`
+Installs pyenv to the system location, by default `/usr/local/pyenv`
 ```ruby
 pyenv_system_install 'foo' do
   git_url      # URL of the plugin repo you want to checkout

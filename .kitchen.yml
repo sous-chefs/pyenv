@@ -45,13 +45,13 @@ platforms:
     intermediate_instructions:
       - RUN yum -y install sudo
 
-- name: oracle-linux-7.3
+- name: oracle-linux
   driver:
-    image: oraclelinux:7.3
+    image: oraclelinux:7
     intermediate_instructions:
       - RUN yum -y install sudo
 
-- name: fedora-latest
+- name: fedora
   driver:
     image: dokken/fedora-latest
     intermediate_instructions:
@@ -64,12 +64,12 @@ platforms:
        - RUN /usr/bin/apt-get update
        - RUN /usr/bin/apt-get install sudo -y
 
-# - name: ubuntu-18.04
-#   driver:
-#     image: dokken/ubuntu-18.04
-#     intermediate_instructions:
-#        - RUN /usr/bin/apt-get update
-#        - RUN /usr/bin/apt-get install sudo -y
+- name: ubuntu-18.04
+  driver:
+    image: dokken/ubuntu-18.04
+    intermediate_instructions:
+       - RUN /usr/bin/apt-get update
+       - RUN /usr/bin/apt-get install sudo -y
 
 - name: opensuse-leap
   driver:
@@ -83,8 +83,6 @@ suites:
   #     - recipe[test::dokken]
   #     - recipe[test::gem]
   #   includes: [centos-7]
-  # - name: global
-  #   run_list: recipe[test::global]
   - name: system_install
     run_list:
       - recipe[build-essential]

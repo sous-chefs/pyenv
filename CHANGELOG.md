@@ -6,7 +6,13 @@ Refactor and update the legacy code base
 * update `user_install` to be a resource
 * update `script` resource
 * update `python` resource
-* update integration test style
+* update `global` resource
+* update `rehash` resource
+* update integration tests
+* delete all recipes
+* delete matchers
+* delete chef_pyenv_recipe_helpers library
+* delete chef_pyenv_mixin library
 
 ## 0.2.0
 * Add oracle linux support
