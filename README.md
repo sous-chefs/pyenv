@@ -30,13 +30,39 @@ Examples installtions are provided in `test/fixtures/cookbooks/test/recipes`
 
 A `pyenv_system_install` or `pyenv_user_install` is required to be set so that pyenv knows which version you want to use, and is installed on the system.
 
+## Pip
+Used to install a Python package into the selected pyenv environment.
+```ruby
+pyenv_pip 'requests' do
+  version # Optional: if passed, the version the python package to install
+  user    # Optional: if passed, the user to install the python module for
+end
+```
+
 ## Global
 ```ruby
 pyenv_global '3.6.1' do
   user # Optional: if passed sets the users global version. Do not set, to set the systems global version
 end
 ```
-If a user is passed in to this resource it sets the global version for the user, under the users root_path (usually `~/.rbenv/version`), otherwise it sets the system global version.
+If a user is passed in to this resource it sets the global version for the user, under the users root_path (usually `~/.pyenv/version`), otherwise it sets the system global version.
+
+## Plugin
+Installs a pyenv plugin.
+```ruby
+pyenv_plugin 'virtualenv' do
+  git_url # Git URL of the plugin
+  git_ref # Git reference of the plugin
+  user    # Optional: if passed installs to the users pyenv. Do not set, to set installs to the system pyenv.
+end
+```
+
+## Rehash
+```ruby
+pyenv_rehash 'rehash' do
+  user # Optional: if passed rehashes the user pyenv otherwise rehashes the system pyenv
+end
+```
 
 ## Python
 ```ruby
@@ -72,7 +98,7 @@ end
 ```
 
 ## User install
-Installs pyenv to the user path, making rbenv available to that user only.
+Installs pyenv to the user path, making pyenv available to that user only.
 ```ruby
 pyenv_user_install 'vagrant' do
   git_url # Optional: Git URL to checkout pyenv from.

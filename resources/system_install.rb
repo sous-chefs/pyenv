@@ -59,7 +59,7 @@ action :install do
     mode  '0755'
   end
 
-  # Initialize rbenv
+  # Initialize pyenv
   ruby_block 'Add pyenv to PATH' do
     block do
       ENV['PATH'] = "#{new_resource.global_prefix}/shims:#{new_resource.global_prefix}/bin:#{ENV['PATH']}"
