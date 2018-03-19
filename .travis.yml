@@ -28,7 +28,6 @@ env:
     # - CHEF_VERSION=12.9.38
     # - CHEF_VERSION=12.22.1
     # - CHEF_VERSION=13.8.5
-    # - INSTANCE=gem-centos-7
     - INSTANCE=system-install-debian-8
     - INSTANCE=system-install-debian-9
     - INSTANCE=system-install-centos-6
