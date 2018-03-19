@@ -22,6 +22,12 @@ control 'pyenv should be installed' do
   describe bash('source /etc/profile.d/pyenv.sh && pyenv virtualenv') do
     its('stderr') { should match('pyenv-virtualenv') }
   end
+
+  desc 'Pip should install package'
+  describe bash('source /etc/profile.d/pyenv.sh && pip show requests') do
+    its('exit_status') { should eq(0) }
+    its('stdout')      { should match('Version: 2.18.1') }
+  end
 end
 
 control 'pyenv should be installed to the system path' do

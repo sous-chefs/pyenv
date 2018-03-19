@@ -1,19 +1,22 @@
 # chef-pyenv Changelog
 
 ## 1.0.0 (BREAKING CHANGES!!)
-Refactor and update the legacy code base
+Refactor and update the legacy code base. Recipes are no longer provided, and custom resources are used to manage pyenv installations instead.
 * update `system_install` to be a resource
 * update `user_install` to be a resource
 * update `script` resource
 * update `python` resource
 * update `global` resource
 * update `rehash` resource
+* create `plugin` resource
+* create `pip` resource
 * update integration tests
 * add linting to CI
 * delete all recipes
 * delete matchers
-* delete chef_pyenv_recipe_helpers library
-* delete chef_pyenv_mixin library
+* delete `chef_pyenv_recipe_helpers` library
+* delete `chef_pyenv_mixin` library
+* add support for Fedora, RedHat distros and OpenSUSE
 
 ## 0.2.0
 * Add oracle linux support

@@ -16,3 +16,8 @@ pyenv_plugin 'virtualenv' do
   git_url 'https://github.com/pyenv/pyenv-virtualenv'
   user    user
 end
+
+pyenv_pip 'requests' do
+  version '2.18.3'
+  user    user
+end

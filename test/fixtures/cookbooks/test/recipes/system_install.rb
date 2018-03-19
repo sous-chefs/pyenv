@@ -12,3 +12,7 @@ pyenv_global version
 pyenv_plugin 'virtualenv' do
   git_url 'https://github.com/pyenv/pyenv-virtualenv'
 end
+
+pyenv_pip 'requests' do
+  version '2.18.1'
+end
