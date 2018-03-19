@@ -38,6 +38,13 @@ end
 ```
 If a user is passed in to this resource it sets the global version for the user, under the users root_path (usually `~/.rbenv/version`), otherwise it sets the system global version.
 
+## Rehash
+```ruby
+pyenv_rehash 'rehash' do
+  user 'vagrant' # Optional: if passed rehashes the user pyenv otherwise rehashes the system pyenv
+end
+```
+
 ## Python
 ```ruby
 pyenv_python '3.6.1' do

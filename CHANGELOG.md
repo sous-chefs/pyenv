@@ -9,6 +9,7 @@ Refactor and update the legacy code base
 * update `global` resource
 * update `rehash` resource
 * update integration tests
+* add linting to CI
 * delete all recipes
 * delete matchers
 * delete chef_pyenv_recipe_helpers library
