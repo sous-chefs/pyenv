@@ -45,7 +45,7 @@ pyenv_global '3.6.1' do
   user # Optional: if passed sets the users global version. Do not set, to set the systems global version
 end
 ```
-If a user is passed in to this resource it sets the global version for the user, under the users root_path (usually `~/.rbenv/version`), otherwise it sets the system global version.
+If a user is passed in to this resource it sets the global version for the user, under the users root_path (usually `~/.pyenv/version`), otherwise it sets the system global version.
 
 ## Plugin
 Installs a pyenv plugin.
@@ -53,7 +53,7 @@ Installs a pyenv plugin.
 pyenv_plugin 'virtualenv' do
   git_url # Git URL of the plugin
   git_ref # Git reference of the plugin
-  user    # Optional: if passed installs to the users rbenv. Do not set, to set installs to the system rbenv.
+  user    # Optional: if passed installs to the users pyenv. Do not set, to set installs to the system pyenv.
 end
 ```
 
@@ -98,7 +98,7 @@ end
 ```
 
 ## User install
-Installs pyenv to the user path, making rbenv available to that user only.
+Installs pyenv to the user path, making pyenv available to that user only.
 ```ruby
 pyenv_user_install 'vagrant' do
   git_url # Optional: Git URL to checkout pyenv from.

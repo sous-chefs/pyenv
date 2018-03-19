@@ -25,7 +25,7 @@ provides :pyenv_rehash
 property :user, String
 
 action :run do
-  rbenv_script "pyenv rehash #{which_rbenv}" do
+  pyenv_script "pyenv rehash #{which_pyenv}" do
     code %(pyenv rehash)
     user new_resource.user if new_resource.user
     action :run
