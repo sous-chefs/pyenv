@@ -4,6 +4,7 @@ gem 'chef', '~> 12.19'
 gem 'berkshelf'
 
 group :test do
+  gem 'chefspec'
   gem 'cookstyle'
   gem 'foodcritic'
   gem 'inspec'
