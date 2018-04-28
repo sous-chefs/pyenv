@@ -24,15 +24,14 @@ describe 'test::system_install' do
       context "on #{platform} #{version}" do
         let(:resources) do
           [
-            :pyenv_system_install
+            :pyenv_system_install,
           ]
         end
 
         cached(:chef_run) do
           ChefSpec::ServerRunner.new(platform: platform, version: version, step_into: resources)
-            .converge(described_recipe)
+                                .converge(described_recipe)
         end
-
 
         it 'installs pyenv globally' do
           expect(chef_run).to install_pyenv_system_install('system')
@@ -65,12 +64,12 @@ describe 'test::system_install' do
 
           it 'creates pyenv.sh' do
             expect(chef_run).to create_template('/etc/profile.d/pyenv.sh').with(
-                                  cookbook: 'pyenv',
-                                  source:   'pyenv.sh',
-                                  owner:    'root',
-                                  mode:     '0755',
-                                  variables: { global_prefix: '/usr/local/pyenv' }
-                                )
+              cookbook: 'pyenv',
+              source:   'pyenv.sh',
+              owner:    'root',
+              mode:     '0755',
+              variables: { global_prefix: '/usr/local/pyenv' }
+            )
           end
         end
       end

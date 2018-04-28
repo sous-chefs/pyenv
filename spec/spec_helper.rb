@@ -9,7 +9,7 @@ DISTROS = {
   'amazon' => ['2017.12'],
   'oracle' => ['7.4'],
   'fedora' => ['27'],
-  'opensuse' => ['42.3']
-}
+  'opensuse' => ['42.3'],
+}.freeze
 
 at_exit { ChefSpec::Coverage.report! }

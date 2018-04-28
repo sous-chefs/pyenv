@@ -24,7 +24,7 @@ describe 'test::user_install' do
       context "on #{platform} #{version}" do
         cached(:chef_run) do
           ChefSpec::ServerRunner.new(platform: platform, version: version)
-            .converge(described_recipe)
+                                .converge(described_recipe)
         end
 
         it 'installs pyenv globally' do
@@ -41,16 +41,16 @@ describe 'test::user_install' do
 
         it 'installs the virtualenv plugin' do
           expect(chef_run).to install_pyenv_plugin('virtualenv').with(
-                                user: 'vagrant',
-                                git_url: 'https://github.com/pyenv/pyenv-virtualenv'
-                              )
+            user: 'vagrant',
+            git_url: 'https://github.com/pyenv/pyenv-virtualenv'
+          )
         end
 
         it 'installs a python package with pip' do
           expect(chef_run).to install_pyenv_pip('requests').with(
-                                user: 'vagrant',
-                                version: '2.18.3'
-                              )
+            user: 'vagrant',
+            version: '2.18.3'
+          )
         end
 
         it 'converges successfully' do
