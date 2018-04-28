@@ -1,18 +1,7 @@
-# frozen_string_literal: true
-
-version = '3.6.1'
-
 # Install pyenv globally
 pyenv_system_install 'system'
 
-pyenv_python version
-
-pyenv_global version
-
-pyenv_plugin 'virtualenv' do
-  git_url 'https://github.com/pyenv/pyenv-virtualenv'
-end
-
-pyenv_pip 'requests' do
-  version '2.18.1'
-end
+include_recipe 'test::_pyenv_python'
+include_recipe 'test::_pyenv_global'
+include_recipe 'test::_pyenv_plugin'
+include_recipe 'test::_pyenv_pip'
