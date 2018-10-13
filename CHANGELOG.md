@@ -1,7 +1,10 @@
 # chef-pyenv Changelog
 
+## 2.0.0
+* Dropping support for Chef 12
+
 ## 1.0.0 (BREAKING CHANGES!!)
-Refactor and update the legacy code base. Recipes are no longer provided, and custom resources are used to manage pyenv installations instead.
+* Refactor and update the legacy code base. Recipes are no longer provided, and custom resources are used to manage pyenv installations instead.
 * update `system_install` to be a resource
 * update `user_install` to be a resource
 * update `script` resource
