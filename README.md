@@ -124,12 +124,9 @@ Pull requests are very welcome! Make sure your patches are well tested.
 
 ## License and Author
 
-* [Shane da Silva][sds]
-* [Darwin D. Wu][darwin]
+* Copyright 2014, [Shane da Silva][sds]
+* Copyright 2017, [Darwin D. Wu][darwin]
 
-Copyright 2014, Shane da Silva
-
-Copyright 2017, Darwin D. Wu
 ```
 http://www.apache.org/licenses/LICENSE-2.0
 ```
