@@ -20,9 +20,10 @@
 #
 provides :pyenv_plugin
 
-property :git_url, String, required: true
-property :git_ref, String, default: 'master'
-property :user,    String
+property :git_url,     String, required: true
+property :git_ref,     String, default: 'master'
+property :environment, Hash
+property :user,        String
 
 # https://github.com/pyenv/pyenv/wiki/Plugins
 action :install do
@@ -34,6 +35,7 @@ action :install do
     reference   new_resource.git_ref
     user        new_resource.user if new_resource.user
     action      :sync
+    environment(new_resource.environment)
   end
 end
 

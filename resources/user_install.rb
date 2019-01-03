@@ -27,6 +27,7 @@ property :git_ref,      String, default: node['pyenv']['git_ref']
 property :group,        String, default: lazy { user }
 property :home_dir,     String, default: lazy { ::File.expand_path("~#{user}") }
 property :user_prefix,  String, default: lazy { ::File.join(home_dir, '.pyenv') }
+property :environment,  Hash
 property :update_pyenv, [true, false], default: true
 
 action :install do
@@ -51,6 +52,7 @@ action :install do
     user       new_resource.user
     group      new_resource.group
     action     :checkout if new_resource.update_pyenv == false
+    environment(new_resource.environment)
 
     notifies :run, 'ruby_block[Add pyenv to PATH]', :immediately
   end

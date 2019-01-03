@@ -21,16 +21,35 @@
 provides :pyenv_pip
 
 property :package_name, String, name_property: true
+property :virtualenv,   String
 property :version,      String
 property :user,         String
-property :reinstall,    [true, false], default: false
+property :options,      String
+property :requirement,  [true, false], default: false
+property :editable,     [true, false], default: false
 
 action :install do
-  opt = new_resource.reinstall ? '-I' : ''
-  command = if new_resource.version
-              "pip install #{opt} #{new_resource.package_name}==#{new_resource.version}"
+  install_mode = if new_resource.requirement
+                   '--requirement'
+                 elsif new_resource.editable
+                   '--editable'
+                 else
+                   ''
+                 end
+
+  install_target = if new_resource.version
+                     "#{new_resource.package_name}==#{new_resource.version}"
+                   else
+                     new_resource.package_name.to_s
+                   end
+
+  pip_args = "install #{new_resource.options} #{install_mode} #{install_target}"
+
+  # without virtualenv, install package with system's pip
+  command = if new_resource.virtualenv
+              "#{new_resource.virtualenv}/bin/pip #{pip_args}"
             else
-              "pip install #{opt} #{new_resource.package_name}"
+              "pip #{pip_args}"
             end
 
   pyenv_script new_resource.package_name do
@@ -40,7 +59,21 @@ action :install do
 end
 
 action :uninstall do
-  command = "pip uninstall #{new_resource.package_name}"
+  uninstall_mode = if new_resource.requirement
+                     '--requirement'
+                   else
+                     ''
+                   end
+
+  pip_args = ["uninstall --yes #{new_resource.options}",
+              "#{uninstall_mode} #{new_resource.package_name}"].join
+
+  # without virtualenv, uninstall package with system's pip
+  command = if new_resource.virtualenv
+              "#{new_resource.virtualenv}/bin/pip #{pip_args}"
+            else
+              "pip #{pip_args}"
+            end
 
   pyenv_script new_resource.package_name do
     code command
