@@ -34,8 +34,12 @@ A `pyenv_system_install` or `pyenv_user_install` is required to be set so that p
 Used to install a Python package into the selected pyenv environment.
 ```ruby
 pyenv_pip 'requests' do
-  version # Optional: if passed, the version the python package to install
-  user    # Optional: if passed, the user to install the python module for
+  virtualenv  # Optional: if passed, pip inside provided virtualenv would be used (by default system's pip)
+  version     # Optional: if passed, the version the python package to install
+  user        # Optional: if passed, the user to install the python module for
+  options     # Optional: if passed, pip would install/uninstall packages with given options
+  requirement # Optional: if true passed, install/uninstall requirements file passed with name property
+  editable    # Optional: if true passed, install package in editable mode
 end
 ```
 
@@ -51,9 +55,10 @@ If a user is passed in to this resource it sets the global version for the user,
 Installs a pyenv plugin.
 ```ruby
 pyenv_plugin 'virtualenv' do
-  git_url # Git URL of the plugin
-  git_ref # Git reference of the plugin
-  user    # Optional: if passed installs to the users pyenv. Do not set, to set installs to the system pyenv.
+  git_url     # Git URL of the plugin
+  git_ref     # Git reference of the plugin
+  environment # Optional: pass environment variables to git resource
+  user        # Optional: if passed installs to the users pyenv. Do not set, to set installs to the system pyenv.
 end
 ```
 
@@ -68,7 +73,9 @@ end
 ```ruby
 pyenv_python '3.6.1' do
   user         # Optional: if passed, the user pyenv to install to
+  environment  # Optional: pass environment variable to git resource
   pyenv_action # Optional: the action to perform, install, remove etc
+  verbose      # Optional: print verbose output during python installation
 end
 ```
 Shorter example `pyenv_python '3.6.1'.`
@@ -82,10 +89,11 @@ pyenv_script 'foo' do
   environment   # Optional: Environment to setup to run the script
   user          # Optional: User to run as
   group         # Optional: Group to run as
-  path          # Optional: User to run as
+  path          # Optional: Path to search for commands
   returns       # Optional: Expected return code
 end
 ```
+
 
 ## System install
 Installs pyenv to the system location, by default `/usr/local/pyenv`
@@ -93,6 +101,7 @@ Installs pyenv to the system location, by default `/usr/local/pyenv`
 pyenv_system_install 'foo' do
   git_url      # URL of the plugin repo you want to checkout
   git_ref      # Optional: Git reference to checkout
+  environment  # Optional: pass environment variable during pyenv installation
   update_pyenv # Optional: Keeps the git repo up to date
 end
 ```
@@ -101,9 +110,10 @@ end
 Installs pyenv to the user path, making pyenv available to that user only.
 ```ruby
 pyenv_user_install 'vagrant' do
-  git_url # Optional: Git URL to checkout pyenv from.
-  git_ref # Optional: Git reference to checkout e.g. 'master'
-  user    # Which user to install pyenv to (also specified in the resources name above)
+  git_url     # Optional: Git URL to checkout pyenv from.
+  git_ref     # Optional: Git reference to checkout e.g. 'master'
+  environment # Optional: pass environment variable during pyenv installation
+  user        # Which user to install pyenv to (also specified in the resources name above)
 end
 ```
 

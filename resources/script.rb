@@ -46,6 +46,7 @@ action :run do
     returns     new_resource.returns if new_resource.returns
     timeout     new_resource.timeout if new_resource.timeout
     umask       new_resource.umask   if new_resource.umask
+    flags       '-e'
     environment(script_environment)
     live_stream new_resource.live_stream
   end
