@@ -1,10 +1,14 @@
 # chef-pyenv Changelog
 
+## HEAD
+<!-- Add your contributions here. -->
+
 ## 2.1.0
 * add support for virtualenv installation and uninstallation.
 * add support for passing environment variable during pyenv, python and plugin installation.
 * delete "reinstall" property from pip resource and replace it with general "options" property 
 * make pyenv_script fail on any subcommand failure
+Thanks to [@ssps](https://github.com/ssps)!
 
 ## 2.0.0
 * Dropping support for Chef 12
