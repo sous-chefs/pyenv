@@ -5,7 +5,7 @@ default['pyenv']['git_ref'] = 'master'
 default['pyenv']['prerequisites'] = case node['platform_family']
                                     when 'debian'
                                       %w(make build-essential libssl-dev zlib1g-dev git-core grep libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm)
-                                    when 'rhel', 'fedora', 'amazon'
+                                    when 'rhel', 'fedora', 'amazon' # oracle, centos, amazon, fedora
                                       %w(bzip2 bzip2-devel git grep patch readline-devel sqlite sqlite-devel zlib-devel openssl-devel)
                                     when 'suse'
                                       %w(git git-core zlib-devel bzip2 libbz2-devel readline-devel sqlite3 sqlite3-devel libopenssl-devel xz xz-devel)

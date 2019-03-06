@@ -1,7 +1,8 @@
 version: 2.1
 
 orbs:
-  kitchen: sous-chefs/kitchen@1.1.0
+  kitchen: sous-chefs/kitchen@dev:first
+  # kitchen: sous-chefs/kitchen@1.1.0
 
 lint_and_unit: &lint_and_unit
   - delivery
@@ -43,18 +44,6 @@ workflows:
           name: system-centos-7
           context: Chef 14
           suite: system-install-centos-7
-          requires:
-            *lint_and_unit
-      - kitchen/dokken-single:
-          name: system-amazon-linux
-          context: Chef 14
-          suite: system-install-amazon-linux
-          requires:
-            *lint_and_unit
-      - kitchen/dokken-single:
-          name: system-oracle-linux
-          context: Chef 14
-          suite: system-install-oracle-linux
           requires:
             *lint_and_unit
       - kitchen/dokken-single:
@@ -104,18 +93,6 @@ workflows:
           name: user-centos-7
           context: Chef 14
           suite: user-install-centos-7
-          requires:
-            *lint_and_unit
-      - kitchen/dokken-single:
-          name: user-amazon-linux
-          context: Chef 14
-          suite: user-install-amazon-linux
-          requires:
-            *lint_and_unit
-      - kitchen/dokken-single:
-          name: user-oracle-linux
-          context: Chef 14
-          suite: user-install-oracle-linux
           requires:
             *lint_and_unit
       - kitchen/dokken-single:
