@@ -1,81 +1,44 @@
+---
 driver:
-  name: dokken
-  chef_version: <%= ENV['CHEF_VERSION'] || "current" %>
-
-transport:
-  name: dokken
+  name: vagrant
+  provider: virtualbox
 
 provisioner:
-  name: dokken
+  product_name: chef
+  product_version: <%= ENV['CHEF_VERSION'] || "current" %>
+  install_strategy: once
   deprecations_as_errors: true
 
 verifier:
   name: inspec
 
 platforms:
-- name: debian-8
-  driver:
-    image: dokken/debian-8
-    intermediate_instructions:
-       - RUN /usr/bin/apt-get update
-       - RUN /usr/bin/apt-get install sudo -y
-
-- name: debian-9
-  driver:
-    image: dokken/debian-9
-    intermediate_instructions:
-       - RUN /usr/bin/apt-get update
-       - RUN /usr/bin/apt-get install sudo -y
-
-- name: centos-6
-  driver:
-    image: dokken/centos-6
-    intermediate_instructions:
-      - RUN yum -y install sudo
-
-- name: centos-7
-  driver:
-    image: dokken/centos-7
-    intermediate_instructions:
-      - RUN yum -y install sudo
-
-- name: amazon-linux
-  driver:
-    image: dokken/amazonlinux
-    intermediate_instructions:
-      - RUN yum -y install sudo
-
-- name: oracle-linux
-  driver:
-    image: oraclelinux:7
-    intermediate_instructions:
-      - RUN yum -y install sudo
-
-- name: fedora
-  driver:
-    image: dokken/fedora-latest
-    intermediate_instructions:
-      - RUN dnf -y install sudo
-
-- name: ubuntu-16.04
-  driver:
-    image: dokken/ubuntu-16.04
-    intermediate_instructions:
-       - RUN /usr/bin/apt-get update
-       - RUN /usr/bin/apt-get install sudo -y
-
-- name: ubuntu-18.04
-  driver:
-    image: dokken/ubuntu-18.04
-    intermediate_instructions:
-       - RUN /usr/bin/apt-get update
-       - RUN /usr/bin/apt-get install sudo -y
-
-- name: opensuse-leap
-  driver:
-    image: dokken/opensuse-leap
-    intermediate_instructions:
-    - RUN zypper --non-interactive install sudo
+  - name: debian-8
+    driver:
+      box: generic/debian8
+  - name: debian-9
+    driver:
+      box: generic/debian9
+  - name: centos-6
+    driver:
+      box: generic/centos6
+  - name: centos-7
+    driver:
+      box: generic/centos7
+  - name: amazon
+    driver:
+      box: generic/rhel8
+  - name: oracle
+    driver:
+      box: generic/oracle7
+  - name: fedora
+    driver:
+      box: generic/fedora28
+  - name: ubuntu-16.04
+  - name: ubuntu-18.04
+  - name: opensuse
+    driver:
+      box: generic/opensuse42
 
 suites:
   # - name: gem

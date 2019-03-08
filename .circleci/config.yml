@@ -1,0 +1,140 @@
+---
+version: 2.1
+
+orbs:
+  kitchen: sous-chefs/kitchen@1.1.1
+
+lint_and_unit: &lint_and_unit
+  - delivery
+  # - danger
+  - lint-yaml
+  - lint-markdown
+
+workflows:
+  version: 2
+  test-kitchen:
+    jobs:
+      # - kitchen/danger
+      - kitchen/delivery:
+          name: delivery
+      - kitchen/yamllint:
+          name: lint-yaml
+      - kitchen/mdlint:
+          name: lint-markdown
+      # ===========================================================
+      #  Chef 14
+      # ===========================================================
+      # system install
+      - kitchen/dokken-single:
+          name: system-debian-8
+          context: Chef 14
+          suite: system-install-debian-8
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: system-debian-9
+          context: Chef 14
+          suite: system-install-debian-9
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: system-centos-6
+          context: Chef 14
+          suite: system-install-centos-6
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: system-centos-7
+          context: Chef 14
+          suite: system-install-centos-7
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: system-fedora
+          context: Chef 14
+          suite: system-install-fedora
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: system-ubuntu-1604
+          context: Chef 14
+          suite: system-install-ubuntu-1604
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: system-ubuntu-1804
+          context: Chef 14
+          suite: system-install-ubuntu-1804
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: system-opensuse-leap
+          context: Chef 14
+          suite: system-install-opensuse-leap
+          channel: stable
+          requires:
+            *lint_and_unit
+      # user install
+      - kitchen/dokken-single:
+          name: user-debian-8
+          context: Chef 14
+          suite: user-install-debian-8
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-debian-9
+          context: Chef 14
+          suite: user-install-debian-9
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-centos-6
+          context: Chef 14
+          suite: user-install-centos-6
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-centos-7
+          context: Chef 14
+          suite: user-install-centos-7
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-fedora
+          context: Chef 14
+          suite: user-install-fedora
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-ubuntu-1604
+          context: Chef 14
+          suite: user-install-ubuntu-1604
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-ubuntu-1804
+          context: Chef 14
+          suite: user-install-ubuntu-1804
+          channel: stable
+          requires:
+            *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-opensuse-leap
+          context: Chef 14
+          suite: user-install-opensuse-leap
+          channel: stable
+          requires:
+            *lint_and_unit
