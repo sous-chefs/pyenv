@@ -12,6 +12,8 @@ Several custom resources are defined to facilitate this.
 
 **WARNING** As of `v1.0.0`, this cookbook no longer provide any recipes. Custom resources are provided instead.
 
+**NOTE** This cookbook does not install `build-essential` libraries for you. Make sure you include the `build-essential` cookbook with this one or you might see build failures.
+
 ## Requirements
 
 ### Chef
