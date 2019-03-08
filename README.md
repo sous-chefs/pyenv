@@ -5,33 +5,36 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/693934e931aa1c52bfa0/maintainability)](https://codeclimate.com/github/darwin67/chef-pyenv/maintainability)
 
 ## Description
+
 Manages [pyenv][pyenv] and its installed Pythons.
 
 Several custom resources are defined to facilitate this.
 
 **WARNING** As of `v1.0.0`, this cookbook no longer provide any recipes. Custom resources are provided instead.
 
-
 ## Requirements
 
 ### Chef
+
 This cookbook requires Chef 13.5+.
 
-### Platform
-* Debian derivatives
+### Platform family
+
+* Debian derivatives (debian, ubuntu)
 * Fedora
 * RHEL derivatives (RHEL, CentOS, Amazon Linux, Oracle, Scientific Linux)
 * openSUSE and openSUSE leap
 
-# Usage
-__Please read__
+## Usage
 
 Examples installtions are provided in `test/fixtures/cookbooks/test/recipes`
 
 A `pyenv_system_install` or `pyenv_user_install` is required to be set so that pyenv knows which version you want to use, and is installed on the system.
 
 ## Pip
+
 Used to install a Python package into the selected pyenv environment.
+
 ```ruby
 pyenv_pip 'requests' do
   virtualenv  # Optional: if passed, pip inside provided virtualenv would be used (by default system's pip)
@@ -44,15 +47,19 @@ end
 ```
 
 ## Global
+
 ```ruby
 pyenv_global '3.6.1' do
   user # Optional: if passed sets the users global version. Do not set, to set the systems global version
 end
 ```
+
 If a user is passed in to this resource it sets the global version for the user, under the users root_path (usually `~/.pyenv/version`), otherwise it sets the system global version.
 
 ## Plugin
+
 Installs a pyenv plugin.
+
 ```ruby
 pyenv_plugin 'virtualenv' do
   git_url     # Git URL of the plugin
@@ -63,6 +70,7 @@ end
 ```
 
 ## Rehash
+
 ```ruby
 pyenv_rehash 'rehash' do
   user # Optional: if passed rehashes the user pyenv otherwise rehashes the system pyenv
@@ -70,6 +78,7 @@ end
 ```
 
 ## Python
+
 ```ruby
 pyenv_python '3.6.1' do
   user         # Optional: if passed, the user pyenv to install to
@@ -78,10 +87,13 @@ pyenv_python '3.6.1' do
   verbose      # Optional: print verbose output during python installation
 end
 ```
+
 Shorter example `pyenv_python '3.6.1'.`
 
 ## Script
+
 Runs a pyenv aware script.
+
 ```ruby
 pyenv_script 'foo' do
   code          # Script code to run
@@ -94,9 +106,10 @@ pyenv_script 'foo' do
 end
 ```
 
-
 ## System install
+
 Installs pyenv to the system location, by default `/usr/local/pyenv`
+
 ```ruby
 pyenv_system_install 'foo' do
   git_url      # URL of the plugin repo you want to checkout
@@ -107,7 +120,9 @@ end
 ```
 
 ## User install
+
 Installs pyenv to the user path, making pyenv available to that user only.
+
 ```ruby
 pyenv_user_install 'vagrant' do
   git_url     # Optional: Git URL to checkout pyenv from.
@@ -116,7 +131,6 @@ pyenv_user_install 'vagrant' do
   user        # Which user to install pyenv to (also specified in the resources name above)
 end
 ```
-
 
 ## System-Wide Mac Installation Note
 
@@ -127,8 +141,8 @@ so you may need to [modify][mac_profile_d] your user profile.
 
 ## Development
 
-- Source hosted at [GitHub][repo]
-- Report issues/Questions/Feature requests on [GitHub Issues][issues]
+* Source hosted at [GitHub][repo]
+* Report issues/Questions/Feature requests on [GitHub Issues][issues]
 
 Pull requests are very welcome! Make sure your patches are well tested.
 
@@ -147,5 +161,6 @@ Unless required by applicable law or agreed to in writing, software distributed 
 [mac_profile_d]: http://hints.macworld.com/article.php?story=20011221192012445
 [repo]: https://github.com/darwin67/chef-pyenv
 [issues]: https://github.com/darwin67/chef-pyenv/issues
+
 [sds]: https://github.com/sds
 [darwin]: https://github.com/darwin67

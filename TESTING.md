@@ -10,7 +10,7 @@ All new features of bug fixes should come with testing if possible.
 
 If you are unsure how to write the integration tests the #sous-chefs channel on the chef community slack will be more than happy to provide help.
 
-## Testing
+## Integration test
 
 Integration testing with kitchen.
 
