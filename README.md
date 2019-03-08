@@ -1,6 +1,6 @@
 # pyenv Chef Cookbook
 
-[![Build Status](https://travis-ci.org/darwin67/chef-pyenv.svg?branch=master)](https://travis-ci.org/darwin67/chef-pyenv)
+[![CircleCI](https://circleci.com/gh/darwin67/chef-pyenv.svg?style=svg)](https://circleci.com/gh/darwin67/chef-pyenv)
 [![Chef Version](https://img.shields.io/cookbook/v/pyenv.svg?style=flat-square)](https://supermarket.chef.io/cookbooks/pyenv)
 [![Maintainability](https://api.codeclimate.com/v1/badges/693934e931aa1c52bfa0/maintainability)](https://codeclimate.com/github/darwin67/chef-pyenv/maintainability)
 
