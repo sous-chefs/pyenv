@@ -1,3 +1,4 @@
+---
 driver:
   name: vagrant
   provider: virtualbox
@@ -12,32 +13,32 @@ verifier:
   name: inspec
 
 platforms:
-- name: debian-8
-  driver:
-    box: generic/debian8
-- name: debian-9
-  driver:
-    box: generic/debian9
-- name: centos-6
-  driver:
-    box: generic/centos6
-- name: centos-7
-  driver:
-    box: generic/centos7
-- name: amazon
-  driver:
-    box: generic/rhel8
-- name: oracle
-  driver:
-    box: generic/oracle7
-- name: fedora
-  driver:
-    box: generic/fedora28
-- name: ubuntu-16.04
-- name: ubuntu-18.04
-- name: opensuse
-  driver:
-    box: generic/opensuse42
+  - name: debian-8
+    driver:
+      box: generic/debian8
+  - name: debian-9
+    driver:
+      box: generic/debian9
+  - name: centos-6
+    driver:
+      box: generic/centos6
+  - name: centos-7
+    driver:
+      box: generic/centos7
+  - name: amazon
+    driver:
+      box: generic/rhel8
+  - name: oracle
+    driver:
+      box: generic/oracle7
+  - name: fedora
+    driver:
+      box: generic/fedora28
+  - name: ubuntu-16.04
+  - name: ubuntu-18.04
+  - name: opensuse
+    driver:
+      box: generic/opensuse42
 
 suites:
   # - name: gem
