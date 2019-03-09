@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-global_python = '3.6.1'
+global_python = '3.7.1'
 venv_root = '/opt/venv_test'
 
 control 'pyenv should be installed' do

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-version = '3.6.1'
+version = '3.7.1'
 venv_root = '/opt/venv_test'
 
 cookbook_file '/tmp/requirements.txt' do
