@@ -48,10 +48,8 @@ suites:
   #   includes: [centos-7]
   - name: system_install
     run_list:
-      - recipe[build-essential]
       - recipe[test::system_install]
   - name: user_install
     run_list:
-      - recipe[build-essential]
       - recipe[test::dokken]
       - recipe[test::user_install]

@@ -36,6 +36,8 @@ action :install do
 
   Chef::Log.info("Building Python #{new_resource.version}, this could take a while...")
 
+  build_essential 'build packages'
+
   package node['pyenv']['prerequisites']
 
   command = %(pyenv #{new_resource.pyenv_action} #{new_resource.version} #{verbose})
