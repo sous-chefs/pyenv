@@ -72,7 +72,7 @@ platforms:
         - RUN /usr/bin/apt-get update
         - RUN /usr/bin/apt-get install sudo -y
 
-  - name: opensuse-leap
+  - name: opensuse-leap         # can't build due to issue with pyenv upstream
     driver:
       image: dokken/opensuse-leap
       intermediate_instructions:

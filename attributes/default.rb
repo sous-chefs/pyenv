@@ -8,7 +8,7 @@ default['pyenv']['prerequisites'] = case node['platform_family']
                                     when 'rhel', 'fedora', 'amazon' # oracle, centos, amazon, fedora
                                       %w(git zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils)
                                     when 'suse'
-                                      %w(git git-core zlib-devel bzip2 libbz2-devel libffi-devel libopenssl-devel readline-devel sqlite3 sqlite3-devel xz xz-devel)
+                                      %w(git git-core zlib-devel bzip2 libbz2-devel libopenssl-devel readline-devel sqlite3 sqlite3-devel xz xz-devel)
                                     when 'mac_os_x'
                                       %w(git readline xz) # not tested
                                     end

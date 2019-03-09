@@ -17,12 +17,12 @@ platforms:
   - name: debian-9
   - name: centos-6
   - name: centos-7
-  # - name: amazon
+  - name: amazon                # no image
   - name: oracle-7
   - name: fedora-29
   - name: ubuntu-16.04
   - name: ubuntu-18.04
-  - name: opensuse-leap
+  - name: opensuse-leap         # error downloading chef 14
 
 suites:
   # - name: gem

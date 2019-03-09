@@ -74,13 +74,7 @@ workflows:
           channel: stable
           requires:
             *lint_and_unit
-      - kitchen/dokken-single:
-          name: system-opensuse-leap
-          context: Chef 14
-          suite: system-install-opensuse-leap
-          channel: stable
-          requires:
-            *lint_and_unit
+
       # user install
       - kitchen/dokken-single:
           name: user-debian-8
@@ -128,13 +122,6 @@ workflows:
           name: user-ubuntu-1804
           context: Chef 14
           suite: user-install-ubuntu-1804
-          channel: stable
-          requires:
-            *lint_and_unit
-      - kitchen/dokken-single:
-          name: user-opensuse-leap
-          context: Chef 14
-          suite: user-install-opensuse-leap
           channel: stable
           requires:
             *lint_and_unit
