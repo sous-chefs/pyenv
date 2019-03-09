@@ -35,7 +35,11 @@ platforms:
     driver:
       box: generic/fedora28
   - name: ubuntu-16.04
+    driver:
+      box: generic/ubuntu1604
   - name: ubuntu-18.04
+    driver:
+      box: generic/ubuntu1804
   - name: opensuse
     driver:
       box: generic/opensuse42

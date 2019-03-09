@@ -1,6 +1,7 @@
 *.rbc
 .config
 .envrc
+.env
 coverage
 InstalledFiles
 lib/bundler/man
