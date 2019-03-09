@@ -12,6 +12,13 @@ Several custom resources are defined to facilitate this.
 
 **WARNING** As of `v1.0.0`, this cookbook no longer provide any recipes. Custom resources are provided instead.
 
+**NOTE** The following distros have [known issues][openssl-issues] regarding building python `3.7` which are all related to the OpenSSL library versions.
+
+* RHEL6
+* Debian 8
+
+[openssl-issue]: https://github.com/pyenv/pyenv/wiki/Common-build-problems#error-the-python-ssl-extension-was-not-compiled-missing-the-openssl-lib
+
 ## Requirements
 
 ### Chef
