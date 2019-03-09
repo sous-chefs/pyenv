@@ -4,6 +4,9 @@
 
 <!-- Add your contributions here. -->
 
+* deprecate support for Chef 13 due to [EOL][supported-versions]
+* update cookbook to use `apt_update` and `build_essential` resources from Chef 14 make sure builds don't failed because of lack of packages
+
 ## 2.1.0
 
 * add support for virtualenv installation and uninstallation.
@@ -57,3 +60,5 @@ Thanks to [@ssps](https://github.com/ssps)!
 ## 0.0.1
 
 * Initial port of [chef-rbenv](https://github.com/fnichol/chef-rbenv)
+
+[supported-versions]: https://docs.chef.io/platforms.html#supported-versions

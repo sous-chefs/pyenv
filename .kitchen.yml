@@ -17,14 +17,12 @@ platforms:
   - name: debian-9
   - name: centos-6
   - name: centos-7
-  - name: amazon
-    driver:
-      box: generic/rhel8
+  # - name: amazon
   - name: oracle-7
   - name: fedora-29
   - name: ubuntu-16.04
   - name: ubuntu-18.04
-  - name: opensuse-leap-42
+  - name: opensuse-leap
 
 suites:
   # - name: gem
