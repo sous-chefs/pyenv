@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-version = '3.6.1'
+version_3_7_2 = '3.7.2'
+version_3_6_1 = '3.6.1'
+version_2_7_15 = '2.7.15'
+
 venv_root = '/opt/venv_test'
 
 cookbook_file '/tmp/requirements.txt' do
@@ -11,9 +14,9 @@ end
 # Install pyenv globally
 pyenv_system_install 'system'
 
-pyenv_python version
-
-pyenv_global version
+pyenv_python version_2_7_15
+pyenv_global version_3_6_1
+pyenv_python version_3_7_2
 
 pyenv_plugin 'virtualenv' do
   git_url 'https://github.com/pyenv/pyenv-virtualenv'
