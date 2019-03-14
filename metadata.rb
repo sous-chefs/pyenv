@@ -6,7 +6,7 @@ description      'Manages pyenv and its installed Python versions.'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 issues_url       'https://github.com/darwin67/chef-pyenv/issues'
 source_url       'https://github.com/darwin67/chef-pyenv'
-version          '2.1.0'
+version          '2.2.0'
 chef_version     '>= 13.5.3' if respond_to?(:chef_version)
 
 %w(
@@ -24,3 +24,5 @@ chef_version     '>= 13.5.3' if respond_to?(:chef_version)
 ).each do |os|
   supports os
 end
+
+depends 'build-essential', '~> 8.2'
