@@ -14,31 +14,15 @@ verifier:
 
 platforms:
   - name: debian-8
-    driver:
-      box: generic/debian8
   - name: debian-9
-    driver:
-      box: generic/debian9
   - name: centos-6
-    driver:
-      box: generic/centos6
   - name: centos-7
-    driver:
-      box: generic/centos7
-  - name: amazon
-    driver:
-      box: generic/rhel8
-  - name: oracle
-    driver:
-      box: generic/oracle7
-  - name: fedora
-    driver:
-      box: generic/fedora28
+  - name: amazon                # no image
+  - name: oracle-7
+  - name: fedora-29
   - name: ubuntu-16.04
   - name: ubuntu-18.04
-  - name: opensuse
-    driver:
-      box: generic/opensuse42
+  - name: opensuse-leap         # error downloading chef 14
 
 suites:
   # - name: gem
@@ -48,10 +32,8 @@ suites:
   #   includes: [centos-7]
   - name: system_install
     run_list:
-      - recipe[build-essential]
       - recipe[test::system_install]
   - name: user_install
     run_list:
-      - recipe[build-essential]
       - recipe[test::dokken]
       - recipe[test::user_install]

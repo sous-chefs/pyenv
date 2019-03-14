@@ -31,6 +31,8 @@ action :install do
   node.run_state['root_path'] ||= {}
   node.run_state['root_path']['system'] = new_resource.global_prefix
 
+  apt_update 'update'
+  build_essential 'build packages'
   package node['pyenv']['prerequisites']
 
   directory '/etc/profile.d' do
