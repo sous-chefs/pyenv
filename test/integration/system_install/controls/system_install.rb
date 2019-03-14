@@ -1,23 +1,52 @@
 # frozen_string_literal: true
 
-global_python = '3.6.1'
+global_python_3_6_1 = '3.6.1'
+python_3_7_2 = '3.7.2'
+python_2_7_15 = '2.7.15'
+
 venv_root = '/opt/venv_test'
 
 control 'pyenv should be installed' do
   title 'pyenv should be installed globally'
-
-  desc "Can set global Python versions to #{global_python}"
+  desc "Can set global Python versions to #{global_python_3_6_1} and add the ability to see other python versions present (#{python_2_7_15} and #{python_3_7_2})"
+  
   describe bash('source /etc/profile.d/pyenv.sh && pyenv global') do
     its('exit_status') { should eq(0) }
-    its('stdout')      { should match(global_python) }
+    its('stdout')      { should match(global_python_3_6_1) }
+    its('stdout')      { should_not match(python_3_7_2) }
+    its('stdout')      { should_not match(python_2_7_15) }
     its('stdout')      { should_not match('system') }
   end
 
-  desc "Python #{global_python} should be installed"
+  describe bash('source /etc/profile.d/pyenv.sh && pyenv versions') do
+    its('exit_status') { should eq(0) }
+    its('stdout')      { should match(python_3_7_2) }
+    its('stdout')      { should match(global_python_3_6_1) }
+    its('stdout')      { should match(python_2_7_15) }
+    its('stdout')      { should match('system') }
+  end
+
+  desc "Python Global #{global_python_3_6_1} should be installed"
   describe bash('source /etc/profile.d/pyenv.sh && python --version') do
     its('exit_status') { should eq(0) }
-    its('stdout')      { should match(global_python) }
+    its('stdout')      { should match(global_python_3_6_1) }
   end
+
+  desc "Python #{python_3_7_2} should be installed"
+  describe bash("source /etc/profile.d/pyenv.sh && PYENV_VERSION=#{python_3_7_2} python --version") do
+    its('exit_status') { should eq(0) }
+    its('stdout')      { should match(python_3_7_2) }
+  end
+
+  desc "Python #{python_2_7_15} should be installed"
+  describe bash("source /etc/profile.d/pyenv.sh && echo \"import sys; print(sys.version)\" | PYENV_VERSION=#{python_2_7_15} python -") do
+    its('exit_status') { should eq(0) }
+    its('stdout')      { should match(python_2_7_15) }
+  end
+end
+
+control 'pyenv on global configs should be configured' do
+  title 'pyenv on global configs should be configured properly'
 
   desc 'Plugin should be installed'
   describe bash('source /etc/profile.d/pyenv.sh && pyenv virtualenv') do
