@@ -1,13 +1,15 @@
 source 'https://rubygems.org'
 
-gem 'chef', '~> 13.5'
 gem 'berkshelf'
+gem 'chef', '~> 13.5'
 
-group :test do
+group :development, :test do
   gem 'cookstyle'
   gem 'foodcritic'
   gem 'inspec'
   gem 'kitchen-dokken'
   gem 'kitchen-inspec'
+  gem 'kitchen-vagrant'
+  gem 'mdl'
   gem 'test-kitchen'
 end
