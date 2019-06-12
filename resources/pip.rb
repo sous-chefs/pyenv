@@ -55,6 +55,7 @@ action :install do
   pyenv_script new_resource.package_name do
     code command
     user new_resource.user if new_resource.user
+    only_if { require_install? }
   end
 end
 
@@ -78,5 +79,37 @@ action :uninstall do
   pyenv_script new_resource.package_name do
     code command
     user new_resource.user if new_resource.user
+  end
+end
+
+action_class do
+  include Chef::Pyenv::ScriptHelpers
+
+  def require_install?
+    current_version = nil
+    show = pip_command("show #{new_resource.package_name}").stdout
+    show.split(/\n+/).each do |line|
+      if line.start_with?('Version:')
+        current_version = line.split(/\s+/)[1]
+      end
+    end
+    Chef::Log.debug("current_version: #{new_resource.package_name} #{current_version}")
+    if !current_version
+      Chef::Log.debug("not installed: #{new_resource.package_name}")
+      return true
+    end
+
+    if !new_resource.version
+      Chef::Log.debug("already installed: #{new_resource.package_name} #{current_version}")
+      return false
+    end
+
+    if current_version != new_resource.version
+      Chef::Log.debug("different version installed: #{new_resource.package_name} current=#{current_version} candidate=#{new_resource.version}")
+      return true
+    else
+      Chef::Log.debug("same version installed: #{new_resource.package_name} #{current_version}")
+      return false
+    end
   end
 end
