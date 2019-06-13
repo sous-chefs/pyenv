@@ -4,6 +4,7 @@
 
 <!-- Add your contributions here. -->
 
+* invoke `pip install` only necessary #34
 * deprecate support for Chef 13 due to [EOL][supported-versions]
 * update cookbook to use `apt_update` and `build_essential` resources from Chef 14 make sure builds don't failed because of lack of packages
 

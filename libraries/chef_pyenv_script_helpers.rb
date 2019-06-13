@@ -1,6 +1,9 @@
+require 'chef/mixin/shell_out'
+
 class Chef
   module Pyenv
     module ScriptHelpers
+      include Chef::Mixin::ShellOut
       def root_path
         node.run_state['root_path'] ||= {}
 
@@ -41,6 +44,20 @@ class Chef
         end
 
         script_env
+      end
+
+      def pip_command(command)
+        pip = if new_resource.virtualenv
+                "#{new_resource.virtualenv}/bin/pip"
+              else
+                'pip'
+              end
+
+        shell_out("#{pip} #{command}",
+                  environment: {
+                    'PATH' => "#{root_path}/shims:#{ENV['PATH']}",
+                  },
+                  user: new_resource.user)
       end
     end
   end
