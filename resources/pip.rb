@@ -89,17 +89,15 @@ action_class do
     current_version = nil
     show = pip_command("show #{new_resource.package_name}").stdout
     show.split(/\n+/).each do |line|
-      if line.start_with?('Version:')
-        current_version = line.split(/\s+/)[1]
-      end
+      current_version = line.split(/\s+/)[1] if line.start_with?('Version:')
     end
     Chef::Log.debug("current_version: #{new_resource.package_name} #{current_version}")
-    if !current_version
+    unless current_version
       Chef::Log.debug("not installed: #{new_resource.package_name}")
       return true
     end
 
-    if !new_resource.version
+    unless new_resource.version
       Chef::Log.debug("already installed: #{new_resource.package_name} #{current_version}")
       return false
     end

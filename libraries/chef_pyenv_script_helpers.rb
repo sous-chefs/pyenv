@@ -54,10 +54,10 @@ class Chef
               end
 
         shell_out("#{pip} #{command}",
-                  :environment => {
+                  environment: {
                     'PATH' => "#{root_path}/shims:#{ENV['PATH']}",
                   },
-                  :user => new_resource.user,)
+                  user: new_resource.user)
       end
     end
   end
