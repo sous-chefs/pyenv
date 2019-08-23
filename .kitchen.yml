@@ -5,7 +5,7 @@ driver:
 
 provisioner:
   product_name: chef
-  product_version: <%= ENV['CHEF_VERSION'] || "current" %>
+  product_version: <%= ENV['CHEF_VERSION'] || "14.0" %>
   install_strategy: once
   deprecations_as_errors: true
 
