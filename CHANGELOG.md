@@ -1,8 +1,9 @@
-# chef-pyenv Changelog
+# pyenv Changelog
 
-## HEAD
+## 3.1.1
 
-<!-- Add your contributions here. -->
+* Migrated ownership to Sous-Chefs
+* Latest cookstyle fixes (5.9.3)
 
 ## 3.1.0
 

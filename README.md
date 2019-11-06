@@ -1,8 +1,11 @@
 # pyenv Chef Cookbook
 
-[![CircleCI](https://circleci.com/gh/darwin67/chef-pyenv.svg?style=svg)](https://circleci.com/gh/darwin67/chef-pyenv)
-[![Chef Version](https://img.shields.io/cookbook/v/pyenv.svg?style=flat-square)](https://supermarket.chef.io/cookbooks/pyenv)
-[![Maintainability](https://api.codeclimate.com/v1/badges/693934e931aa1c52bfa0/maintainability)](https://codeclimate.com/github/darwin67/chef-pyenv/maintainability)
+[![Cookbook Version](https://img.shields.io/cookbook/v/pyenv.svg)](https://supermarket.chef.io/cookbooks/pyenv)
+[![Build Status](https://img.shields.io/circleci/project/github/sous-chefs/pyenv/master.svg)](https://circleci.com/gh/sous-chefs/pyenv)
+[![OpenCollective](https://opencollective.com/sous-chefs/backers/badge.svg)](#backers)
+[![OpenCollective](https://opencollective.com/sous-chefs/sponsors/badge.svg)](#sponsors)
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Maintainability](https://api.codeclimate.com/v1/badges/693934e931aa1c52bfa0/maintainability)](https://codeclimate.com/github/sous-chefs/pyenv/maintainability)
 
 ## Description
 
@@ -148,8 +151,8 @@ so you may need to [modify][mac_profile_d] your user profile.
 
 ## Development
 
-* Source hosted at [GitHub][repo]
-* Report issues/Questions/Feature requests on [GitHub Issues][issues]
+* Source hosted at [GitHub](https://github.com/sous-chefs/pyenv)
+* Report issues/Questions/Feature requests on [GitHub Issues](https://github.com/sous-chefs/pyenv)
 
 Pull requests are very welcome! Make sure your patches are well tested.
 
@@ -158,16 +161,27 @@ Pull requests are very welcome! Make sure your patches are well tested.
 * Copyright 2014, [Shane da Silva][sds]
 * Copyright 2017, [Darwin D. Wu][darwin]
 
-```
-http://www.apache.org/licenses/LICENSE-2.0
-```
+## Contributors
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+This project exists thanks to all the people who [contribute.](https://opencollective.com/sous-chefs/contributors.svg?width=890&button=false)
 
-[pyenv]: https://github.com/yyuu/pyenv
-[mac_profile_d]: http://hints.macworld.com/article.php?story=20011221192012445
-[repo]: https://github.com/darwin67/chef-pyenv
-[issues]: https://github.com/darwin67/chef-pyenv/issues
+### Backers
 
-[sds]: https://github.com/sds
-[darwin]: https://github.com/darwin67
+Thank you to all our backers!
+
+![https://opencollective.com/sous-chefs#backers](https://opencollective.com/sous-chefs/backers.svg?width=600&avatarHeight=40)
+
+### Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
+
+![https://opencollective.com/sous-chefs/sponsor/0/website](https://opencollective.com/sous-chefs/sponsor/0/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/1/website](https://opencollective.com/sous-chefs/sponsor/1/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/2/website](https://opencollective.com/sous-chefs/sponsor/2/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/3/website](https://opencollective.com/sous-chefs/sponsor/3/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/4/website](https://opencollective.com/sous-chefs/sponsor/4/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/5/website](https://opencollective.com/sous-chefs/sponsor/5/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/6/website](https://opencollective.com/sous-chefs/sponsor/6/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/7/website](https://opencollective.com/sous-chefs/sponsor/7/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/8/website](https://opencollective.com/sous-chefs/sponsor/8/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/9/website](https://opencollective.com/sous-chefs/sponsor/9/avatar.svg?avatarHeight=100)

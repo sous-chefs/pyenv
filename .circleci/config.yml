@@ -1,85 +1,101 @@
 ---
-version: 2.1
-
-orbs:
-  kitchen: sous-chefs/kitchen@1.1.1
-
+jobs:
+  final:
+    docker:
+      - image: bash:latest
+    steps:
+      - run:
+          name: Finish cooking
+          command: echo "Finished cooking"
 lint_and_unit: &lint_and_unit
   - delivery
-  # - danger
+  - danger
   - lint-yaml
   - lint-markdown
-
+version: 2.1
+orbs:
+  kitchen: sous-chefs/kitchen@2
 workflows:
-  version: 2
-  test-kitchen:
+  kitchen:
     jobs:
-      # - kitchen/danger
-      - kitchen/delivery:
-          name: delivery
       - kitchen/yamllint:
           name: lint-yaml
       - kitchen/mdlint:
           name: lint-markdown
-      # ===========================================================
-      #  Chef 14
-      # ===========================================================
-      # system install (testing with python 3.7)
+      - kitchen/danger:
+          name: danger
+          context: Danger
+      - kitchen/delivery:
+          name: delivery
       - kitchen/dokken-single:
-          name: system-debian-9
-          context: Chef 14
+          name: system-install-debian-9
           suite: system-install-debian-9
-          channel: stable
-          requires:
-            *lint_and_unit
+          requires: *lint_and_unit
       - kitchen/dokken-single:
-          name: system-centos-7
-          context: Chef 14
+          name: system-install-centos-7
           suite: system-install-centos-7
-          channel: stable
-          requires:
-            *lint_and_unit
+          requires: *lint_and_unit
       - kitchen/dokken-single:
-          name: system-fedora
-          context: Chef 14
+          name: system-install-amazon-linux
+          suite: system-install-amazon-linux
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: system-install-oracle-linux
+          suite: system-install-oracle-linux
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: system-install-fedora
           suite: system-install-fedora
-          channel: stable
-          requires:
-            *lint_and_unit
+          requires: *lint_and_unit
       - kitchen/dokken-single:
-          name: system-ubuntu-1604
-          context: Chef 14
+          name: system-install-ubuntu-1604
           suite: system-install-ubuntu-1604
-          channel: stable
-          requires:
-            *lint_and_unit
+          requires: *lint_and_unit
       - kitchen/dokken-single:
-          name: system-ubuntu-1804
-          context: Chef 14
+          name: system-install-ubuntu-1804
           suite: system-install-ubuntu-1804
-          channel: stable
-          requires:
-            *lint_and_unit
-
-      # user install (testing with python 3.6)
+          requires: *lint_and_unit
       - kitchen/dokken-single:
-          name: user-debian-8
-          context: Chef 14
-          suite: user-install-debian-8
-          channel: stable
-          requires:
-            *lint_and_unit
+          name: user-install-debian-9
+          suite: user-install-debian-9
+          requires: *lint_and_unit
       - kitchen/dokken-single:
-          name: user-centos-6
-          context: Chef 14
-          suite: user-install-centos-6
-          channel: stable
-          requires:
-            *lint_and_unit
+          name: user-install-centos-7
+          suite: user-install-centos-7
+          requires: *lint_and_unit
       - kitchen/dokken-single:
-          name: user-ubuntu-1804
-          context: Chef 14
+          name: user-install-amazon-linux
+          suite: user-install-amazon-linux
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-install-oracle-linux
+          suite: user-install-oracle-linux
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-install-fedora
+          suite: user-install-fedora
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-install-ubuntu-1604
+          suite: user-install-ubuntu-1604
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: user-install-ubuntu-1804
           suite: user-install-ubuntu-1804
-          channel: stable
+          requires: *lint_and_unit
+      - final:
           requires:
-            *lint_and_unit
+            - system-install-debian-9
+            - system-install-centos-7
+            - system-install-amazon-linux
+            - system-install-oracle-linux
+            - system-install-fedora
+            - system-install-ubuntu-1604
+            - system-install-ubuntu-1804
+            - user-install-debian-9
+            - user-install-centos-7
+            - user-install-amazon-linux
+            - user-install-oracle-linux
+            - user-install-fedora
+            - user-install-ubuntu-1604
+            - user-install-ubuntu-1804
