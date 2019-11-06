@@ -1,7 +1,5 @@
 *.rbc
 .config
-.envrc
-.env
 coverage
 InstalledFiles
 lib/bundler/man
@@ -12,6 +10,7 @@ test/tmp
 test/version_tmp
 tmp
 _Store
+.DS_Store
 *~
 *#
 .#*
@@ -46,7 +45,6 @@ vendor/
 Policyfile.lock.json
 Cheffile.lock
 .librarian/
-.chef
 
 # vagrant stuff
 .vagrant/
