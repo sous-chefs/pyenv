@@ -14,12 +14,12 @@ verifier:
   name: inspec
 
 platforms:
-  - name: debian-8
-    driver:
-      image: dokken/debian-8
-      intermediate_instructions:
-        - RUN /usr/bin/apt-get update
-        - RUN /usr/bin/apt-get install sudo -y
+  # - name: debian-8
+  #   driver:
+  #     image: dokken/debian-8
+  #     intermediate_instructions:
+  #       - RUN /usr/bin/apt-get update
+  #       - RUN /usr/bin/apt-get install sudo -y
 
   - name: debian-9
     driver:
@@ -28,11 +28,11 @@ platforms:
         - RUN /usr/bin/apt-get update
         - RUN /usr/bin/apt-get install sudo -y
 
-  - name: centos-6
-    driver:
-      image: dokken/centos-6
-      intermediate_instructions:
-        - RUN yum -y install sudo
+  # - name: centos-6
+  #   driver:
+  #     image: dokken/centos-6
+  #     intermediate_instructions:
+  #       - RUN yum -y install sudo
 
   - name: centos-7
     driver:
@@ -72,16 +72,17 @@ platforms:
         - RUN /usr/bin/apt-get update
         - RUN /usr/bin/apt-get install sudo -y
 
-  - name: opensuse-leap         # can't build due to issue with pyenv upstream
-    driver:
-      image: dokken/opensuse-leap
-      intermediate_instructions:
-        - RUN zypper --non-interactive install sudo
+  # - name: opensuse-leap         # can't build due to issue with pyenv upstream
+  #   driver:
+  #     image: dokken/opensuse-leap
+  #     intermediate_instructions:
+  #       - RUN zypper --non-interactive install sudo
 
 suites:
   - name: system_install
     run_list:
       - recipe[test::system_install]
+
   - name: user_install
     run_list:
       - recipe[test::dokken]

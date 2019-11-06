@@ -1,13 +1,12 @@
 name             'pyenv'
-maintainer       'Darwin D. Wu'
-maintainer_email 'darwinwu67@gmail.com'
+maintainer       'Sous Chefs'
+maintainer_email 'help@sous-chefs.org'
 license          'Apache-2.0'
 description      'Manages pyenv and its installed Python versions.'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-issues_url       'https://github.com/darwin67/chef-pyenv/issues'
-source_url       'https://github.com/darwin67/chef-pyenv'
-version          '3.1.0'
-chef_version     '>= 14.0' if respond_to?(:chef_version)
+issues_url       'https://github.com/sous-chefs/pyenv/issues'
+source_url       'https://github.com/sous-chefs/pyenv'
+version          '3.1.1'
+chef_version     '>= 14.0'
 
 %w(
   ubuntu

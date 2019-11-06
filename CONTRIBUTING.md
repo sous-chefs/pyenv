@@ -1,37 +1,21 @@
 # Contributing
 
-## Issues, questions and pull requests
+## Branches
 
-Please post issues and questions on the [Github issue tracker][github-issue].
-I also welcome contributions so please feel free to submit pull requests too.
-A template is provided when you create a pull request, so please make sure to fill it in so I get an idea of the change you are proposing.
+### `master` branch
 
-Also, changes in behaviours should be included in the tests, so make sure to update the tests with your pull requests.
+The master branch is the current committed changes. These changes may not yet be released although we try to release often.
 
-## Tests
+## Tags
 
-Tests are all handled by [Test kitchen][test-kitchen] with [Docker][docker] so make sure you have docker installed to run the tests.
-You will also need the [ChefDK][chefdk] to use the Test kitchen libraries.
+All releases are tagged in git. To see the releases available to you see the changelog or the tags directly.
 
-Showing all available test suites
+## Pull requests
 
-```
-kitchen list
-```
+- <https://github.com/sous-chefs/pyenv/pulls>
 
-Converging a suite
+## Issues
 
-```
-kitchen converge <suite-name>
-```
+Need to report an issue? Use the github issues:
 
-Verifing configurations
-
-```
-kitchen verify <suite-name>
-```
-
-[github-issue]: https://github.com/darwin67/chef-pyenv/issues
-[test-kitchen]: https://kitchen.ci/
-[docker]: https://www.docker.com/
-[chefdk]: https://downloads.chef.io/chefdk
+- <https://github.com/sous-chefs/pyenv/issues>
