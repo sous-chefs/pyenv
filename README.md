@@ -156,11 +156,6 @@ so you may need to [modify][mac_profile_d] your user profile.
 
 Pull requests are very welcome! Make sure your patches are well tested.
 
-## License and Author
-
-* Copyright 2014, [Shane da Silva][sds]
-* Copyright 2017, [Darwin D. Wu][darwin]
-
 ## Contributors
 
 This project exists thanks to all the people who [contribute.](https://opencollective.com/sous-chefs/contributors.svg?width=890&button=false)

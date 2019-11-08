@@ -1,5 +1,7 @@
 # pyenv Changelog
 
+* Follow up tweaks after ownership migration
+
 ## 3.1.1
 
 * Migrated ownership to Sous-Chefs
