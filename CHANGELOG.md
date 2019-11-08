@@ -1,5 +1,6 @@
 # pyenv Changelog
 
+* Fix broken link in README
 * Follow up tweaks after ownership migration
 
 ## 3.1.1
