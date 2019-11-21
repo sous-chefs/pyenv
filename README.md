@@ -37,7 +37,7 @@ This cookbook requires Chef 14.0+.
 
 ## Usage
 
-Examples installtions are provided in `test/fixtures/cookbooks/test/recipes`
+Examples installations are provided in `test/fixtures/cookbooks/test/recipes`
 
 A `pyenv_system_install` or `pyenv_user_install` is required to be set so that pyenv knows which version you want to use, and is installed on the system.
 
