@@ -37,7 +37,7 @@ This cookbook requires Chef 14.0+.
 
 ## Usage
 
-Examples installtions are provided in `test/fixtures/cookbooks/test/recipes`
+Examples installations are provided in `test/fixtures/cookbooks/test/recipes`
 
 A `pyenv_system_install` or `pyenv_user_install` is required to be set so that pyenv knows which version you want to use, and is installed on the system.
 
@@ -180,3 +180,5 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 ![https://opencollective.com/sous-chefs/sponsor/7/website](https://opencollective.com/sous-chefs/sponsor/7/avatar.svg?avatarHeight=100)
 ![https://opencollective.com/sous-chefs/sponsor/8/website](https://opencollective.com/sous-chefs/sponsor/8/avatar.svg?avatarHeight=100)
 ![https://opencollective.com/sous-chefs/sponsor/9/website](https://opencollective.com/sous-chefs/sponsor/9/avatar.svg?avatarHeight=100)
+
+[pyenv]: https://github.com/pyenv/pyenv
