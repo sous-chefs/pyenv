@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- resolved cookstyle error: resources/pip.rb:107:7 convention: `Style/RedundantReturn`
+- resolved cookstyle error: resources/pip.rb:110:7 convention: `Style/RedundantReturn`
 - Migrate to actions for builds
 - Fix broken link in README
 - Follow up tweaks after ownership migration
