@@ -104,10 +104,10 @@ action_class do
 
     if current_version != new_resource.version
       Chef::Log.debug("different version installed: #{new_resource.package_name} current=#{current_version} candidate=#{new_resource.version}")
-      return true
+      true
     else
       Chef::Log.debug("same version installed: #{new_resource.package_name} #{current_version}")
-      return false
+      false
     end
   end
 end
