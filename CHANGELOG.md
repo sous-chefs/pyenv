@@ -1,6 +1,6 @@
 # pyenv Changelog
 
-## Unreleased
+## 3.2.0
 
 - resolved cookstyle error: resources/pip.rb:107:7 convention: `Style/RedundantReturn`
 - resolved cookstyle error: resources/pip.rb:110:7 convention: `Style/RedundantReturn`
