@@ -5,12 +5,12 @@ class Chef
     module ScriptHelpers
       include Chef::Mixin::ShellOut
       def root_path
-        node.run_state['root_path'] ||= {}
+        node.run_state['sous-chefs']['pyenv']['root_path'] ||= {}
 
         if new_resource.user
-          node.run_state['root_path'][new_resource.user]
+          node.run_state['sous-chefs']['pyenv']['root_path'][new_resource.user]
         else
-          node.run_state['root_path']['system']
+          node.run_state['sous-chefs']['pyenv']['root_path']['system']
         end
       end
 
