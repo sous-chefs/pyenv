@@ -31,7 +31,10 @@ property :environment,  Hash
 property :update_pyenv, [true, false], default: true
 
 action :install do
+  node.run_state['sous-chefs'] ||= {}
+  node.run_state['sous-chefs']['pyenv'] ||= {}
   node.run_state['sous-chefs']['pyenv']['root_path'] ||= {}
+
   node.run_state['sous-chefs']['pyenv']['root_path'][new_resource.user] ||= new_resource.user_prefix
 
   apt_update 'update'

@@ -5,6 +5,8 @@ class Chef
     module ScriptHelpers
       include Chef::Mixin::ShellOut
       def root_path
+        node.run_state['sous-chefs'] ||= {}
+        node.run_state['sous-chefs']['pyenv'] ||= {}
         node.run_state['sous-chefs']['pyenv']['root_path'] ||= {}
 
         if new_resource.user
