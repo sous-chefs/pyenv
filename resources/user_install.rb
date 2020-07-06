@@ -49,6 +49,7 @@ action :install do
   end
 
   git new_resource.user_prefix do
+    checkout_branch 'deploy'
     repository new_resource.git_url
     reference  new_resource.git_ref
     user       new_resource.user
