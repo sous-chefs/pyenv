@@ -49,6 +49,7 @@ action :install do
   end
 
   git new_resource.global_prefix do
+    checkout_branch 'deploy'
     repository new_resource.git_url
     reference  new_resource.git_ref
     action     :checkout if new_resource.update_pyenv == false

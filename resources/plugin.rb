@@ -30,6 +30,7 @@ action :install do
   # If we pass in a username, we then install the plugin to the user's home_dir
   # See chef_pyenv_script_helpers.rb for root_path
   git "Install #{new_resource.name} plugin" do
+    checkout_branch 'deploy'
     destination ::File.join(root_path, 'plugins', new_resource.name)
     repository  new_resource.git_url
     reference   new_resource.git_ref
