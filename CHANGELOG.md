@@ -1,5 +1,9 @@
 # pyenv Changelog
 
+## 3.3.0
+
+- Chef 16 removed defaults for checkout_branch from the git resource, restore them to the previous default 'deploy'
+
 ## 3.2.0
 
 - resolved cookstyle error: resources/pip.rb:107:7 convention: `Style/RedundantReturn`
