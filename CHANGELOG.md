@@ -1,5 +1,9 @@
 # pyenv Changelog
 
+## 3.3.1
+
+- Namespace the run_state variables used in the resources
+
 ## 3.3.0
 
 - Chef 16 removed defaults for checkout_branch from the git resource, restore them to the previous default 'deploy'

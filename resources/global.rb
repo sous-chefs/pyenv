@@ -30,9 +30,9 @@ property :pyenv_version, String, name_property: true
 property :user,          String
 property :root_path,     String, default: lazy {
   if user
-    node.run_state['root_path'][user]
+    node.run_state['sous-chefs']['pyenv']['root_path'][user]
   else
-    node.run_state['root_path']['system']
+    node.run_state['sous-chefs']['pyenv']['root_path']['system']
   end
 }
 

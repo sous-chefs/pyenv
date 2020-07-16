@@ -31,14 +31,17 @@ property :environment,  Hash
 property :update_pyenv, [true, false], default: true
 
 action :install do
-  node.run_state['root_path'] ||= {}
-  node.run_state['root_path'][new_resource.user] ||= new_resource.user_prefix
+  node.run_state['sous-chefs'] ||= {}
+  node.run_state['sous-chefs']['pyenv'] ||= {}
+  node.run_state['sous-chefs']['pyenv']['root_path'] ||= {}
+
+  node.run_state['sous-chefs']['pyenv']['root_path'][new_resource.user] ||= new_resource.user_prefix
 
   apt_update 'update'
   build_essential 'build packages'
   package node['pyenv']['prerequisites']
 
-  system_prefix = node.run_state['root_path']['system']
+  system_prefix = node.run_state['sous-chefs']['pyenv']['root_path']['system']
 
   template '/etc/profile.d/pyenv.sh' do
     cookbook 'pyenv'

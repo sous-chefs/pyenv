@@ -28,8 +28,11 @@ property :environment,   Hash
 property :update_pyenv,  [true, false], default: true
 
 action :install do
-  node.run_state['root_path'] ||= {}
-  node.run_state['root_path']['system'] = new_resource.global_prefix
+  node.run_state['sous-chefs'] ||= {}
+  node.run_state['sous-chefs']['pyenv'] ||= {}
+  node.run_state['sous-chefs']['pyenv']['root_path'] ||= {}
+
+  node.run_state['sous-chefs']['pyenv']['root_path']['system'] = new_resource.global_prefix
 
   apt_update 'update'
   build_essential 'build packages'
