@@ -3,6 +3,8 @@
 ## Unpublished
 
 - Do not attempt to rehash in a system-wide install
+- Removed testing support for centos-6. Python 3.7.1 requires a newer version of openssl than centos-6 supplies.
+- Removed testing support for debian-8. Debian-8 is no longer supported. Also has issues with the level of openssl that is available.
 
 ## 3.3.1
 

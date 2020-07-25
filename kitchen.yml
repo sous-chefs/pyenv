@@ -13,9 +13,7 @@ verifier:
   name: inspec
 
 platforms:
-  - name: debian-8
   - name: debian-9
-  - name: centos-6
   - name: centos-7
   - name: amazon                # no image
   - name: oracle-7
@@ -24,11 +22,6 @@ platforms:
   - name: opensuse-leap         # error downloading chef 14
 
 suites:
-  # - name: gem
-  #   run_list:
-  #     - recipe[test::dokken]
-  #     - recipe[test::gem]
-  #   includes: [centos-7]
   - name: system_install
     run_list:
       - recipe[test::system_install]

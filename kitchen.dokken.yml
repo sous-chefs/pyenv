@@ -14,25 +14,12 @@ verifier:
   name: inspec
 
 platforms:
-  # - name: debian-8
-  #   driver:
-  #     image: dokken/debian-8
-  #     intermediate_instructions:
-  #       - RUN /usr/bin/apt-get update
-  #       - RUN /usr/bin/apt-get install sudo -y
-
   - name: debian-9
     driver:
       image: dokken/debian-9
       intermediate_instructions:
         - RUN /usr/bin/apt-get update
         - RUN /usr/bin/apt-get install sudo -y
-
-  # - name: centos-6
-  #   driver:
-  #     image: dokken/centos-6
-  #     intermediate_instructions:
-  #       - RUN yum -y install sudo
 
   - name: centos-7
     driver:
@@ -58,14 +45,14 @@ platforms:
       intermediate_instructions:
         - RUN dnf -y install sudo
 
-  - name: ubuntu-16.04
+  - name: ubuntu-18.04
     driver:
       image: dokken/ubuntu-16.04
       intermediate_instructions:
         - RUN /usr/bin/apt-get update
         - RUN /usr/bin/apt-get install sudo -y
 
-  - name: ubuntu-18.04
+  - name: ubuntu-20.04
     driver:
       image: dokken/ubuntu-18.04
       intermediate_instructions:
