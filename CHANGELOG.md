@@ -1,5 +1,9 @@
 # pyenv Changelog
 
+## Unpublished
+
+- Do not attempt to rehash in a system-wide install
+
 ## 3.3.1
 
 - Namespace the run_state variables used in the resources

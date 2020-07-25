@@ -55,6 +55,9 @@ control 'pyenv should be installed to the system path' do
     it { should be_file }
     it { should be_executable }
     its('owner') { should eq('root') }
+    its('content') { should match(/^\s+pyenv_init="pyenv init -"/) }
+    its('content') { should match(/Rehashing will fail in a system install\n\s+pyenv_init="pyenv init - --no-rehash"/m) }
+    its('content') { should match(/^\s+eval "\$\(\$pyenv_init\)"/) }
   end
 
   describe directory('/usr/local/pyenv') do

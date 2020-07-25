@@ -44,8 +44,7 @@ jobs:
           - 'centos-7'
           - 'oracle-linux'
           - 'amazon-linux'
-          - 'ubuntu-1604'
-          - 'ubuntu-1804'
+          - 'ubuntu-2004'
         suite:
           - 'system-install'
           - 'user-install'

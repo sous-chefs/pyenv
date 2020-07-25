@@ -5,7 +5,7 @@ driver:
 
 provisioner:
   product_name: chef
-  product_version: <%= ENV['CHEF_VERSION'] || "current" %>
+  product_version: 15
   install_strategy: once
   deprecations_as_errors: true
 
@@ -20,8 +20,7 @@ platforms:
   - name: amazon                # no image
   - name: oracle-7
   - name: fedora-29
-  - name: ubuntu-16.04
-  - name: ubuntu-18.04
+  - name: ubuntu-20.04
   - name: opensuse-leap         # error downloading chef 14
 
 suites:
