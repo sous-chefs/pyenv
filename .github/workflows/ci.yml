@@ -42,8 +42,10 @@ jobs:
         os:
           - 'debian-9'
           - 'centos-7'
+          - 'centos-8'
           - 'oracle-linux'
           - 'amazon-linux'
+          - 'ubuntu-1804'
           - 'ubuntu-2004'
         suite:
           - 'system-install'

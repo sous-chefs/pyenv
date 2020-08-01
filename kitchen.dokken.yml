@@ -27,6 +27,12 @@ platforms:
       intermediate_instructions:
         - RUN yum -y install sudo
 
+  - name: centos-8
+    driver:
+      image: dokken/centos-8
+      intermediate_instructions:
+        - RUN yum -y install sudo
+
   - name: amazon-linux
     driver:
       image: dokken/amazonlinux
@@ -58,12 +64,6 @@ platforms:
       intermediate_instructions:
         - RUN /usr/bin/apt-get update
         - RUN /usr/bin/apt-get install sudo -y
-
-  # - name: opensuse-leap         # can't build due to issue with pyenv upstream
-  #   driver:
-  #     image: dokken/opensuse-leap
-  #     intermediate_instructions:
-  #       - RUN zypper --non-interactive install sudo
 
 suites:
   - name: system_install

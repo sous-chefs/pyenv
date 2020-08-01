@@ -5,7 +5,7 @@ driver:
 
 provisioner:
   product_name: chef
-  product_version: 15
+  product_version:  <%= ENV['CHEF_VERSION'] || "latest" %>
   install_strategy: once
   deprecations_as_errors: true
 
@@ -13,13 +13,17 @@ verifier:
   name: inspec
 
 platforms:
+  - name: amazonlinux2
+    driver_config:
+      box: mvbcoding/awslinux
   - name: debian-9
   - name: centos-7
-  - name: amazon                # no image
+  - name: centos-8
   - name: oracle-7
   - name: fedora-29
+  - name: ubuntu-18.04
   - name: ubuntu-20.04
-  - name: opensuse-leap         # error downloading chef 14
+  - name: opensuse-leap-15        # error downloading chef 14
 
 suites:
   - name: system_install
