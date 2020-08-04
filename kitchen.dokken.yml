@@ -21,6 +21,13 @@ platforms:
         - RUN /usr/bin/apt-get update
         - RUN /usr/bin/apt-get install sudo -y
 
+  - name: debian-10
+    driver:
+      image: dokken/debian-10
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update
+        - RUN /usr/bin/apt-get install sudo -y
+
   - name: centos-7
     driver:
       image: dokken/centos-7

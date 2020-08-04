@@ -1,7 +1,7 @@
 ---
 name: ci
 
-on:
+'on':
   pull_request:
   push:
     branches:
@@ -41,6 +41,7 @@ jobs:
       matrix:
         os:
           - 'debian-9'
+          - 'debian-10'
           - 'centos-7'
           - 'centos-8'
           - 'oracle-linux'
