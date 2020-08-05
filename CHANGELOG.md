@@ -1,6 +1,6 @@
 # pyenv Changelog
 
-## Unpublished
+## 3.3.2 (2020-08-05)
 
 - Do not attempt to rehash in a system-wide install
 - Removed testing support for centos-6. Python 3.7.1 requires a newer version of openssl than centos-6 supplies.
