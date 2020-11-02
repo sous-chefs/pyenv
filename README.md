@@ -56,6 +56,12 @@ pyenv_pip 'requests' do
 end
 ```
 
+The pyenv_pip resource has the following actions:
+
+* `:install` - Default. Install a python package. If a version is specified, install the specified version of the python package.
+* `:upgrade` - Install/upgrade a python package. Call `install` command with `--upgrade` flag. If version is not specified, latest version will be installed.
+* `:uninstall` - Uninstall a python package.
+
 ## Global
 
 ```ruby

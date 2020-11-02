@@ -36,6 +36,12 @@ pyenv_pip '/tmp/requirements.txt' do
   requirement true
 end
 
+pyenv_pip 'urllib3' do
+  virtualenv venv_root
+  action :upgrade
+  version '1.25.11'
+end
+
 pyenv_pip 'requests' do
   virtualenv venv_root
   action :uninstall

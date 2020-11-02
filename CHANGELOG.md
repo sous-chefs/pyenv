@@ -1,5 +1,9 @@
 # pyenv Changelog
 
+## Unreleased
+
+- Add `:upgrade` action to the pyenv_pip resource
+
 ## 3.3.2 (2020-08-05)
 
 - Do not attempt to rehash in a system-wide install

@@ -37,7 +37,7 @@ control 'pyenv should be installed' do
     its('stdout')      { should match('Version: 16.2.0') }
   end
 
-  desc 'Pip should install package requests inside virtualenv according to requirements.txt'
+  desc 'Pip should install package fire inside virtualenv according to requirements.txt'
   describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && #{venv_root}/bin/pip show fire'") do
     its('exit_status') { should eq(0) }
     its('stdout')      { should match('Version: 0.1.2') }
