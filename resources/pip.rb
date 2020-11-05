@@ -59,6 +59,29 @@ action :install do
   end
 end
 
+action :upgrade do
+  upgrade_target = if new_resource.version
+                     "#{new_resource.package_name}==#{new_resource.version}"
+                   else
+                     new_resource.package_name.to_s
+                   end
+
+  pip_args = "install --upgrade #{new_resource.options} #{upgrade_target}"
+
+  # without virtualenv, upgrade package with system's pip
+  command = if new_resource.virtualenv
+              "#{new_resource.virtualenv}/bin/pip #{pip_args}"
+            else
+              "pip #{pip_args}"
+            end
+
+  pyenv_script new_resource.package_name do
+    code command
+    user new_resource.user if new_resource.user
+    only_if { require_upgrade? }
+  end
+end
+
 action :uninstall do
   uninstall_mode = if new_resource.requirement
                      '--requirement'
@@ -86,6 +109,25 @@ action_class do
   include Chef::Pyenv::ScriptHelpers
 
   def require_install?
+    current_version = get_current_version
+    return true unless current_version
+
+    unless new_resource.version
+      Chef::Log.debug("already installed: #{new_resource.package_name} #{current_version}")
+      return false
+    end
+
+    is_different_version?(current_version)
+  end
+
+  def require_upgrade?
+    current_version = get_current_version
+    return true unless current_version
+
+    is_different_version?(current_version)
+  end
+
+  def get_current_version
     current_version = nil
     show = pip_command("show #{new_resource.package_name}").stdout
     show.split(/\n+/).each do |line|
@@ -94,14 +136,11 @@ action_class do
     Chef::Log.debug("current_version: #{new_resource.package_name} #{current_version}")
     unless current_version
       Chef::Log.debug("not installed: #{new_resource.package_name}")
-      return true
     end
+    current_version
+  end
 
-    unless new_resource.version
-      Chef::Log.debug("already installed: #{new_resource.package_name} #{current_version}")
-      return false
-    end
-
+  def is_different_version?(current_version)
     if current_version != new_resource.version
       Chef::Log.debug("different version installed: #{new_resource.package_name} current=#{current_version} candidate=#{new_resource.version}")
       true
@@ -111,3 +150,4 @@ action_class do
     end
   end
 end
+
