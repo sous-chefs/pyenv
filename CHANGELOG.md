@@ -1,6 +1,6 @@
 # pyenv Changelog
 
-## Unreleased
+## 3.4.0 (2020-11-05)
 
 - Add `:upgrade` action to the pyenv_pip resource
 
