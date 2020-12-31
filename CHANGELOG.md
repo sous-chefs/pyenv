@@ -1,5 +1,9 @@
 # pyenv Changelog
 
+## Unreleased
+
+- resolved cookstyle error: resources/pip.rb:153:1 convention: `Layout/TrailingEmptyLines`
+
 ## 3.4.0 (2020-11-05)
 
 - Add `:upgrade` action to the pyenv_pip resource
