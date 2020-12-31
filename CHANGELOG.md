@@ -1,6 +1,6 @@
 # pyenv Changelog
 
-## Unreleased
+## 3.4.1 - *2020-12-31*
 
 - resolved cookstyle error: resources/pip.rb:153:1 convention: `Layout/TrailingEmptyLines`
 
