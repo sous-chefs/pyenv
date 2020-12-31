@@ -150,4 +150,3 @@ action_class do
     end
   end
 end
-
