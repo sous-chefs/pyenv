@@ -56,7 +56,7 @@ action :install do
   pyenv_script new_resource.package_name do
     code command
     user new_resource.user if new_resource.user
-    umask new_resource.umask if new_resouce.umask
+    umask new_resource.umask if new_resource.umask
     only_if { require_install? }
   end
 end
@@ -80,7 +80,7 @@ action :upgrade do
   pyenv_script new_resource.package_name do
     code command
     user new_resource.user if new_resource.user
-    umask new_resource.umask if new_resouce.umask
+    umask new_resource.umask if new_resource.umask
     only_if { require_upgrade? }
   end
 end
@@ -105,7 +105,7 @@ action :uninstall do
   pyenv_script new_resource.package_name do
     code command
     user new_resource.user if new_resource.user
-    umask new_resource.umask if new_resouce.umask
+    umask new_resource.umask if new_resource.umask
   end
 end
 
