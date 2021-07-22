@@ -1,6 +1,6 @@
 # pyenv Changelog
 
-## Unreleased
+## 3.5.0 - *2021-07-22*
 
 - Add support for setting umask for pip resource.
 
