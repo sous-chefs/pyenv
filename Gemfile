@@ -5,7 +5,6 @@ gem 'chef', '~> 15.0'
 
 group :development, :test do
   gem 'cookstyle'
-  gem 'foodcritic'
   gem 'inspec'
   gem 'kitchen-dokken'
   gem 'kitchen-inspec'
