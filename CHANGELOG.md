@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add support for setting umask for pip resource.
+
 ## 3.4.2 - *2021-06-01*
 
 ## 3.4.1 - *2020-12-31*
