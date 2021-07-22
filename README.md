@@ -50,6 +50,7 @@ pyenv_pip 'requests' do
   virtualenv  # Optional: if passed, pip inside provided virtualenv would be used (by default system's pip)
   version     # Optional: if passed, the version the python package to install
   user        # Optional: if passed, the user to install the python module for
+  umask       # Optional: if passed, the umask to set before installing the python module
   options     # Optional: if passed, pip would install/uninstall packages with given options
   requirement # Optional: if true passed, install/uninstall requirements file passed with name property
   editable    # Optional: if true passed, install package in editable mode
@@ -116,6 +117,7 @@ pyenv_script 'foo' do
   pyenv_version # pyenv version to run the script against
   environment   # Optional: Environment to setup to run the script
   user          # Optional: User to run as
+  umask         # Optional: the umask to set before running the script
   group         # Optional: Group to run as
   path          # Optional: Path to search for commands
   returns       # Optional: Expected return code
