@@ -2,11 +2,15 @@
 
 ## Unreleased
 
+- Standardise files with files in sous-chefs/repo-management
+
 ## 3.5.0 - *2021-07-22*
 
 - Add support for setting umask for pip resource.
 
 ## 3.4.2 - *2021-06-01*
+
+- Standardise files with files in sous-chefs/repo-management
 
 ## 3.4.1 - *2020-12-31*
 
