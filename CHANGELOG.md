@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Set unified_mode for Chef 17 support
+- Require Chef 15.3 for unified_mode
 - resolved cookstyle error: resources/global.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
 - resolved cookstyle error: resources/pip.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
 - resolved cookstyle error: resources/plugin.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
@@ -10,6 +12,7 @@
 - resolved cookstyle error: resources/script.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
 - resolved cookstyle error: resources/system_install.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
 - resolved cookstyle error: resources/user_install.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
+
 ## 3.5.0 - *2021-07-22*
 
 - Add support for setting umask for pip resource.
