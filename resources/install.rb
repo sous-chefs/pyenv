@@ -1,6 +1,6 @@
 provides :pyenv_install
-provides :pyenv_user_install
-provides :pyenv_system_install
+# provides :pyenv_user_install
+# provides :pyenv_system_install
 unified_mode true
 
 property :prefix_type,

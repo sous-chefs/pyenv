@@ -12,7 +12,9 @@ cookbook_file '/tmp/requirements.txt' do
   mode '0644'
 end
 
-pyenv_user_install user
+pyenv_install 'user' do
+  user
+end
 
 pyenv_python version do
   user user
