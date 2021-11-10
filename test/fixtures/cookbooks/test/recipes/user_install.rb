@@ -1,4 +1,6 @@
-# Install pyenv and makes it avilable to the selected user
+# Install pyenv
+# and make it avilable to the selected user
+
 version   = '3.6.1'
 user      = 'vagrant'
 venv_root = "/home/#{user}/venv_test"
