@@ -8,7 +8,7 @@ property :user, String
 # e.g. "pyenv local" should return the version we set
 
 action :create do
-  pyenv_script "local" do
+  pyenv_script 'local' do
     code "pyenv local #{new_resource.python_version}"
     cwd new_resource.path
     user new_resource.user if new_resource.user

@@ -17,7 +17,7 @@ property :prefix,
           default: lazy { root_path }
 
 action :create do
-  pyenv_script "globals" do
+  pyenv_script 'globals' do
     code "pyenv global #{new_resource.pyenv_version}"
     user new_resource.user if new_resource.user
     action :run

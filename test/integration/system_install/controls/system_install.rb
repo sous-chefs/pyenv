@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 global_python = '3.7.7'
-venv_root = '/opt/pyenv_test'
+# venv_root = '/opt/pyenv_test'
 
 control 'pyenv should be installed' do
   title 'pyenv should be installed globally'
@@ -71,6 +71,6 @@ control 'Path' do
   end
 
   describe os_env('PATH') do
-    its('content') { should match /.pyenv\/bin/}
+    its('content') { should match %r{.pyenv/bin} }
   end
 end
