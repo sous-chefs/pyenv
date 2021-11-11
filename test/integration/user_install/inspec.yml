@@ -8,4 +8,4 @@ supports:
   - os-family: linux
 depends:
   - name: common
-    path: ../common
+    path: test/integration/common
