@@ -1,15 +1,16 @@
 unified_mode true
 
-property :user, String
+property :user,
+          String
 
 action :run do
   pyenv_script 'pyenv rehash' do
     code %(pyenv rehash)
-    user new_resource.user if new_resource.user
+    user new_resource.user
     action :run
   end
 end
 
 action_class do
-  include Chef::Pyenv::ScriptHelpers
+  include PyEnv::Cookbook::ScriptHelpers
 end

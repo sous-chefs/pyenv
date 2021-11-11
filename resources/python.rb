@@ -1,10 +1,21 @@
 unified_mode true
 
-property :version,      String, name_property: true
-property :version_file, String
-property :user,         String
-property :environment,  Hash
-property :verbose,      [true, false], default: false
+property :version,
+          String,
+          name_property: true
+
+property :version_file,
+          String
+
+property :user,
+          String
+
+property :environment,
+          Hash
+
+property :verbose,
+          [true, false],
+          default: false
 
 action :install do
   install_start = Time.now
@@ -15,8 +26,8 @@ action :install do
 
   pyenv_script "#{command}" do
     code        command
-    user        new_resource.user        if new_resource.user
-    environment new_resource.environment if new_resource.environment
+    user        new_resource.user
+    environment new_resource.environment
     live_stream new_resource.verbose
     action      :run
     not_if { python_installed? }
@@ -30,8 +41,8 @@ action :uninstall do
 
   pyenv_script "#{command}" do
     code        command
-    user        new_resource.user        if new_resource.user
-    environment new_resource.environment if new_resource.environment
+    user        new_resource.user
+    environment new_resource.environment
     live_stream new_resource.verbose
     action      :run
     not_if { python_installed? }
@@ -39,7 +50,7 @@ action :uninstall do
 end
 
 action_class do
-  include Chef::Pyenv::ScriptHelpers
+  include PyEnv::Cookbook::ScriptHelpers
 
   def python_installed?
     ::File.directory?(::File.join(root_path, 'versions', new_resource.version))

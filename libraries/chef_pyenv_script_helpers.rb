@@ -1,5 +1,5 @@
-class Chef
-  module Pyenv
+class PyEnv
+  module Cookbook
     module ScriptHelpers
       require 'chef/mixin/shell_out'
 

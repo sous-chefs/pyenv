@@ -1,9 +1,18 @@
 unified_mode true
 
-property :git_url,     String, required: true
-property :git_ref,     String, default: 'master'
-property :environment, Hash
-property :user,        String
+property :git_url,
+          String,
+          required: true
+
+property :git_ref,
+          String,
+          default: 'master'
+
+property :environment,
+          Hash
+
+property :user,
+         String
 
 # https://github.com/pyenv/pyenv/wiki/Plugins
 action :install do
@@ -14,12 +23,12 @@ action :install do
     destination ::File.join(root_path, 'plugins', new_resource.name)
     repository  new_resource.git_url
     reference   new_resource.git_ref
-    user        new_resource.user if new_resource.user
+    user        new_resource.user
     action      :sync
     environment(new_resource.environment)
   end
 end
 
 action_class do
-  include Chef::Pyenv::ScriptHelpers
+  include PyEnv::Cookbook::ScriptHelpers
 end

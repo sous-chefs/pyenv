@@ -1,13 +1,31 @@
 unified_mode true
 
-property :package_name, String, name_property: true
-property :virtualenv,   String
-property :version,      String
-property :user,         String
-property :umask,        [String, Integer]
-property :options,      String
-property :requirement,  [true, false], default: false
-property :editable,     [true, false], default: false
+property :package_name,
+          String,
+          name_property: true
+
+property :virtualenv,
+          String
+
+property :version,
+          String
+
+property :user,
+          String
+
+property :umask,
+          [String, Integer]
+
+property :options,
+          String
+
+property :requirement,
+          [true, false],
+          default: false
+
+property :editable,
+          [true, false],
+          default: false
 
 action :install do
   install_mode = if new_resource.requirement
@@ -35,8 +53,8 @@ action :install do
 
   pyenv_script new_resource.package_name do
     code command
-    user new_resource.user if new_resource.user
-    umask new_resource.umask if new_resource.umask
+    user new_resource.user
+    umask new_resource.umask
     only_if { require_install? }
   end
 end
@@ -59,8 +77,8 @@ action :upgrade do
 
   pyenv_script new_resource.package_name do
     code command
-    user new_resource.user if new_resource.user
-    umask new_resource.umask if new_resource.umask
+    user new_resource.user
+    umask new_resource.umask
     only_if { require_upgrade? }
   end
 end
@@ -84,13 +102,13 @@ action :uninstall do
 
   pyenv_script new_resource.package_name do
     code command
-    user new_resource.user if new_resource.user
-    umask new_resource.umask if new_resource.umask
+    user new_resource.user
+    umask new_resource.umask
   end
 end
 
 action_class do
-  include Chef::Pyenv::ScriptHelpers
+  include PyEnv::Cookbook::ScriptHelpers
 
   def require_install?
     current_version = get_current_version

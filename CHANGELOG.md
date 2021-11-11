@@ -4,6 +4,7 @@
 
 - Set unified_mode for Chef 17 support
 - Require Chef 15.3 for unified_mode
+- Fix pyenv not being on the path properly
 - resolved cookstyle error: resources/global.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
 - resolved cookstyle error: resources/pip.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
 - resolved cookstyle error: resources/plugin.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`

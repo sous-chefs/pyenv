@@ -11,7 +11,8 @@ property :user,
           default: 'root',
           description: 'User directory to install pyenv to.'
 
-property :group, String,
+property :group,
+          String,
           default: lazy { user },
           description: 'Group for the pyenv directories and files.'
 
@@ -103,5 +104,5 @@ action :install do
 end
 
 action_class do
-  include Chef::Pyenv::ScriptHelpers
+  include PyEnv::Cookbook::ScriptHelpers
 end

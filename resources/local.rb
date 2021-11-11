@@ -1,8 +1,14 @@
 unified_mode true
 
-property :python_version, String, name_property: true
-property :path, String, required: true
-property :user, String
+property :python_version,
+          String,
+          name_property: true
+property :path,
+          String,
+          required: true
+
+property :user,
+          String
 
 action :create do
   pyenv_script 'local' do
@@ -15,7 +21,7 @@ action :create do
 end
 
 action_class do
-  include Chef::Pyenv::ScriptHelpers
+  include PyEnv::Cookbook::ScriptHelpers
 
   def current_local_version_correct?
     current_local_version == new_resource.python_version
