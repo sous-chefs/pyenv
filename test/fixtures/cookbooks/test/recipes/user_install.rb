@@ -1,7 +1,7 @@
 # Install pyenv
 # and make it avilable to the selected user
 
-version   = '3.6.1'
+version   = '3.7.7'
 user      = 'vagrant'
 venv_root = "/home/#{user}/venv_test"
 
@@ -13,7 +13,7 @@ cookbook_file '/tmp/requirements.txt' do
 end
 
 pyenv_install 'user' do
-  user
+  user user
 end
 
 pyenv_python version do

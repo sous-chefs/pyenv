@@ -1,4 +1,3 @@
-provides :pyenv_rehash
 unified_mode true
 
 property :user, String

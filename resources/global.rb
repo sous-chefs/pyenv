@@ -1,7 +1,3 @@
-# Check for the user or system global verison
-# If we pass in a user check that users global
-
-provides :pyenv_global
 unified_mode true
 include Chef::Pyenv::ScriptHelpers
 

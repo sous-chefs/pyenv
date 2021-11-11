@@ -1,4 +1,3 @@
-provides :pyenv_python
 unified_mode true
 
 property :version,      String, name_property: true

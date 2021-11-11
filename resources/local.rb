@@ -4,9 +4,6 @@ property :python_version, String, name_property: true
 property :path, String, required: true
 property :user, String
 
-# This sets the Local pyenv version
-# e.g. "pyenv local" should return the version we set
-
 action :create do
   pyenv_script 'local' do
     code "pyenv local #{new_resource.python_version}"

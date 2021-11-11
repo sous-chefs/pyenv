@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-global_python = '3.6.1'
+global_python = '3.7.7'
 user          = 'vagrant'
 venv_root     = "/home/#{user}/venv_test"
 
