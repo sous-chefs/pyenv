@@ -63,9 +63,7 @@ action :install do
     source   'pyenv.sh'
     owner    'root'
     mode     '0755'
-    variables(
-      global_prefix: node.run_state['sous-chefs']['pyenv']['root_path']['prefix']
-    )
+    variables(prefix: new_resource.prefix)
   end
 
   git new_resource.prefix do
@@ -77,10 +75,11 @@ action :install do
     action     new_resource.update_pyenv ? :sync : :checkout
     environment(new_resource.environment)
     notifies :run, 'ruby_block[Add pyenv to PATH]', :immediately
+    notifies :run, 'execute[Initialize pyenv]', :immediately
   end
 
-  %w(plugins shims versions).each do |d|
-    directory "#{new_resource.prefix}/#{d}" do
+  %w(plugins shims versions).each do |dir|
+    directory "#{new_resource.prefix}/#{dir}" do
       owner new_resource.user
       group new_resource.group
       mode '0755'
@@ -99,7 +98,6 @@ action :install do
     command %(PATH="#{new_resource.prefix}/bin:$PATH" pyenv init -)
     environment('PYENV_ROOT' => new_resource.prefix)
     action :nothing
-    subscribes :run, "git[#{new_resource.prefix}]", :immediately
   end
 end
 

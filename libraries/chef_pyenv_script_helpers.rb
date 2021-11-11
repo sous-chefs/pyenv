@@ -5,9 +5,6 @@ class Chef
 
       include Chef::Mixin::ShellOut
       def root_path
-        puts '____HELLO _______'
-        puts node.run_state['sous-chefs']['pyenv']['root_path']['prefix']
-
         node.run_state['sous-chefs']['pyenv']['root_path']['prefix']
       end
 

@@ -6,12 +6,14 @@ local_folder = '/opt/pyenv_test'
 
 directory local_folder
 
-cookbook_file '/tmp/requirements.txt' do
-  source 'requirements.txt'
-  mode '0644'
-end
+# cookbook_file '/tmp/requirements.txt' do
+#   source 'requirements.txt'
+#   mode '0644'
+# end
 
 pyenv_install 'system'
+
+pyenv_rehash 'for-new-python'
 
 pyenv_python version
 
