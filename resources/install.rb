@@ -26,6 +26,10 @@ property :git_ref,
           String,
           default: 'master'
 
+property :home_dir,
+          String,
+          default: lazy { ::File.expand_path("~#{user}") }
+
 property :prefix,
           String,
           default: lazy {
