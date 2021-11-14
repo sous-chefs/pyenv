@@ -3,12 +3,7 @@
 Installs pyenv to either a user or system location.
 
 ```ruby
-pyenv_install 'foo' do
-  git_url      # URL of the plugin repo you want to checkout
-  git_ref      # Optional: Git reference to checkout
-  environment  # Optional: pass environment variable during pyenv installation
-  update_pyenv # Optional: Keeps the git repo up to date
-end
+pyenv_install 'user'
 ```
 
 | Name         | Type            | Allowed Options                            | Default                              | Description                                            |
