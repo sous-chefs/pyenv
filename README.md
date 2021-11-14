@@ -35,7 +35,7 @@ A `pyenv_install` is required to be set so that pyenv knows which version you wa
 ## Resources
 
 - [pyenv_global](documentation/pyenv_global.md)
-- [pyenv_istall](documentation/pyenv_install.md)
+- [pyenv_install](documentation/pyenv_install.md)
 - [pyenv_pip](documentation/pyenv_pip.md)
 - [pyenv_plugin](documentation/pyenv_plugin.md)
 - [pyenv_python](documentation/pyenv_python.md)
