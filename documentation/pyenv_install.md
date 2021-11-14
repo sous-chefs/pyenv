@@ -19,6 +19,6 @@ end
 | git_url      | String          |                                            | `https://github.com/pyenv/pyenv.git` |                                                        |
 | git_ref      | String,         |                                            |                                      | `master`                                               |
 | home_dir     | String          |                                            | user home                            |                                                        |
-| prefix       | String          | '/usr/local/pyenv' or users home directory | Path to install pyenv to             |
+| prefix       | String          | `/usr/local/pyenv` or users home directory | Path to install pyenv to             |
 | environment  | Hash            |                                            |                                      |                                                        |
 | update_pyenv | `true`, `false` |                                            | false                                |
