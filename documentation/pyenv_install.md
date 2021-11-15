@@ -16,7 +16,6 @@ Install PyEnv globally
 pyenv_install 'system'
 ```
 
-
 | Name         | Type            | Allowed Options                            | Default                              | Description                                            |
 | ------------ | --------------- | ------------------------------------------ | ------------------------------------ | ------------------------------------------------------ |
 | prefix_type  | String          | user system                                |                                      | Whether to install pyenv to a user or system directory |
