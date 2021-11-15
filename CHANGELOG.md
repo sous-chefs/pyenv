@@ -14,7 +14,7 @@
 - resolved cookstyle error: resources/system_install.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
 - resolved cookstyle error: resources/user_install.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
 - Removed the pyenv_system_install and pyenv_user_install resources for a singular pyenv_install.
-  - This resource acts like all other resources where it can install both as a userr and system wide.
+  - This resource acts like all other resources where it can install both as a user and system wide.
     Please see the documentation for further information.
 
 ## 3.5.1 - *2021-08-30*
