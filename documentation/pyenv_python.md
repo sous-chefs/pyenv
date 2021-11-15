@@ -1,16 +1,25 @@
 # `pyenv_python`
 
-```ruby
-pyenv_python '3.6.1' do
-  user         # Optional: if passed, the user pyenv to install to
-  environment  # Optional: pass environment variable to git resource
-  pyenv_action # Optional: the action to perform, install, remove etc
-  verbose      # Optional: print verbose output during python installation
-end
-```
+Installs Python.
 
-Shorter example
+| Name         | Type            | Default | Description                   |
+| ------------ | --------------- | ------- | ----------------------------- |
+| version      | `String`        |         | Version of Python to install  |
+| version_file | `String`        |         |                               |
+| user         | `String`        |         | User to install the Python to |
+| environment  | `Hash`          |         |                               |
+| verbose      | `[true, false]` | `false` |                               |
+
+## Examples
 
 ```ruby
 pyenv_python '3.6.1'
+```
+
+Install a Python for a user install
+
+```ruby
+pyenv_python version do
+  user 'vagrant'
+end
 ```

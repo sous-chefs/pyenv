@@ -2,15 +2,26 @@
 
 Runs a pyenv aware script.
 
+| Name          | Type                | Default | Description |
+| ------------- | ------------------- | ------- | ----------- |
+| pyenv_version | `String`            |         |             |
+| code          | `String`            |         |             |
+| creates       | `String`            |         |             |
+| cwd           | `String`            |         |             |
+| environment   | `Hash`              |         |             |
+| group         | `String`            |         |             |
+| path          | `Array`             |         |             |
+| returns       | `Array`             | `[0]`   |             |
+| timeout       | Integer             |         |             |
+| user          | String              |         |             |
+| umask         | `[String, Integer]` |         |             |
+| live_stream   | `[true, false]`     | `false` |             |
+
+## Examples
+
 ```ruby
-pyenv_script 'foo' do
-  code          # Script code to run
-  pyenv_version # pyenv version to run the script against
-  environment   # Optional: Environment to setup to run the script
-  user          # Optional: User to run as
-  umask         # Optional: the umask to set before running the script
-  group         # Optional: Group to run as
-  path          # Optional: Path to search for commands
-  returns       # Optional: Expected return code
+pyenv_script 'create virtualenv' do
+  code "virtualenv #{venv_root}"
+  user 'vagrant'
 end
 ```
