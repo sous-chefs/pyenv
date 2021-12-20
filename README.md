@@ -11,15 +11,11 @@
 
 Manages [pyenv][pyenv] and its installed Pythons.
 
-Several custom resources are defined to facilitate this.
-
-**WARNING** As of `v1.0.0`, this cookbook no longer provide any recipes. Custom resources are provided instead.
-
-### Chef
+## Chef
 
 This cookbook requires Chef 15.3+.
 
-### Platform family
+## Platform family
 
 - Debian derivatives (debian, ubuntu)
 - Fedora
