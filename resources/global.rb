@@ -1,55 +1,28 @@
-#
-# Cookbook:: pyenv
-# Resource:: global
-#
-# Author:: Shane da Silva
-# Author:: Darwin D. Wu <darwinwu67@gmail.com>
-#
-# Copyright:: 2014-2017, Shane da Silva
-# Copyright:: 2017-2018, Darwin D. Wu
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+unified_mode true
+include PyEnv::Cookbook::ScriptHelpers
 
-# Check for the user or system global verison
-# If we pass in a user check that users global
+property :pyenv_version,
+          String,
+          name_property: true
 
-provides :pyenv_global
+property :user,
+          String
 
-property :pyenv_version, String, name_property: true
-property :user,          String
-property :root_path,     String, default: lazy {
-  if user
-    node.run_state['sous-chefs']['pyenv']['root_path'][user]
-  else
-    node.run_state['sous-chefs']['pyenv']['root_path']['system']
-  end
-}
-
-# This sets the Global pyenv version
-# e.g. "pyenv global" should return the version we set
+property :prefix,
+          String,
+          default: lazy { root_path }
 
 action :create do
-  pyenv_script "globals #{which_pyenv}" do
+  pyenv_script 'globals' do
     code "pyenv global #{new_resource.pyenv_version}"
-    user new_resource.user if new_resource.user
+    user new_resource.user
     action :run
     not_if { current_global_version_correct? }
   end
 end
 
 action_class do
-  include Chef::Pyenv::ScriptHelpers
+  include PyEnv::Cookbook::ScriptHelpers
 
   def current_global_version_correct?
     current_global_version == new_resource.pyenv_version

@@ -1,10 +1,11 @@
 ---
 name: pyenv
 title: pyenv profile
-maintainer: Darwin D. Wu
-copyright: Darwin D. Wu
-license: Apache-2.0
+maintainer: Sous-Chefs
 summary: Verifies pyenv is installed correctly
 version: 1.0.0
 supports:
   - os-family: linux
+depends:
+  - name: common
+    path: test/integration/common

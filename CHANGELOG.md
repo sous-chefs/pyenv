@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- Set unified_mode for Chef 17 support
+- Require Chef 15.3 for unified_mode
+- Fix pyenv not being on the path properly
+- resolved cookstyle error: resources/global.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
+- resolved cookstyle error: resources/pip.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
+- resolved cookstyle error: resources/plugin.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
+- resolved cookstyle error: resources/python.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
+- resolved cookstyle error: resources/rehash.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
+- resolved cookstyle error: resources/script.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
+- resolved cookstyle error: resources/system_install.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
+- resolved cookstyle error: resources/user_install.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
+- Removed the pyenv_system_install and pyenv_user_install resources for a singular pyenv_install.
+  - This resource acts like all other resources where it can install both as a user and system wide.
+    Please see the documentation for further information.
+
 ## 3.5.1 - *2021-08-30*
 
 - Standardise files with files in sous-chefs/repo-management

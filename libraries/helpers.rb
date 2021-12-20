@@ -1,29 +1,17 @@
-require 'chef/mixin/shell_out'
-
-class Chef
-  module Pyenv
+class PyEnv
+  module Cookbook
     module ScriptHelpers
+      require 'chef/mixin/shell_out'
+
       include Chef::Mixin::ShellOut
       def root_path
-        node.run_state['sous-chefs'] ||= {}
-        node.run_state['sous-chefs']['pyenv'] ||= {}
-        node.run_state['sous-chefs']['pyenv']['root_path'] ||= {}
-
-        if new_resource.user
-          node.run_state['sous-chefs']['pyenv']['root_path'][new_resource.user]
-        else
-          node.run_state['sous-chefs']['pyenv']['root_path']['system']
-        end
-      end
-
-      def which_pyenv
-        "(#{new_resource.user || 'system'})"
+        node.run_state['sous-chefs']['pyenv']['root_path']['prefix']
       end
 
       def script_code
         script = []
         script << %(export PYENV_ROOT="#{root_path}")
-        script << %(export PATH="${PYENV_ROOT}/bin:$PATH")
+        script << %(export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:$PATH")
         script << %{eval "$(pyenv init -)"}
         if new_resource.pyenv_version
           script << %(export PYENV_VERSION="#{new_resource.pyenv_version}")
@@ -60,6 +48,19 @@ class Chef
                     'PATH' => "#{root_path}/shims:#{ENV['PATH']}",
                   },
                   user: new_resource.user)
+      end
+
+      def pyenv_prerequisites
+        case node['platform_family']
+        when 'debian'
+          %w(make libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git)
+        when 'rhel', 'fedora', 'amazon'
+          %w(git zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils)
+        when 'suse'
+          %w(git git-core zlib-devel bzip2 libbz2-devel libopenssl-devel readline-devel sqlite3 sqlite3-devel xz xz-devel)
+        when 'mac_os_x'
+          %w(git readline xz)
+        end
       end
     end
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-global_python = '3.6.1'
+global_python = '3.7.7'
 user          = 'vagrant'
 venv_root     = "/home/#{user}/venv_test"
 
@@ -18,34 +18,6 @@ control 'pyenv should be installed' do
   describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && python --version'") do
     its('exit_status') { should eq(0) }
     its('stdout')      { should match(global_python) }
-  end
-
-  desc 'Plugin should be installed'
-  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && pyenv virtualenv'") do
-    its('stderr') { should match('pyenv-virtualenv') }
-  end
-
-  desc 'Pip should install package requests'
-  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && pip show requests'") do
-    its('exit_status') { should eq(0) }
-    its('stdout')      { should match('Version: 2.18.3') }
-  end
-
-  desc 'Pip should install package virtualenv'
-  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && pip show virtualenv'") do
-    its('exit_status') { should eq(0) }
-    its('stdout')      { should match('Version: 16.2.0') }
-  end
-
-  desc 'Pip should install package fire inside virtualenv according to requirements.txt'
-  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && #{venv_root}/bin/pip show fire'") do
-    its('exit_status') { should eq(0) }
-    its('stdout')      { should match('Version: 0.1.2') }
-  end
-
-  desc 'Pip should uninstall package requests inside virtualenv'
-  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && #{venv_root}/bin/pip show requests'") do
-    its('exit_status') { should eq(1) }
   end
 end
 
@@ -79,6 +51,36 @@ control 'pyenv should be installed to the user path' do
   end
 end
 
+control 'virtualenv' do
+  desc 'Plugin should be installed'
+  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && pyenv virtualenv'") do
+    its('stderr') { should match('pyenv-virtualenv') }
+  end
+
+  desc 'Pip should install package requests'
+  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && pip show requests'") do
+    its('exit_status') { should eq(0) }
+    its('stdout')      { should match('Version: 2.18.3') }
+  end
+
+  desc 'Pip should install package virtualenv'
+  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && pip show virtualenv'") do
+    its('exit_status') { should eq(0) }
+    its('stdout')      { should match('Version: 16.2.0') }
+  end
+
+  desc 'Pip should install package fire inside virtualenv according to requirements.txt'
+  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && #{venv_root}/bin/pip show fire'") do
+    its('exit_status') { should eq(0) }
+    its('stdout')      { should match('Version: 0.1.2') }
+  end
+
+  desc 'Pip should uninstall package requests inside virtualenv'
+  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && #{venv_root}/bin/pip show requests'") do
+    its('exit_status') { should eq(1) }
+  end
+end
+
 control 'virtualenv should be created' do
   title "virtualenv should be created in #{venv_root}"
 
@@ -92,3 +94,5 @@ control 'virtualenv should be created' do
     its('owner') { should eq(user) }
   end
 end
+
+include_controls 'common'

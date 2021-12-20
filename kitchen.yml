@@ -1,7 +1,6 @@
 ---
 driver:
   name: vagrant
-  provider: virtualbox
 
 provisioner:
   product_name: chef
@@ -23,7 +22,7 @@ platforms:
   - name: fedora-29
   - name: ubuntu-18.04
   - name: ubuntu-20.04
-  - name: opensuse-leap-15        # error downloading chef 14
+  - name: opensuse-leap-15
 
 suites:
   - name: system_install

@@ -1,33 +1,31 @@
-#
-# Cookbook:: pyenv
-# Resource:: pip
-#
-# Author:: Darwin D. Wu <darwinwu67@gmail.com>
-#
-# Copyright:: 2018, Darwin D. Wu
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-provides :pyenv_pip
+unified_mode true
 
-property :package_name, String, name_property: true
-property :virtualenv,   String
-property :version,      String
-property :user,         String
-property :umask,        [String, Integer]
-property :options,      String
-property :requirement,  [true, false], default: false
-property :editable,     [true, false], default: false
+property :package_name,
+          String,
+          name_property: true
+
+property :virtualenv,
+          String
+
+property :version,
+          String
+
+property :user,
+          String
+
+property :umask,
+          [String, Integer]
+
+property :options,
+          String
+
+property :requirement,
+          [true, false],
+          default: false
+
+property :editable,
+          [true, false],
+          default: false
 
 action :install do
   install_mode = if new_resource.requirement
@@ -41,7 +39,7 @@ action :install do
   install_target = if new_resource.version
                      "#{new_resource.package_name}==#{new_resource.version}"
                    else
-                     new_resource.package_name.to_s
+                     new_resource.package_name
                    end
 
   pip_args = "install #{new_resource.options} #{install_mode} #{install_target}"
@@ -55,8 +53,8 @@ action :install do
 
   pyenv_script new_resource.package_name do
     code command
-    user new_resource.user if new_resource.user
-    umask new_resource.umask if new_resource.umask
+    user new_resource.user
+    umask new_resource.umask
     only_if { require_install? }
   end
 end
@@ -79,8 +77,8 @@ action :upgrade do
 
   pyenv_script new_resource.package_name do
     code command
-    user new_resource.user if new_resource.user
-    umask new_resource.umask if new_resource.umask
+    user new_resource.user
+    umask new_resource.umask
     only_if { require_upgrade? }
   end
 end
@@ -104,13 +102,13 @@ action :uninstall do
 
   pyenv_script new_resource.package_name do
     code command
-    user new_resource.user if new_resource.user
-    umask new_resource.umask if new_resource.umask
+    user new_resource.user
+    umask new_resource.umask
   end
 end
 
 action_class do
-  include Chef::Pyenv::ScriptHelpers
+  include PyEnv::Cookbook::ScriptHelpers
 
   def require_install?
     current_version = get_current_version

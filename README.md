@@ -11,144 +11,32 @@
 
 Manages [pyenv][pyenv] and its installed Pythons.
 
-Several custom resources are defined to facilitate this.
+## Chef
 
-**WARNING** As of `v1.0.0`, this cookbook no longer provide any recipes. Custom resources are provided instead.
+This cookbook requires Chef 15.3+.
 
-**NOTE** The following distros have [known issues][openssl-issues] regarding building python `3.7` which are all related to the OpenSSL library versions.
+## Platform family
 
-* RHEL6
-* Debian 8
-
-[openssl-issue]: https://github.com/pyenv/pyenv/wiki/Common-build-problems#error-the-python-ssl-extension-was-not-compiled-missing-the-openssl-lib
-
-## Requirements
-
-### Chef
-
-This cookbook requires Chef 14.0+.
-
-### Platform family
-
-* Debian derivatives (debian, ubuntu)
-* Fedora
-* RHEL derivatives (RHEL, CentOS, Amazon Linux, Oracle, Scientific Linux)
-* openSUSE and openSUSE leap
+- Debian derivatives (debian, ubuntu)
+- Fedora
+- RHEL derivatives (RHEL, CentOS, Amazon Linux, Oracle, Scientific Linux)
+- openSUSE and openSUSE leap
 
 ## Usage
 
 Examples installations are provided in `test/fixtures/cookbooks/test/recipes`
 
-A `pyenv_system_install` or `pyenv_user_install` is required to be set so that pyenv knows which version you want to use, and is installed on the system.
+A `pyenv_install` is required to be set so that pyenv knows which version you want to use, and is installed on the system.
 
-## Pip
+## Resources
 
-Used to install a Python package into the selected pyenv environment.
-
-```ruby
-pyenv_pip 'requests' do
-  virtualenv  # Optional: if passed, pip inside provided virtualenv would be used (by default system's pip)
-  version     # Optional: if passed, the version the python package to install
-  user        # Optional: if passed, the user to install the python module for
-  umask       # Optional: if passed, the umask to set before installing the python module
-  options     # Optional: if passed, pip would install/uninstall packages with given options
-  requirement # Optional: if true passed, install/uninstall requirements file passed with name property
-  editable    # Optional: if true passed, install package in editable mode
-end
-```
-
-The pyenv_pip resource has the following actions:
-
-* `:install` - Default. Install a python package. If a version is specified, install the specified version of the python package.
-* `:upgrade` - Install/upgrade a python package. Call `install` command with `--upgrade` flag. If version is not specified, latest version will be installed.
-* `:uninstall` - Uninstall a python package.
-
-## Global
-
-```ruby
-pyenv_global '3.6.1' do
-  user # Optional: if passed sets the users global version. Do not set, to set the systems global version
-end
-```
-
-If a user is passed in to this resource it sets the global version for the user, under the users root_path (usually `~/.pyenv/version`), otherwise it sets the system global version.
-
-## Plugin
-
-Installs a pyenv plugin.
-
-```ruby
-pyenv_plugin 'virtualenv' do
-  git_url     # Git URL of the plugin
-  git_ref     # Git reference of the plugin
-  environment # Optional: pass environment variables to git resource
-  user        # Optional: if passed installs to the users pyenv. Do not set, to set installs to the system pyenv.
-end
-```
-
-## Rehash
-
-```ruby
-pyenv_rehash 'rehash' do
-  user # Optional: if passed rehashes the user pyenv otherwise rehashes the system pyenv
-end
-```
-
-## Python
-
-```ruby
-pyenv_python '3.6.1' do
-  user         # Optional: if passed, the user pyenv to install to
-  environment  # Optional: pass environment variable to git resource
-  pyenv_action # Optional: the action to perform, install, remove etc
-  verbose      # Optional: print verbose output during python installation
-end
-```
-
-Shorter example `pyenv_python '3.6.1'.`
-
-## Script
-
-Runs a pyenv aware script.
-
-```ruby
-pyenv_script 'foo' do
-  code          # Script code to run
-  pyenv_version # pyenv version to run the script against
-  environment   # Optional: Environment to setup to run the script
-  user          # Optional: User to run as
-  umask         # Optional: the umask to set before running the script
-  group         # Optional: Group to run as
-  path          # Optional: Path to search for commands
-  returns       # Optional: Expected return code
-end
-```
-
-## System install
-
-Installs pyenv to the system location, by default `/usr/local/pyenv`
-
-```ruby
-pyenv_system_install 'foo' do
-  git_url      # URL of the plugin repo you want to checkout
-  git_ref      # Optional: Git reference to checkout
-  environment  # Optional: pass environment variable during pyenv installation
-  update_pyenv # Optional: Keeps the git repo up to date
-end
-```
-
-## User install
-
-Installs pyenv to the user path, making pyenv available to that user only.
-
-```ruby
-pyenv_user_install 'vagrant' do
-  git_url     # Optional: Git URL to checkout pyenv from.
-  git_ref     # Optional: Git reference to checkout e.g. 'master'
-  environment # Optional: pass environment variable during pyenv installation
-  user        # Which user to install pyenv to (also specified in the resources name above)
-end
-```
+- [pyenv_global](documentation/pyenv_global.md)
+- [pyenv_install](documentation/pyenv_install.md)
+- [pyenv_pip](documentation/pyenv_pip.md)
+- [pyenv_plugin](documentation/pyenv_plugin.md)
+- [pyenv_python](documentation/pyenv_python.md)
+- [pyenv_rehash](documentation/pyenv_rehash.md)
+- [pyenv_script](documentation/pyenv_script.md)
 
 ## System-Wide Mac Installation Note
 
@@ -156,13 +44,6 @@ This cookbook takes advantage of managing profile fragments in an
 `/etc/profile.d` directory, common on most Unix-flavored platforms.
 Unfortunately, Mac OS X does not support this idiom out of the box,
 so you may need to [modify][mac_profile_d] your user profile.
-
-## Development
-
-* Source hosted at [GitHub](https://github.com/sous-chefs/pyenv)
-* Report issues/Questions/Feature requests on [GitHub Issues](https://github.com/sous-chefs/pyenv)
-
-Pull requests are very welcome! Make sure your patches are well tested.
 
 ## Contributors
 

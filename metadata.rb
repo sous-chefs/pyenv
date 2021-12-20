@@ -6,7 +6,7 @@ description      'Manages pyenv and its installed Python versions.'
 issues_url       'https://github.com/sous-chefs/pyenv/issues'
 source_url       'https://github.com/sous-chefs/pyenv'
 version          '3.5.1'
-chef_version     '>= 14.0'
+chef_version     '>= 15.3'
 
 %w(
   ubuntu
