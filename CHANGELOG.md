@@ -1,6 +1,6 @@
 # pyenv Changelog
 
-## Unreleased
+## 4.0.0 - *2021-12-20*
 
 - Set unified_mode for Chef 17 support
 - Require Chef 15.3 for unified_mode
