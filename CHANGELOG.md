@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Remove delivery folder
+
 ## 4.0.0 - *2021-12-20*
 
 - Set unified_mode for Chef 17 support
