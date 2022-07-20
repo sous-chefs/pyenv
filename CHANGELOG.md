@@ -1,6 +1,6 @@
 # pyenv Changelog
 
-## Unreleased
+## 4.1.0 - *2022-07-20*
 
 - Remove duplicate pyenv init from profile script, fixes "pyenv: cannot rehash: <...>/shims isn't writable" for system install
 
