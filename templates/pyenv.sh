@@ -13,6 +13,5 @@ fi
 
 if [ -n "$pyenv_root" ]; then
     export PATH="${pyenv_root}/bin:$PATH"
-    eval "$(pyenv init --path)"
     eval "$($pyenv_init)"
 fi
