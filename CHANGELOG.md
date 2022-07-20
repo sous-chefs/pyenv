@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Remove duplicate pyenv init from profile script, fixes "pyenv: cannot rehash: <...>/shims isn't writable" for system install
+
 ## 4.0.1 - *2022-02-08*
 
 - Remove delivery folder
