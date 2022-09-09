@@ -53,7 +53,11 @@ class PyEnv
       def pyenv_prerequisites
         case node['platform_family']
         when 'debian'
-          %w(make libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git)
+          %w(make libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git) << if platform?('ubuntu') && node['lsb']['codename'] == 'jammy'
+            'python3-openssl'
+          else
+            'python-openssl'
+          end
         when 'rhel', 'fedora', 'amazon'
           %w(git zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils)
         when 'suse'

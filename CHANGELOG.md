@@ -5,6 +5,7 @@
 ## 4.1.0 - *2022-07-20*
 
 - Remove duplicate pyenv init from profile script, fixes "pyenv: cannot rehash: <...>/shims isn't writable" for system install
+- Add support for ubuntu 22.04
 
 ## 4.0.1 - *2022-02-08*
 
