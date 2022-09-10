@@ -16,6 +16,7 @@ platforms:
     driver_config:
       box: mvbcoding/awslinux
   - name: debian-10
+  - name: debian-11
   - name: centos-7
   - name: centos-8
   - name: oracle-7
