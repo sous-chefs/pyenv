@@ -28,6 +28,13 @@ platforms:
         - RUN /usr/bin/apt-get update
         - RUN /usr/bin/apt-get install sudo -y
 
+  - name: debian-11
+    driver:
+      image: dokken/debian-11
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update
+        - RUN /usr/bin/apt-get install sudo -y
+
   - name: centos-7
     driver:
       image: dokken/centos-7
@@ -60,14 +67,21 @@ platforms:
 
   - name: ubuntu-18.04
     driver:
-      image: dokken/ubuntu-16.04
+      image: dokken/ubuntu-18.04
       intermediate_instructions:
         - RUN /usr/bin/apt-get update
         - RUN /usr/bin/apt-get install sudo -y
 
   - name: ubuntu-20.04
     driver:
-      image: dokken/ubuntu-18.04
+      image: dokken/ubuntu-20.04
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update
+        - RUN /usr/bin/apt-get install sudo -y
+
+  - name: ubuntu-22.04
+    driver:
+      image: dokken/ubuntu-22.04
       intermediate_instructions:
         - RUN /usr/bin/apt-get update
         - RUN /usr/bin/apt-get install sudo -y

@@ -16,12 +16,14 @@ platforms:
     driver_config:
       box: mvbcoding/awslinux
   - name: debian-10
+  - name: debian-11
   - name: centos-7
   - name: centos-8
   - name: oracle-7
   - name: fedora-29
   - name: ubuntu-18.04
   - name: ubuntu-20.04
+  - name: ubuntu-22.04
   - name: opensuse-leap-15
 
 suites:

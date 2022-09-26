@@ -51,16 +51,17 @@ class PyEnv
       end
 
       def pyenv_prerequisites
-        case node['platform_family']
-        when 'debian'
-          %w(make libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git)
-        when 'rhel', 'fedora', 'amazon'
-          %w(git zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils)
-        when 'suse'
-          %w(git git-core zlib-devel bzip2 libbz2-devel libopenssl-devel readline-devel sqlite3 sqlite3-devel xz xz-devel)
-        when 'mac_os_x'
-          %w(git readline xz)
-        end
+        value_for_platform_family(
+        'debian' =>  %w(make libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git) \
+          << value_for_platform(
+            'debian' => { '>= 11' => 'python3-openssl', 'default' => 'python-openssl' },
+            'ubuntu' => { '>= 22.04' => 'python3-openssl', 'default' => 'python-openssl' },
+            'default' => 'python-openssl'
+          ),
+        %w(rhel fedora amazon) =>  %w(git zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils),
+        'suse' => %w(git git-core zlib-devel bzip2 libbz2-devel libopenssl-devel readline-devel sqlite3 sqlite3-devel xz xz-devel),
+        'mac_os_x' => %w(git readline xz)
+      )
       end
     end
   end
