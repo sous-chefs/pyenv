@@ -17,16 +17,16 @@ jobs:
     strategy:
       matrix:
         os:
-         - 'debian-9'
-         - 'debian-10'
-         - 'debian-11'
-         - 'centos-7'
-         - 'centos-8'
-         - 'oracle-linux'
-         - 'amazon-linux'
-         - 'ubuntu-1804'
-         - 'ubuntu-2004'
-         - 'ubuntu-2204'
+          - 'debian-9'
+          - 'debian-10'
+          - 'debian-11'
+          - 'centos-7'
+          - 'centos-8'
+          - 'oracle-linux'
+          - 'amazon-linux'
+          - 'ubuntu-1804'
+          - 'ubuntu-2004'
+          - 'ubuntu-2204'
 
         suite:
           - system-install
