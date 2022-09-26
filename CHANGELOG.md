@@ -1,6 +1,6 @@
 # pyenv Changelog
 
-## Unreleased
+## 4.2.0 - *2022-09-26*
 
 - Add support for ubuntu >= 22.04 and debian >= 11
 
