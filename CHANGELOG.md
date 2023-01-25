@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Update `templates/pyenv.sh` script to properly evaluate when to add a user install to `$PATH`
+
 ## 4.2.0 - *2022-09-26*
 
 - Add support for ubuntu >= 22.04 and debian >= 11
