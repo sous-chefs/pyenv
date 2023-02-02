@@ -1,6 +1,6 @@
 # pyenv Changelog
 
-## Unreleased
+## 4.2.1 - *2023-02-02*
 
 - Update `templates/pyenv.sh` script to properly evaluate when to add a user install to `$PATH`
 
