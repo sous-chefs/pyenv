@@ -11,7 +11,7 @@ else
     pyenv_init="pyenv init - --no-rehash"
 fi
 
-if [ -n "$pyenv_root" ]; then
+if [ -d "$pyenv_root" ]; then
     export PATH="${pyenv_root}/bin:$PATH"
     eval "$($pyenv_init)"
 fi

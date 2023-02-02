@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Update `templates/pyenv.sh` script to properly evaluate when to add a user install to `$PATH`
+
 ## 4.2.0 - *2022-09-26*
 
 - Add support for ubuntu >= 22.04 and debian >= 11
@@ -28,8 +30,9 @@
 - resolved cookstyle error: resources/system_install.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
 - resolved cookstyle error: resources/user_install.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
 - Removed the pyenv_system_install and pyenv_user_install resources for a singular pyenv_install.
-  - This resource acts like all other resources where it can install both as a user and system wide.
-    Please see the documentation for further information.
+
+   - This resource acts like all other resources where it can install both as a user and system wide.
+     Please see the documentation for further information.
 
 ## 3.5.1 - *2021-08-30*
 
