@@ -17,16 +17,16 @@ jobs:
     strategy:
       matrix:
         os:
-          - 'debian-9'
-          - 'debian-10'
-          - 'debian-11'
-          - 'centos-7'
-          - 'centos-8'
-          - 'oracle-linux'
-          - 'amazon-linux'
-          - 'ubuntu-1804'
-          - 'ubuntu-2004'
-          - 'ubuntu-2204'
+          - "debian-9"
+          - "debian-10"
+          - "debian-11"
+          - "centos-7"
+          - "centos-8"
+          - "oracle-linux"
+          - "amazon-linux"
+          - "ubuntu-1804"
+          - "ubuntu-2004"
+          - "ubuntu-2204"
 
         suite:
           - system-install
@@ -37,9 +37,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Install Chef
-        uses: actionshub/chef-install@main
+        uses: actionshub/chef-install@2.0.4
       - name: Dokken
-        uses: actionshub/test-kitchen@main
+        uses: actionshub/test-kitchen@2.1.0
         env:
           CHEF_LICENSE: accept-no-persist
           KITCHEN_LOCAL_YAML: kitchen.dokken.yml
