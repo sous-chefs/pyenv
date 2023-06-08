@@ -1,6 +1,6 @@
 # pyenv Changelog
 
-## Unreleased
+## 4.2.2 - *2023-06-08*
 
 Standardise files with files in sous-chefs/repo-management
 
