@@ -9,7 +9,7 @@ name: ci
 
 jobs:
   lint-unit:
-    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@0.0.3
+    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@020e520079be3de52e2039ef54b314141edc81a4
 
   integration:
     needs: lint-unit
@@ -37,9 +37,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Install Chef
-        uses: actionshub/chef-install@main
+        uses: actionshub/chef-install@7bb3b3d73e3495589eac4880759c8eacc8f488e3
       - name: Dokken
-        uses: actionshub/test-kitchen@main
+        uses: actionshub/test-kitchen@939c105d7257a960e788afa50dada6833f31ea33
         env:
           CHEF_LICENSE: accept-no-persist
           KITCHEN_LOCAL_YAML: kitchen.dokken.yml
