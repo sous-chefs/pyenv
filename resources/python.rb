@@ -24,7 +24,7 @@ action :install do
 
   command = %(pyenv install #{verbose} #{new_resource.version})
 
-  pyenv_script "#{command}" do
+  pyenv_script command.to_s do
     code        command
     user        new_resource.user
     environment new_resource.environment
@@ -39,7 +39,7 @@ end
 action :uninstall do
   command = %(pyenv uninstall -f #{new_resource.version})
 
-  pyenv_script "#{command}" do
+  pyenv_script command.to_s do
     code        command
     user        new_resource.user
     environment new_resource.environment
@@ -57,6 +57,6 @@ action_class do
   end
 
   def verbose
-    return '-v' if new_resource.verbose
+    '-v' if new_resource.verbose
   end
 end
