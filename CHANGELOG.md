@@ -1,5 +1,12 @@
 # pyenv Changelog
 
+## [4.2.9](https://github.com/sous-chefs/pyenv/compare/4.2.8...v4.2.9) (2025-10-16)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#120](https://github.com/sous-chefs/pyenv/issues/120)) ([bf95c1d](https://github.com/sous-chefs/pyenv/commit/bf95c1db2dfff97d070ab189e1438c25ebba7c8c))
+
 ## 4.2.2 - *2023-06-08*
 
 Standardise files with files in sous-chefs/repo-management
