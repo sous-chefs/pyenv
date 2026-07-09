@@ -1,6 +1,7 @@
 class PyEnv
   module Cookbook
     module ScriptHelpers
+      require 'shellwords'
       require 'chef/mixin/shell_out'
 
       include Chef::Mixin::ShellOut
@@ -36,14 +37,16 @@ class PyEnv
         script_env
       end
 
-      def pip_command(command)
+      def pip_command(*arguments)
         pip = if new_resource.virtualenv
                 "#{new_resource.virtualenv}/bin/pip"
               else
                 'pip'
               end
+        pip_arguments = arguments.length == 1 ? Shellwords.split(arguments.first.to_s) : arguments.flatten
+        pip_arguments = pip_arguments.compact.reject { |arg| arg.to_s.empty? }
 
-        shell_out("#{pip} #{command}",
+        shell_out(Shellwords.join([pip, *pip_arguments]),
                   environment: {
                     'PATH' => "#{root_path}/shims:#{ENV['PATH']}",
                   },
