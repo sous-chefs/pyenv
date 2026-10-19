@@ -1,3 +1,5 @@
+require 'shellwords'
+
 unified_mode true
 
 property :package_name,
@@ -42,14 +44,11 @@ action :install do
                      new_resource.package_name
                    end
 
-  pip_args = "install #{new_resource.options} #{install_mode} #{install_target}"
+  pip_args = ['install', *Shellwords.split(new_resource.options.to_s), install_mode, install_target].reject { |arg| arg.to_s.empty? }
 
   # without virtualenv, install package with system's pip
-  command = if new_resource.virtualenv
-              "#{new_resource.virtualenv}/bin/pip #{pip_args}"
-            else
-              "pip #{pip_args}"
-            end
+  pip_executable = new_resource.virtualenv ? "#{new_resource.virtualenv}/bin/pip" : 'pip'
+  command = Shellwords.join([pip_executable, *pip_args])
 
   pyenv_script new_resource.package_name do
     code command
@@ -66,14 +65,11 @@ action :upgrade do
                      new_resource.package_name.to_s
                    end
 
-  pip_args = "install --upgrade #{new_resource.options} #{upgrade_target}"
+  pip_args = ['install', '--upgrade', *Shellwords.split(new_resource.options.to_s), upgrade_target].reject { |arg| arg.to_s.empty? }
 
   # without virtualenv, upgrade package with system's pip
-  command = if new_resource.virtualenv
-              "#{new_resource.virtualenv}/bin/pip #{pip_args}"
-            else
-              "pip #{pip_args}"
-            end
+  pip_executable = new_resource.virtualenv ? "#{new_resource.virtualenv}/bin/pip" : 'pip'
+  command = Shellwords.join([pip_executable, *pip_args])
 
   pyenv_script new_resource.package_name do
     code command
@@ -90,15 +86,11 @@ action :uninstall do
                      ''
                    end
 
-  pip_args = ["uninstall --yes #{new_resource.options}",
-              "#{uninstall_mode} #{new_resource.package_name}"].join
+  pip_args = ['uninstall', '--yes', *Shellwords.split(new_resource.options.to_s), uninstall_mode, new_resource.package_name].reject { |arg| arg.to_s.empty? }
 
   # without virtualenv, uninstall package with system's pip
-  command = if new_resource.virtualenv
-              "#{new_resource.virtualenv}/bin/pip #{pip_args}"
-            else
-              "pip #{pip_args}"
-            end
+  pip_executable = new_resource.virtualenv ? "#{new_resource.virtualenv}/bin/pip" : 'pip'
+  command = Shellwords.join([pip_executable, *pip_args])
 
   pyenv_script new_resource.package_name do
     code command
@@ -131,7 +123,7 @@ action_class do
 
   def get_current_version
     current_version = nil
-    show = pip_command("show #{new_resource.package_name}").stdout
+    show = pip_command('show', new_resource.package_name).stdout
     show.split(/\n+/).each do |line|
       current_version = line.split(/\s+/)[1] if line.start_with?('Version:')
     end
