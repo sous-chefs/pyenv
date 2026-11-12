@@ -11,7 +11,7 @@
 
 * pyenv is installed from its upstream Git repository; Python interpreters are compiled by python-build.
 * Follow the [upstream build prerequisites](https://github.com/pyenv/pyenv/wiki#suggested-build-environment). OpenSSL development headers provide Python SSL support; the obsolete `python-openssl` package is not a build prerequisite.
-* Test Python 3.12 rather than the end-of-life Python 3.7 fixture. Ubuntu 20.04 lacks sufficiently new zstd for Python 3.14's optional compression module, so retain the compatible 3.12 test line.
+* Use maintained Python fixtures rather than end-of-life Python 3.7. Retain the compatible 3.12 line on Ubuntu 20 and older supported systems; Fedora 45+ uses Python 3.15 for its OpenSSL 4 headers. This changes no resource Python default.
 * Current CI covers Debian, Ubuntu, RHEL derivatives, CentOS Stream, Amazon Linux, Fedora, Oracle and openSUSE. Retire obsolete image versions without replacing these families with Ubuntu-only coverage.
 * Metadata retains Linux Mint as an Ubuntu-family consumer; it has no dedicated Dokken image. Scientific Linux is retired; its RHEL family remains covered by AlmaLinux, Rocky and Oracle.
 
@@ -33,10 +33,12 @@
   global development headers. Use current Python 3.15.2 for that Fedora test fixture and retain
   Python 3.12.16 elsewhere for Ubuntu20 compatibility. Keep public resource defaults unchanged.
   Refresh Fedora package metadata before prerequisites to avoid the observed stale Git candidate.
+  Verifiers derive the expected version from the actual target OS, so the same expectations apply
+  to every documented Kitchen driver rather than a Docker-only verifier input.
 * The official Leap16 image lacks sudo, while system/user verifier commands explicitly use it.
   Install sudo in the test image; do not remove those assertions or platform coverage.
 * The VM lab is outside this completion task and must remain untouched. Use isolated Docker only.
-* Focused completion evidence: Fedora45 native-ARM system installation built Python3.15.2 with
-  existing OpenSSL4 headers and completed a second converge with zero updates. Leap16 user
-  installation built Python3.12.16 and passed every pip, virtualenv, ownership and sudo assertion.
+* Focused completion evidence: Fedora 45 native ARM system installation built Python 3.15.2 with
+  existing OpenSSL 4 headers and completed a second converge with zero updates. Leap 16 user
+  installation built Python 3.12.16 and passed every pip, virtualenv, ownership and sudo assertion.
   Public resource defaults and all 12 CI platform entries remain unchanged.

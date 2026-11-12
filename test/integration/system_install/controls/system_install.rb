@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-global_python = input('python_version', value: '3.12.16')
+global_python = os.name == 'fedora' && os.release.to_i >= 45 ? '3.15.2' : '3.12.16'
 
 control 'pyenv should be installed' do
   title 'pyenv should be installed globally'

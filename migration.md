@@ -11,8 +11,10 @@ openSUSE Leap 16. Ubuntu 20.04 remains available for ESM deployments; maintain t
 appropriate Ubuntu Pro subscription and security updates. Fedora continues to use
 the current rolling CI image.
 
-Python version selection is still explicit in your resources. Test examples now
-use Python 3.12; this does not change interpreters requested by your cookbooks.
+Python version selection is still explicit in your resources. Test examples use
+Python 3.12.16 on older supported systems and Python 3.15.2 on Fedora 45 or newer,
+whose OpenSSL 4 headers require a compatible Python release. This does not change
+interpreters requested by your cookbooks or replace global OpenSSL headers.
 Python uninstall now removes an installed version and skips missing versions.
 
 Maintainers should use `test/cookbooks/test` and the Policyfile named run lists.

@@ -33,9 +33,6 @@ platforms:
       image: dokken/debian-13
       pid_one_command: /usr/lib/systemd/systemd
   - name: fedora-latest
-    verifier:
-      inputs:
-        python_version: '3.15.2'
     driver:
       image: dokken/fedora-latest
       pid_one_command: /usr/lib/systemd/systemd
