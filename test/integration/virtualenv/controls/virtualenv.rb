@@ -21,7 +21,7 @@ control 'VirtualEnv' do
   desc 'Pip should install package fire inside virtualenv according to requirements.txt'
   describe bash("sudo -H bash -c 'source /etc/profile.d/pyenv.sh && #{venv_root}/bin/pip show fire'") do
     its('exit_status') { should eq(0) }
-    its('stdout')      { should match('Version: 0.1.2') }
+    its('stdout')      { should match('Version: 0.7.0') }
   end
 
   desc 'Pip should uninstall package requests inside virtualenv'

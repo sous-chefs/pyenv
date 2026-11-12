@@ -14,6 +14,6 @@ control 'Shims' do
   desc 'When pyen shims is run we should have the correct version of Python shimmed'
   describe bash('source /etc/profile.d/pyenv.sh && pyenv shims') do
     its('stdout') { should match /shims/ }
-    its('stdout') { should match /python3.7/ }
+    its('stdout') { should match /python3.12/ }
   end
 end

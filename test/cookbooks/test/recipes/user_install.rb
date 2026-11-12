@@ -1,7 +1,7 @@
 # Install pyenv
 # and make it avilable to the selected user
 
-version   = '3.7.7'
+version   = '3.12.12'
 user      = 'vagrant'
 venv_root = "/home/#{user}/venv_test"
 
@@ -30,16 +30,13 @@ pyenv_plugin 'virtualenv' do
 end
 
 pyenv_pip 'requests' do
-  version '2.18.3'
+  version '2.32.3'
   user    user
 end
 
-pyenv_pip 'virtualenv' do
-  version '16.2.0'
-end
-
 pyenv_script 'create virtualenv' do
-  code "virtualenv #{venv_root}"
+  code "python -m venv #{venv_root}"
+  creates "#{venv_root}/bin/activate"
   user user
 end
 

@@ -3,39 +3,50 @@ driver:
   name: vagrant
 
 provisioner:
+  name: chef_infra
   product_name: chef
-  product_version: <%= ENV['CHEF_VERSION'] || "latest" %>
-  install_strategy: once
-  deprecations_as_errors: true
+  product_version: latest
+  chef_license: accept-no-persist
   policyfile: Policyfile.rb
+  multiple_converge: 2
+  enforce_idempotency: true
 
 verifier:
   name: inspec
+  sudo: true
 
 platforms:
-  - name: amazonlinux2
-    driver_config:
-      box: mvbcoding/awslinux
-  - name: debian-10
-  - name: debian-11
-  - name: centos-7
-  - name: centos-8
-  - name: oracle-7
-  - name: fedora-29
-  - name: ubuntu-18.04
-  - name: ubuntu-20.04
-  - name: ubuntu-22.04
-  - name: opensuse-leap-15
+  - name: almalinux-9
+  - name: amazonlinux-2023
+  - name: centos-stream-9
+  - name: debian-12
+  - name: debian-13
+  - name: fedora-latest
+  - name: opensuse-leap-16
+  - name: oraclelinux-9
+  - name: rockylinux-9
+  - name: ubuntu-2004
+  - name: ubuntu-2204
+  - name: ubuntu-2404
 
 suites:
+  - name: default
+    provisioner:
+      named_run_list: default
+    verifier:
+      inspec_tests:
+        - test/integration/default
   - name: system_install
-    run_list:
-      - recipe[test::system_install]
     provisioner:
       named_run_list: system_install
+    verifier:
+      inspec_tests:
+        - test/integration/system_install
   - name: user_install
-    run_list:
-      - recipe[test::dokken]
-      - recipe[test::user_install]
     provisioner:
       named_run_list: user_install
+      multiple_converge: 1
+      enforce_idempotency: false
+    verifier:
+      inspec_tests:
+        - test/integration/user_install
