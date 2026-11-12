@@ -4,8 +4,6 @@ title: pyenv profile
 maintainer: Sous-Chefs
 summary: Verifies pyenv is installed correctly
 version: 1.0.0
-supports:
-  - os-family: linux
 depends:
   - name: common
     path: test/integration/common

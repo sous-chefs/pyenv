@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-global_python = '3.7.7'
+global_python = os.name == 'fedora' && os.release.to_i >= 45 ? '3.15.2' : '3.12.16'
 
 control 'pyenv should be installed' do
   title 'pyenv should be installed globally'
@@ -26,7 +26,7 @@ control 'pyenv should be installed' do
   desc 'Pip should install package requests'
   describe bash("sudo -H bash -c 'source /etc/profile.d/pyenv.sh && pip show requests'") do
     its('exit_status') { should eq(0) }
-    its('stdout')      { should match('Version: 2.18.3') }
+    its('stdout')      { should match('Version: 2.32.3') }
   end
 end
 

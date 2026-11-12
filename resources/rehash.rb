@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+provides :pyenv_rehash
 unified_mode true
 
 property :user,

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+provides :pyenv_pip
 unified_mode true
 
 property :package_name,
@@ -104,6 +107,7 @@ action :uninstall do
     code command
     user new_resource.user
     umask new_resource.umask
+    only_if { new_resource.requirement || !get_current_version.nil? }
   end
 end
 

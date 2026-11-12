@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+provides :pyenv_install
 unified_mode true
 
 property :prefix_type,
@@ -53,7 +56,9 @@ action :install do
   node.run_state['sous-chefs']['pyenv']['root_path']['prefix'] ||= new_resource.prefix
 
   build_essential 'build packages'
-  package pyenv_prerequisites
+  package pyenv_prerequisites do
+    flush_cache [:before] if platform_family?('fedora')
+  end
 
   directory '/etc/profile.d' do
     owner 'root'
@@ -66,6 +71,13 @@ action :install do
     owner    'root'
     mode     '0755'
     variables(prefix: new_resource.prefix)
+  end
+
+  directory new_resource.prefix do
+    owner new_resource.user
+    group new_resource.group
+    mode '0755'
+    recursive true
   end
 
   git new_resource.prefix do

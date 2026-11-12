@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+provides :pyenv_script
 unified_mode true
 
 property :pyenv_version,
