@@ -61,7 +61,7 @@ jobs:
         if: failure() && matrix.os == 'fedora-latest'
         run: |
           for container in $(docker ps --format '{{.Names}}' | grep -- '-fedora-latest$'); do
-            docker exec "$container" rpm -q git python3 python3-libdnf5 python3-dnf
+            docker exec "$container" rpm -q git python3 python3-libdnf5 python3-dnf || true
             docker exec "$container" dnf repolist
             docker exec "$container" dnf repoquery --available --qf '%{name} %{evr} %{arch} %{repoid}' git
             docker exec "$container" python3 -c 'import libdnf5; b = libdnf5.base.Base(); b.load_config(); b.setup(); s = b.get_repo_sack(); s.create_repos_from_system_configuration(); s.load_repos(); q = libdnf5.rpm.PackageQuery(b); q.filter_name(["git"]); print([(p.get_nevra(), p.get_repo_id()) for p in q])'
