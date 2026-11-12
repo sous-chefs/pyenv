@@ -1,7 +1,7 @@
 # Install pyenv
 # and make it avilable to the selected user
 
-version   = '3.12.12'
+version   = platform_family?('fedora') && node['platform_version'].to_i >= 45 ? '3.15.2' : '3.12.16'
 user      = 'vagrant'
 venv_root = "/home/#{user}/venv_test"
 

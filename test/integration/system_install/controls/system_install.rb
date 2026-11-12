@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-global_python = '3.12.12'
+global_python = input('python_version', value: '3.12.16')
 
 control 'pyenv should be installed' do
   title 'pyenv should be installed globally'

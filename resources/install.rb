@@ -56,7 +56,9 @@ action :install do
   node.run_state['sous-chefs']['pyenv']['root_path']['prefix'] ||= new_resource.prefix
 
   build_essential 'build packages'
-  package pyenv_prerequisites
+  package pyenv_prerequisites do
+    flush_cache [:before] if platform_family?('fedora')
+  end
 
   directory '/etc/profile.d' do
     owner 'root'

@@ -28,3 +28,15 @@
 * Minimal Amazon Linux images lack tar even after compiler installation. Install tar/gzip/patch explicitly as Python source-build prerequisites.
 * File-change protection runs on opened, reopened and synchronize events. PR body edits do not change files; the upstream action incorrectly treats the editing actor as the PR author and otherwise rejects a bot's `pull_request` edit event. Keep title validation on edits and retain every code-change protection event.
 * Native ARM Dokken images are available for local Docker. Never run these installation suites directly against the macOS host.
+* Completion repair on 12 November: Fedora 45 defaults to OpenSSL4 development headers, which fail
+  Python 3.12 SSL compilation. Its installed headers conflict with openssl3-devel; do not replace
+  global development headers. Use current Python 3.15.2 for that Fedora test fixture and retain
+  Python 3.12.16 elsewhere for Ubuntu20 compatibility. Keep public resource defaults unchanged.
+  Refresh Fedora package metadata before prerequisites to avoid the observed stale Git candidate.
+* The official Leap16 image lacks sudo, while system/user verifier commands explicitly use it.
+  Install sudo in the test image; do not remove those assertions or platform coverage.
+* The VM lab is outside this completion task and must remain untouched. Use isolated Docker only.
+* Focused completion evidence: Fedora45 native-ARM system installation built Python3.15.2 with
+  existing OpenSSL4 headers and completed a second converge with zero updates. Leap16 user
+  installation built Python3.12.16 and passed every pip, virtualenv, ownership and sudo assertion.
+  Public resource defaults and all 12 CI platform entries remain unchanged.
