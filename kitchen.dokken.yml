@@ -38,6 +38,7 @@ platforms:
       intermediate_instructions:
         - RUN dnf clean all
         - RUN dnf --refresh makecache
+        - RUN dnf install -y python3-libdnf5
       pid_one_command: /usr/lib/systemd/systemd
   - name: opensuse-leap-16
     driver:

@@ -38,9 +38,9 @@
 * The official Leap16 image lacks sudo, while system/user verifier commands explicitly use it.
   Install sudo in the test image; do not remove those assertions or platform coverage.
 * The VM lab is outside this completion task and must remain untouched. Use isolated Docker only.
-* Release validation reproduced the stale Fedora Git candidate after a successful retry. Clean and
-  refresh the Dokken image's DNF cache before Chef resolves candidates; Chef's flush_cache only
-  restarts its package helper. This is test-image preparation, not a prerequisite bypass.
+* Hosted x86 Fedora lacks python3-libdnf5, making Chef fall back to DNF4 and its separate stale
+  cache while the CLI uses DNF5. Cleaning DNF5 alone did not fix it. Install the DNF5 Python
+  bindings in the test image so both use the same package API; retain every prerequisite test.
 * Focused completion evidence: Fedora 45 native ARM system installation built Python 3.15.2 with
   existing OpenSSL 4 headers and completed a second converge with zero updates. Leap 16 user
   installation built Python 3.12.16 and passed every pip, virtualenv, ownership and sudo assertion.
