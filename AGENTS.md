@@ -23,4 +23,8 @@
 * The default and system-install suites require two converges with zero updates on the second.
 * The user-install suite deliberately reinstalls requirements and removes a package to exercise lifecycle transitions; it verifies the final state with one converge rather than claiming that this sequence is idempotent.
 * Keep platform names identical across Kitchen files and CI. Use Dokken for Linux; the old generic macOS/Windows exec scaffold does not represent supported cookbook platforms.
+* Leap 16 uses the official `opensuse/leap:16.0` image with systemd/gzip/tar installed, matching the Apache cookbook's existing setup; no `dokken/opensuse-leap-16` image is published.
+* Debian 13 no longer supplies `/bin/systemd`; use `/usr/lib/systemd/systemd`. Leap 16's development pattern installs `zlib-ng-compat-devel`, which conflicts with explicitly installing legacy `zlib-devel`.
+* Minimal Amazon Linux images lack tar even after compiler installation. Install tar/gzip/patch explicitly as Python source-build prerequisites.
+* File-change protection runs on opened, reopened and synchronize events. PR body edits do not change files; the upstream action incorrectly treats the editing actor as the PR author and otherwise rejects a bot's `pull_request` edit event. Keep title validation on edits and retain every code-change protection event.
 * Native ARM Dokken images are available for local Docker. Never run these installation suites directly against the macOS host.

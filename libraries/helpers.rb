@@ -55,9 +55,12 @@ class PyEnv
 
       def pyenv_prerequisites
         value_for_platform_family(
-        'debian' => %w(make libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses-dev xz-utils tk-dev libffi-dev liblzma-dev git),
-        %w(rhel fedora amazon) => %w(git zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils),
-        'suse' => %w(git git-core zlib-devel bzip2 libbz2-devel libopenssl-devel readline-devel sqlite3 sqlite3-devel xz xz-devel),
+        'debian' => %w(make libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses-dev xz-utils tk-dev libffi-dev liblzma-dev git tar gzip patch),
+        %w(rhel fedora amazon) => %w(git zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils tar gzip patch),
+        'suse' => %w(git git-core bzip2 libbz2-devel libopenssl-devel readline-devel sqlite3 sqlite3-devel xz xz-devel tar gzip patch) << value_for_platform(
+          'opensuseleap' => { '>= 16.0' => 'zlib-ng-compat-devel', 'default' => 'zlib-devel' },
+          'default' => 'zlib-devel'
+        ),
         'mac_os_x' => %w(git readline xz)
       )
       end
