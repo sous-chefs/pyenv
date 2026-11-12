@@ -5,7 +5,7 @@ license          'Apache-2.0'
 description      'Manages pyenv and its installed Python versions.'
 issues_url       'https://github.com/sous-chefs/pyenv/issues'
 source_url       'https://github.com/sous-chefs/pyenv'
-version          '4.2.9'
+version          '5.0.0'
 chef_version     '>= 15.3'
 
 supports 'ubuntu', '>= 20.04'
