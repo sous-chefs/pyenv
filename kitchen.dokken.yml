@@ -35,6 +35,9 @@ platforms:
   - name: fedora-latest
     driver:
       image: dokken/fedora-latest
+      intermediate_instructions:
+        - RUN dnf clean all
+        - RUN dnf --refresh makecache
       pid_one_command: /usr/lib/systemd/systemd
   - name: opensuse-leap-16
     driver:
