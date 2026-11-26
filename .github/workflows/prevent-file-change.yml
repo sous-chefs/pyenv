@@ -3,7 +3,7 @@ name: prevent-file-change
 
 "on":
   pull_request_target:
-    branches: [main]
+    branches: [codex/smoke-policy-base]
     types:
       - opened
       - reopened
