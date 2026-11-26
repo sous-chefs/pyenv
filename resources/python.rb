@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+provides :pyenv_python
 unified_mode true
 
 property :version,
@@ -45,7 +48,7 @@ action :uninstall do
     environment new_resource.environment
     live_stream new_resource.verbose
     action      :run
-    not_if { python_installed? }
+    only_if { python_installed? }
   end
 end
 

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require 'shellwords'
 
+provides :pyenv_pip
 unified_mode true
 
 property :package_name,
@@ -34,8 +37,6 @@ action :install do
                    '--requirement'
                  elsif new_resource.editable
                    '--editable'
-                 else
-                   ''
                  end
 
   install_target = if new_resource.version
@@ -44,10 +45,9 @@ action :install do
                      new_resource.package_name
                    end
 
-  pip_args = ['install', *Shellwords.split(new_resource.options.to_s), install_mode, install_target].reject { |arg| arg.to_s.empty? }
+  pip_args = ['install', *Shellwords.split(new_resource.options.to_s), install_mode, install_target].compact
 
   # without virtualenv, install package with system's pip
-  pip_executable = new_resource.virtualenv ? "#{new_resource.virtualenv}/bin/pip" : 'pip'
   command = Shellwords.join([pip_executable, *pip_args])
 
   pyenv_script new_resource.package_name do
@@ -65,10 +65,9 @@ action :upgrade do
                      new_resource.package_name.to_s
                    end
 
-  pip_args = ['install', '--upgrade', *Shellwords.split(new_resource.options.to_s), upgrade_target].reject { |arg| arg.to_s.empty? }
+  pip_args = ['install', '--upgrade', *Shellwords.split(new_resource.options.to_s), upgrade_target]
 
   # without virtualenv, upgrade package with system's pip
-  pip_executable = new_resource.virtualenv ? "#{new_resource.virtualenv}/bin/pip" : 'pip'
   command = Shellwords.join([pip_executable, *pip_args])
 
   pyenv_script new_resource.package_name do
@@ -80,22 +79,18 @@ action :upgrade do
 end
 
 action :uninstall do
-  uninstall_mode = if new_resource.requirement
-                     '--requirement'
-                   else
-                     ''
-                   end
+  uninstall_mode = '--requirement' if new_resource.requirement
 
-  pip_args = ['uninstall', '--yes', *Shellwords.split(new_resource.options.to_s), uninstall_mode, new_resource.package_name].reject { |arg| arg.to_s.empty? }
+  pip_args = ['uninstall', '--yes', *Shellwords.split(new_resource.options.to_s), uninstall_mode, new_resource.package_name].compact
 
   # without virtualenv, uninstall package with system's pip
-  pip_executable = new_resource.virtualenv ? "#{new_resource.virtualenv}/bin/pip" : 'pip'
   command = Shellwords.join([pip_executable, *pip_args])
 
   pyenv_script new_resource.package_name do
     code command
     user new_resource.user
     umask new_resource.umask
+    only_if { new_resource.requirement || !get_current_version.nil? }
   end
 end
 

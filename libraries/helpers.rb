@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class PyEnv
   module Cookbook
     module ScriptHelpers
-      require 'shellwords'
       require 'chef/mixin/shell_out'
 
       include Chef::Mixin::ShellOut
       def root_path
-        node.run_state['sous-chefs']['pyenv']['root_path']['prefix']
+        node.run_state.dig('sous-chefs', 'pyenv', 'root_path', 'prefix') ||
+          raise(Chef::Exceptions::ValidationFailed, 'Declare pyenv_install before using other pyenv resources')
       end
 
       def script_code
@@ -37,16 +39,12 @@ class PyEnv
         script_env
       end
 
-      def pip_command(*arguments)
-        pip = if new_resource.virtualenv
-                "#{new_resource.virtualenv}/bin/pip"
-              else
-                'pip'
-              end
-        pip_arguments = arguments.length == 1 ? Shellwords.split(arguments.first.to_s) : arguments.flatten
-        pip_arguments = pip_arguments.compact.reject { |arg| arg.to_s.empty? }
+      def pip_executable
+        new_resource.virtualenv ? "#{new_resource.virtualenv}/bin/pip" : 'pip'
+      end
 
-        shell_out(Shellwords.join([pip, *pip_arguments]),
+      def pip_command(*arguments)
+        shell_out(pip_executable, *arguments,
                   environment: {
                     'PATH' => "#{root_path}/shims:#{ENV['PATH']}",
                   },
@@ -55,14 +53,12 @@ class PyEnv
 
       def pyenv_prerequisites
         value_for_platform_family(
-        'debian' => %w(make libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git) \
-          << value_for_platform(
-            'debian' => { '>= 11' => 'python3-openssl', 'default' => 'python-openssl' },
-            'ubuntu' => { '>= 22.04' => 'python3-openssl', 'default' => 'python-openssl' },
-            'default' => 'python-openssl'
-          ),
-        %w(rhel fedora amazon) => %w(git zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils),
-        'suse' => %w(git git-core zlib-devel bzip2 libbz2-devel libopenssl-devel readline-devel sqlite3 sqlite3-devel xz xz-devel),
+        'debian' => %w(make libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses-dev xz-utils tk-dev libffi-dev liblzma-dev git tar gzip patch),
+        %w(rhel fedora amazon) => %w(git zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils tar gzip patch),
+        'suse' => %w(git git-core bzip2 libbz2-devel libopenssl-devel readline-devel sqlite3 sqlite3-devel xz xz-devel tar gzip patch) << value_for_platform(
+          'opensuseleap' => { '>= 16.0' => 'zlib-ng-compat-devel', 'default' => 'zlib-devel' },
+          'default' => 'zlib-devel'
+        ),
         'mac_os_x' => %w(git readline xz)
       )
       end

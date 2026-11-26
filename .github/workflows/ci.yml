@@ -7,9 +7,18 @@ name: ci
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   lint-unit:
-    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@6.0.0
+    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@9.0.1
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+      statuses: write
 
   integration:
     needs: lint-unit
@@ -17,25 +26,27 @@ jobs:
     strategy:
       matrix:
         os:
-          - "debian-9"
-          - "debian-10"
-          - "debian-11"
-          - "centos-7"
-          - "centos-8"
-          - "oracle-linux"
-          - "amazon-linux"
-          - "ubuntu-1804"
-          - "ubuntu-2004"
-          - "ubuntu-2204"
-
+          - almalinux-9
+          - amazonlinux-2023
+          - centos-stream-9
+          - debian-12
+          - debian-13
+          - fedora-latest
+          - opensuse-leap-16
+          - oraclelinux-9
+          - rockylinux-9
+          - ubuntu-2004
+          - ubuntu-2204
+          - ubuntu-2404
         suite:
+          - default
           - system-install
           - user-install
       fail-fast: false
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install Chef
         uses: actionshub/chef-install@6.0.0
       - name: Dokken

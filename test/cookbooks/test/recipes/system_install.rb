@@ -1,7 +1,7 @@
 # Install Python system wide
 # and make it the global default
 
-version = '3.7.7'
+version = platform_family?('fedora') && node['platform_version'].to_i >= 45 ? '3.15.2' : '3.12.16'
 local_folder = '/opt/pyenv_test'
 
 directory local_folder
@@ -24,5 +24,5 @@ pyenv_plugin 'virtualenv' do
 end
 
 pyenv_pip 'requests' do
-  version '2.18.3'
+  version '2.32.3'
 end

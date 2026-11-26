@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+provides :pyenv_plugin
 unified_mode true
 
 property :git_url,

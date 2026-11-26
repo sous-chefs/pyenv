@@ -1,5 +1,29 @@
 # pyenv Changelog
 
+## [5.0.1](https://github.com/sous-chefs/pyenv/compare/v5.0.0...v5.0.1) (2026-11-26)
+
+
+### Bug Fixes
+
+* **ci:** run file policy from the base branch ([#143](https://github.com/sous-chefs/pyenv/issues/143)) ([74f4d03](https://github.com/sous-chefs/pyenv/commit/74f4d0308173a7773d13c895b63ad602729e2ffb))
+
+## [5.0.0](https://github.com/sous-chefs/pyenv/compare/v4.2.9...v5.0.0) (2026-11-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Retire obsolete operating-system versions; see migration.md for the retained platform baseline.
+
+### Features
+
+* modernise pyenv resources and platforms ([#139](https://github.com/sous-chefs/pyenv/issues/139)) ([2a5ab53](https://github.com/sous-chefs/pyenv/commit/2a5ab53a9644a828ae480dafbdc2f045a846f567))
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#120](https://github.com/sous-chefs/pyenv/issues/120)) ([bf95c1d](https://github.com/sous-chefs/pyenv/commit/bf95c1db2dfff97d070ab189e1438c25ebba7c8c))
+* **ci:** use DNF5 consistently in Fedora test image ([#140](https://github.com/sous-chefs/pyenv/issues/140)) ([0d16fac](https://github.com/sous-chefs/pyenv/commit/0d16face70b37c1672893a2b0f42b713bec58337))
+
 ## [4.2.9](https://github.com/sous-chefs/pyenv/compare/4.2.8...v4.2.9) (2025-10-16)
 
 

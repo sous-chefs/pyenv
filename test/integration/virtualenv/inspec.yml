@@ -4,5 +4,3 @@ title: virtualenv
 maintainer: Sous-Chefs
 summary: Verifies pyenv configures virtualenv properly
 version: 1.0.0
-supports:
-  - os-family: linux

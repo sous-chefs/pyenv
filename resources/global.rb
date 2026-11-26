@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+provides :pyenv_global
 unified_mode true
 include PyEnv::Cookbook::ScriptHelpers
 

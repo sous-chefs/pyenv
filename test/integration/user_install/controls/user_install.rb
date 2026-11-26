@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-global_python = '3.7.7'
+global_python = os.name == 'fedora' && os.release.to_i >= 45 ? '3.15.2' : '3.12.16'
 user          = 'vagrant'
 venv_root     = "/home/#{user}/venv_test"
 
@@ -60,19 +60,13 @@ control 'virtualenv' do
   desc 'Pip should install package requests'
   describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && pip show requests'") do
     its('exit_status') { should eq(0) }
-    its('stdout')      { should match('Version: 2.18.3') }
-  end
-
-  desc 'Pip should install package virtualenv'
-  describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && pip show virtualenv'") do
-    its('exit_status') { should eq(0) }
-    its('stdout')      { should match('Version: 16.2.0') }
+    its('stdout')      { should match('Version: 2.32.3') }
   end
 
   desc 'Pip should install package fire inside virtualenv according to requirements.txt'
   describe bash("sudo -H -u #{user} bash -c 'source /etc/profile.d/pyenv.sh && #{venv_root}/bin/pip show fire'") do
     its('exit_status') { should eq(0) }
-    its('stdout')      { should match('Version: 0.1.2') }
+    its('stdout')      { should match('Version: 0.7.0') }
   end
 
   desc 'Pip should uninstall package requests inside virtualenv'

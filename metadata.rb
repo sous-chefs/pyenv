@@ -5,21 +5,19 @@ license          'Apache-2.0'
 description      'Manages pyenv and its installed Python versions.'
 issues_url       'https://github.com/sous-chefs/pyenv/issues'
 source_url       'https://github.com/sous-chefs/pyenv'
-version          '4.2.9'
+version          '5.0.1'
 chef_version     '>= 15.3'
 
-%w(
-  ubuntu
-  linuxmint
-  debian
-  redhat
-  centos
-  fedora
-  amazon
-  scientific
-  opensuse
-  opensuseleap
-  oracle
-).each do |os|
-  supports os
-end
+supports 'ubuntu', '>= 20.04'
+supports 'linuxmint', '>= 21.0'
+supports 'debian', '>= 12.0'
+supports 'redhat', '>= 8.0'
+supports 'almalinux', '>= 8.0'
+supports 'rocky', '>= 8.0'
+supports 'centos', '>= 9.0'
+supports 'centos_stream', '>= 9.0'
+supports 'fedora'
+supports 'amazon', '>= 2023.0'
+supports 'opensuse'
+supports 'opensuseleap', '>= 16.0'
+supports 'oracle', '>= 8.0'
