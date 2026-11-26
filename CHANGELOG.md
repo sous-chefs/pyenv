@@ -1,5 +1,12 @@
 # pyenv Changelog
 
+## [5.0.1](https://github.com/sous-chefs/pyenv/compare/v5.0.0...v5.0.1) (2026-11-26)
+
+
+### Bug Fixes
+
+* **ci:** run file policy from the base branch ([#143](https://github.com/sous-chefs/pyenv/issues/143)) ([74f4d03](https://github.com/sous-chefs/pyenv/commit/74f4d0308173a7773d13c895b63ad602729e2ffb))
+
 ## [5.0.0](https://github.com/sous-chefs/pyenv/compare/v4.2.9...v5.0.0) (2026-11-12)
 
 
