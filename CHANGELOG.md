@@ -1,5 +1,12 @@
 # pyenv Changelog
 
+## [5.0.2](https://github.com/sous-chefs/pyenv/compare/v5.0.1...v5.0.2) (2026-11-26)
+
+
+### Bug Fixes
+
+* harden pip shell commands ([#126](https://github.com/sous-chefs/pyenv/issues/126)) ([973cb85](https://github.com/sous-chefs/pyenv/commit/973cb8547ad3f579e3a74700e9b401add09cb695))
+
 ## [5.0.1](https://github.com/sous-chefs/pyenv/compare/v5.0.0...v5.0.1) (2026-11-26)
 
 
