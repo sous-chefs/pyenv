@@ -2,6 +2,7 @@
 
 require 'spec_helper'
 require 'ostruct'
+require 'shellwords'
 
 RSpec.shared_context 'pyenv installation' do
   stubs_for_resource do |resource|
@@ -200,7 +201,7 @@ describe 'pyenv_pip' do
 
   context 'installing a missing package' do
     recipe { pyenv_pip('requests') { version '2.32.3' } }
-    it { is_expected.to run_pyenv_script('requests').with(code: 'pip install   requests==2.32.3') }
+    it { is_expected.to run_pyenv_script('requests').with(code: 'pip install requests\=\=2.32.3') }
   end
 
   context 'installing the requested existing version' do
@@ -217,17 +218,49 @@ describe 'pyenv_pip' do
         action :upgrade
       end
     end
-    it { is_expected.to run_pyenv_script('requests').with(code: 'pip install --upgrade  requests==2.32.3') }
+    it { is_expected.to run_pyenv_script('requests').with(code: 'pip install --upgrade requests\=\=2.32.3') }
   end
 
   context 'uninstalling an installed package' do
     let(:installed_version) { '2.32.3' }
     recipe { pyenv_pip('requests') { action :uninstall } }
-    it { is_expected.to run_pyenv_script('requests') }
+    it { is_expected.to run_pyenv_script('requests').with(code: 'pip uninstall --yes requests') }
   end
 
   context 'uninstalling a missing package' do
     recipe { pyenv_pip('requests') { action :uninstall } }
     it { is_expected.not_to run_pyenv_script('requests') }
+  end
+
+  context 'installing from a requirements file in a virtual environment' do
+    recipe do
+      pyenv_pip '/tmp/sample project/requirements.txt' do
+        virtualenv '/tmp/sample environment'
+        options '--find-links "/tmp/local wheels"'
+        requirement true
+      end
+    end
+
+    it 'passes the executable, option value, and requirements path as individual arguments' do
+      command = chef_run.find_resource(:pyenv_script, '/tmp/sample project/requirements.txt').code
+      arguments = [
+        '/tmp/sample environment/bin/pip',
+        'install',
+        '--find-links',
+        '/tmp/local wheels',
+        '--requirement',
+        '/tmp/sample project/requirements.txt',
+      ]
+      expect(Shellwords.split(command)).to eq(arguments)
+    end
+  end
+
+  context 'installing an editable project' do
+    recipe { pyenv_pip('/tmp/sample project') { editable true } }
+
+    it 'passes the project path as one argument' do
+      command = chef_run.find_resource(:pyenv_script, '/tmp/sample project').code
+      expect(Shellwords.split(command)).to eq(['pip', 'install', '--editable', '/tmp/sample project'])
+    end
   end
 end

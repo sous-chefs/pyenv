@@ -39,14 +39,12 @@ class PyEnv
         script_env
       end
 
-      def pip_command(command)
-        pip = if new_resource.virtualenv
-                "#{new_resource.virtualenv}/bin/pip"
-              else
-                'pip'
-              end
+      def pip_executable
+        new_resource.virtualenv ? "#{new_resource.virtualenv}/bin/pip" : 'pip'
+      end
 
-        shell_out("#{pip} #{command}",
+      def pip_command(*arguments)
+        shell_out(pip_executable, *arguments,
                   environment: {
                     'PATH' => "#{root_path}/shims:#{ENV['PATH']}",
                   },
